@@ -2,10 +2,10 @@
 >作者：[Codimiracle](https://github.com/Codimiracle)
 >项目链接：[CAstoreServer](https://github.com/Codimiracle/CAstoreServer)
 ## 目录
-- 简介
-- 特色
-- 安装/配置
-- 附加说明
+- [简介](#简介)
+- [特色](#特色)
+- [安装](#安装)/[配置](#配置)
+- [附加说明](#附加说明)
 
 ### 简介
 这个东东是为了填补 15 级师兄留下的坑而制作的。
