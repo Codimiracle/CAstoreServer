@@ -14,17 +14,17 @@
 - 完整的 AppStore 体验
 - 提供了客户端访问接口，使用 OkHttp 进行连接即可。
 ### 安装/配置
-#### 安装
+- 安装
 
-#### 配置
-- 打开项目根目录
-- 编辑 settings.php
-    ```php
-    <?php
-      // 与网站相关的变量
-      $website = array();
-      // 与网站数据库相关的变量
-      $database = array();
-    ```
+- 配置
+    - 打开项目根目录
+    - 编辑 settings.php
+        ```php
+        <?php
+          // 与网站相关的变量
+          $website = array();
+          // 与网站数据库相关的变量
+          $database = array();
+        ```
 ### 附加说明
     
