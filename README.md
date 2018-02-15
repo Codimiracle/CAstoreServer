@@ -12,12 +12,16 @@
 ### 特色
 - 完整的 PC 网页体验
 - 完整的 AppStore 体验
-- 提供了客户端访问接口，使用 OkHttp 进行连接即可。
+- 提供了客户端访问接口，使用 OkHttp(java) 进行连接即可。
 ### 安装/配置
 - 安装
     - 依赖
         - PHP >= 5.4
-    - 
+    - 步骤
+        - 克隆项目
+        - 移动到 apache 的 www 文件夹。
+        - 浏览 http://localhost/CAstoreServer
+    
 - 配置
     - 打开项目根目录
     - 编辑 settings.php
@@ -28,5 +32,8 @@
           // 与网站数据库相关的变量
           $database = array();
         ```
+    - 根据实际需要编辑模板
+        - tempaltes
 ### 附加说明
-    
+- license: LGPL2.0
+- bugs: [feedback](mailto:Codimiracle@outlook.com)

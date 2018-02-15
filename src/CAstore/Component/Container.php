@@ -14,15 +14,15 @@ interface Container extends Context
 {
     /**
      * URL 重定向
-     * @param string $node_path
+     * @param string $node_pathname
      */
-    public function redirect($node_path);
+    public function redirect($node_pathname);
 
     /**
      * 请求分发
-     * @param NodePath $node_path
+     * @param string $node_pathname
      */
-    public function dispatch($node_path);
+    public function dispatch($node_pathname);
     /**
      * 初始化容器
      */

@@ -2,32 +2,35 @@
 
 namespace CAstore\Action;
 
-use CAstore\Component\ActionContainer;
+use CAstore\Component\Container;
+use CAstore\Component\DelineContainer;
 use CAstore\Component\Mapper;
 use CAstore\Component\SessionManager;
 use CAstore\Template\Renderer;
+use CAstore\Template\RendererSetter;
 
 /**
- * Class Action
+ * Class AbstractAction
  * 代表一个 抽象动作 。
  * 具体请点击<a href="docs\Structure.md">这里</a>
- * @package CAstore\Action
+ * @package CAstore\AbstractAction
  */
-abstract class Action
+abstract class AbstractAction
 {
     /**
-     * @var Context
+     * @var Container
      */
-    protected $context;
-    /**
-     * @var Renderer
-     */
-    protected $renderer;
+    protected $container;
 
     private $mapper;
 
     /**
-     * Action constructor.
+     * @var RendererSetter
+     */
+    protected $view;
+
+    /**
+     * AbstractAction constructor.
      */
     public function __construct()
     {
@@ -37,18 +40,18 @@ abstract class Action
     /**
      * @return Context
      */
-    public function getContext()
+    public function getContainer()
     {
-        return $this->context;
+        return $this->container;
     }
 
     /**
-     * @param Context $context
+     * @param Context $container
      */
-    public function setContext($context)
+    public function setContainer($container)
     {
-        $this->context = $context;
-        $this->renderer = $context->getRenderer();
+        $this->container = $container;
+        $this->view = new RendererSetter($container->getRenderer());
     }
 
     public function attachAction($pattern, $method) {
@@ -63,27 +66,30 @@ abstract class Action
         return isset($_POST[$submit_id]) && ($_POST[$submit_id] == $submit_id);
     }
 
+    protected function getNodePath() {
+        return $this->container->getNodePath()->getSubnodePath();
+    }
     /**
      * @return string
      */
     private function getCurrentNodePathname()
     {
         global $logger;
-        $pathname = strval($this->context->getNodePath()->getSubnodePath());
-        $logger->addDebug("Action Method matching:".$pathname);
+        $pathname = strval($this->getNodePath());
+        $logger->addDebug("AbstractAction Pathname matching: ".$pathname);
         return $pathname;
     }
     public function onActionHandle() {
+        global $logger;
         $method_name = $this->mapper->match($this->getCurrentNodePathname());
+        $logger->addDebug("AbstractAction Method invoking: ".$method_name);
         if ($method_name) {
             $this->$method_name();
         } else {
             $this->onActionDefaultHandle();
         }
     }
-    public function onActionDefaultHandle() {
-
-    }
+    public function onActionDefaultHandle() {}
     public abstract function onActionStart();
     public abstract function onActionEnd();
 }
