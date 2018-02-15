@@ -1,0 +1,11 @@
+@charset "UTF-8";
+
+body {
+    padding-top: 52px;
+    padding-bottom: 67px;
+    background: #f6f6f6;
+}
+
+body > .container, body > .container-fluid > .row > div > div {
+    background: white;
+}
