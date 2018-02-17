@@ -25,7 +25,7 @@ class SQLDataSourceTest extends TestCase
         $database["database_name"] = "ca_appstore";
         $database["database_username"] = "root";
         $database["database_password"] = "Codimiracle855866";
-        $this->accessor = new SQLDataSource($database);
+        $this->accessor = new MySQLDataSource($database);
     }
 
     public function testConnection() {
