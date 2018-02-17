@@ -9,7 +9,7 @@
 namespace CAstore\Action;
 
 
-class AboutAbstractAction extends AbstractAction
+class AboutAction extends AbstractAction
 {
 
     public function onActionStart()

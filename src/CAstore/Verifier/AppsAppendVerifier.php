@@ -22,21 +22,34 @@ class AppsAppendVerifier extends AbstractVerifier
 
     public function getPattern($field)
     {
-        
+        switch($field) {
+            case "name":
+                return "";
+            case "title":
+                return "";
+            case "package":
+                return "";
+            case "description":
+                return "";
+            case "platform":
+                return "";
+            case "developer":
+                return "";
+        }
     }
 
     public function getPassedMessage($field)
     {
-        
+        return "";
     }
 
     public function getEmptyMessage($field)
     {
-        
+        return "";
     }
 
     public function getUnrecognizedMessage($field)
     {
-        
+        return "";
     }
 }

@@ -13,7 +13,7 @@ use CAstore\Action\Context;
 use CAstore\Component\ComponentCenter;
 use CAstore\Component\Security;
 use CAstore\Component\SessionManager;
-use CAstore\DAO\UserInfo;
+use CAstore\Entity\UserInfo;
 use CAstore\DAO\UserInfoDAO;
 
 class IUserOperation implements UserOperation

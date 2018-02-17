@@ -97,7 +97,7 @@
                                 <input type="file" name="powerpoint[]" />
                                 <input type="file" name="powerpoint[]" />
                                 <input type="file" name="powerpoint[]" />
-                            </div>
+                        git     </div>
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-default" name="apps_append" value="apps_append">提交</button>
