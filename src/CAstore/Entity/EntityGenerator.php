@@ -9,7 +9,11 @@
 namespace CAstore\Entity;
 
 
-class EntityGenerator
+class EntityGenerator implements Generable
 {
 
+    public function generate()
+    {
+
+    }
 }

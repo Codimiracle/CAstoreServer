@@ -9,6 +9,8 @@
 namespace CAstore\DAO;
 
 
+use CAstore\Entity\UserInfo;
+
 class IUserInfoDAO extends AbstractDAO implements UserInfoDAO
 {
     const INSERT_CONTENT = "INSERT INTO content(title, name, content) VALUES (:nickname, 'userdata', :description)";

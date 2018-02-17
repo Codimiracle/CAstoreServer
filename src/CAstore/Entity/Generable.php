@@ -9,7 +9,7 @@
 namespace CAstore\Entity;
 
 
-interface Autogeneration
+interface Generable
 {
-    public function getEntity();
+    public function generate();
 }

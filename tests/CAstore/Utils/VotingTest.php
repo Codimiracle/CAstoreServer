@@ -9,7 +9,7 @@
 namespace CAstore\Utils;
 
 use CAstore\Component\DataSource;
-use CAstore\Component\SQLDataSource;
+use CAstore\Component\MySQLDataSource;
 use PHPUnit\Framework\TestCase;
 
 class VotingTest extends TestCase
@@ -27,7 +27,7 @@ class VotingTest extends TestCase
         $database["database_name"] = "test";
         $database["database_username"] = "root";
         $database["database_password"] = "Codimiracle855866";
-        $this->dataSource = new SQLDataSource($database);
+        $this->dataSource = new MySQLDataSource($database);
         $this->dataSource->getConnection()->exec("TRUNCATE vote;");
         $this->voting = new Voting();
         $this->voting->setDataSource($this->dataSource);

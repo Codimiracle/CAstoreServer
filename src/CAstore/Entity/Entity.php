@@ -6,7 +6,7 @@
  * Time: 下午10:01
  */
 
-namespace CAstore\DAO;
+namespace CAstore\Entity;
 
 
 interface Entity

@@ -8,7 +8,7 @@
 
 namespace CAstore\Utils;
 
-use CAstore\Component\SQLDataSource;
+use CAstore\Component\MySQLDataSource;
 use PHPUnit\Framework\TestCase;
 
 class IUserInfoDAOTest extends TestCase
@@ -27,7 +27,7 @@ class IUserInfoDAOTest extends TestCase
         $database["database_name"] = "test";
         $database["database_username"] = "root";
         $database["database_password"] = "Codimiracle855866";
-        $this->accessor = new SQLDataSource($database);
+        $this->accessor = new MySQLDataSource($database);
         $this->accessor->getConnection()->exec("
             TRUNCATE `user`;
             TRUNCATE `content`;"

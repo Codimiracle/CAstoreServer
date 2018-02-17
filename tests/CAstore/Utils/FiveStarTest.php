@@ -8,7 +8,7 @@
 
 namespace CAstore\Utils;
 
-use CAstore\Component\SQLDataSource;
+use CAstore\Component\MySQLDataSource;
 use PHPUnit\Framework\TestCase;
 
 class FiveStarTest extends TestCase
@@ -23,7 +23,7 @@ class FiveStarTest extends TestCase
         $database["database_name"] = "test";
         $database["database_username"] = "root";
         $database["database_password"] = "Codimiracle855866";
-        $this->dataSource = new SQLDataSource($database);
+        $this->dataSource = new MySQLDataSource($database);
         $this->dataSource->getConnection()->exec("TRUNCATE mark;");
         $this->fiveStar = new FiveStar();
         $this->fiveStar->setDataSource($this->dataSource);

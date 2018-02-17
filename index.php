@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * Component: codimiracle
- * Date: 18-1-17
- * Time: 下午3:36
- */
 
 require __DIR__ . '/vendor/autoload.php';
 

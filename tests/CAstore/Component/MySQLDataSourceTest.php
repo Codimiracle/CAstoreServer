@@ -10,7 +10,7 @@ namespace CAstore\Component;
 
 use PHPUnit\Framework\TestCase;
 
-class SQLDataSourceTest extends TestCase
+class MySQLDataSourceTest extends TestCase
 {
     /**
      * @var DataSource

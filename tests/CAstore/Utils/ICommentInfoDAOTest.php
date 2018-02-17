@@ -8,7 +8,7 @@
 
 namespace CAstore\Utils;
 
-use CAstore\Component\SQLDataSource;
+use CAstore\Component\MySQLDataSource;
 use PHPUnit\Framework\TestCase;
 
 class ICommentInfoDAOTest extends TestCase
@@ -26,7 +26,7 @@ class ICommentInfoDAOTest extends TestCase
         $database["database_username"] = "root";
         $database["database_password"] = "Codimiracle855866";
         $this->dao = new ICommentInfoDAO();
-        $this->dataSource = new SQLDataSource($database);
+        $this->dataSource = new MySQLDataSource($database);
         $this->dataSource->getConnection()->exec("
             TRUNCATE `comment`;
             TRUNCATE `content`;"

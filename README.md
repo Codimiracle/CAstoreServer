@@ -33,7 +33,7 @@
           $database = array();
         ```
     - 根据实际需要编辑模板
-        - tempaltes
+        - templates
 ### 附加说明
 - license: LGPL2.0
 - bugs: [feedback](mailto:Codimiracle@outlook.com)

@@ -9,6 +9,8 @@
 namespace CAstore\DAO;
 
 
+use CAstore\Entity\CommentInfo;
+
 class ICommentInfoDAO extends AbstractDAO implements CommentInfoDAO
 {
     const INSERT_CONTENT = "INSERT INTO content(title, name, content) VALUES ('comment_title', 'comment_name', :content)";

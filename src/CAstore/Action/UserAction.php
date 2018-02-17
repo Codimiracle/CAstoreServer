@@ -11,9 +11,8 @@ namespace CAstore\Action;
 use CAstore\Component\DelineContainer;
 use CAstore\Component\ComponentCenter;
 use CAstore\Component\Security;
-use CAstore\Verifier\UserInfoVerifier;
 use CAstore\Operation\UserOperation;
-use CAstore\DAO\UserInfo;
+use CAstore\Entity\UserInfo;
 use CAstore\Verifier\UserSignUpVerifier;
 
 class UserAction extends AbstractAction

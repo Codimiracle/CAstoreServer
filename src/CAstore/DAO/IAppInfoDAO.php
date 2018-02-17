@@ -8,6 +8,7 @@
 
 namespace CAstore\DAO;
 
+use CAstore\Entity\AppInfo;
 use PDOException;
 
 class IAppInfoDAO extends AbstractDAO implements AppInfoDAO

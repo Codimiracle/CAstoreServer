@@ -6,7 +6,7 @@
  * Time: 下午9:23
  */
 
-namespace CAstore\DAO;
+namespace CAstore\Entity;
 
 
 class CommentInfo implements Entity

@@ -94,7 +94,7 @@ class DelineContainer implements Container
     public function getDataSource()
     {
         if (is_null($this->dataSource)) {
-            $this->dataSource = new SQLDataSource();
+            $this->dataSource = new MySQLDataSource();
         }
         return $this->dataSource;
     }

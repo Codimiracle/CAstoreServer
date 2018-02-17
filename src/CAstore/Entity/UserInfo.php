@@ -6,7 +6,7 @@
  * Time: 下午9:56
  */
 
-namespace CAstore\DAO;
+namespace CAstore\Entity;
 
 
 class UserInfo implements Entity

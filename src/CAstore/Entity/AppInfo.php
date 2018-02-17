@@ -6,7 +6,7 @@
  * Time: 下午3:50
  */
 
-namespace CAstore\DAO;
+namespace CAstore\Entity;
 
 
 class AppInfo implements Entity
