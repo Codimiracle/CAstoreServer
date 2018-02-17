@@ -74,7 +74,7 @@
                         </div>
                         <div class="form-group">
                             <label for="description">应用描述</label>
-                            <textarea id="description" class="form-control" rows="3"></textarea>
+                            <textarea id="description" name="description" class="form-control" rows="3"></textarea>
                             <p class="help-block">&lt;ul&gt;</p>
                         </div>
                         <div class="form-group">

@@ -17,26 +17,26 @@ class AppsAppendVerifier extends AbstractVerifier
      */
     public function getFields()
     {
-        return array("");
+        return array("name", "title", "package", "description", "platform", "developer");
     }
 
     public function getPattern($field)
     {
-        // TODO: Implement getPattern() method.
+        
     }
 
     public function getPassedMessage($field)
     {
-        // TODO: Implement getPassedMessage() method.
+        
     }
 
     public function getEmptyMessage($field)
     {
-        // TODO: Implement getEmptyMessage() method.
+        
     }
 
     public function getUnrecognizedMessage($field)
     {
-        // TODO: Implement getUnrecognizedMessage() method.
+        
     }
 }

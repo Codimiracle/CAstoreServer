@@ -12,21 +12,25 @@ namespace CAstore\Entity;
 use CAstore\Entity\Generable;
 use CAstore\Entity\UserInfo;
 
-class UserInfoGenerator implements Generable
+class UserInfoGenerator extends EntityGenerator
 {
     private $entity;
+    
     public function __construct()
     {
         $this->entity = new UserInfo();
     }
 
-    const fields = array();
-
-    private function setEntityAttribute($field, $value) {
-        $setter = "set".strtoupper(substr($field,0,1)).strtolower(substr($field,1));
-        $this->entity->$setter($value);
+    public function getFields()
+    {
+        return array("username", "");
     }
     public function getEntity()
+    {
+        return $this->entity;
+    }
+    
+    public function generate()
     {
         $userInfo->setName($_POST["username"]);
         $userInfo->setNickname($_POST["nickname"]);

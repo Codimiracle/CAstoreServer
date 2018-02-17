@@ -12,11 +12,13 @@ namespace CAstore\Action;
 use CAstore\Component\ComponentCenter;
 use CAstore\Component\Container;
 use CAstore\Component\DelineContainer;
-use CAstore\DAO\AppInfo;
+use CAstore\Entity\AppInfo;
+use CAstore\verifier\AppsAppendVerifier;
 use CAstore\Operation\AppOperation;
 
 class AppsAction extends AbstractEntityAction
 {
+    const SUBMIT_ID_APP_APPEND = "apps_append";
 
     /** @var  AppOperation */
     private $appOperation;
@@ -35,9 +37,13 @@ class AppsAction extends AbstractEntityAction
 
     public function onEntityAppend()
     {
-        if ($this->isSubmit())
-        $this->view->setPageTitle("添加应用");
-        $this->view->setPageName("apps.append");
+        if ($this->isSubmit(self::SUBMIT_ID_APP_APPEND)) {
+            $verifier = new AppsAppendVerifier();
+            $verifier
+        } else {
+            $this->view->setPageTitle("添加应用");
+            $this->view->setPageName("apps.append");
+        }
     }
 
     public function onAppRoot()
