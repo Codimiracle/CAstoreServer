@@ -11,9 +11,8 @@ namespace CAstore\Action;
 
 use CAstore\Component\ComponentCenter;
 use CAstore\Component\Container;
-use CAstore\Component\DelineContainer;
 use CAstore\Entity\AppInfo;
-use CAstore\verifier\AppsAppendVerifier;
+use CAstore\Verifier\AppsAppendVerifier;
 use CAstore\Operation\AppOperation;
 
 class AppsAction extends AbstractEntityAction
@@ -39,7 +38,6 @@ class AppsAction extends AbstractEntityAction
     {
         if ($this->isSubmit(self::SUBMIT_ID_APP_APPEND)) {
             $verifier = new AppsAppendVerifier();
-            $verifier
         } else {
             $this->view->setPageTitle("添加应用");
             $this->view->setPageName("apps.append");
@@ -82,8 +80,6 @@ class AppsAction extends AbstractEntityAction
                 $this->view->setData("app_info", $entity);
             }
         }
-        /** @var DelineContainer $container */
-        $container = $this->getContainer();
-        $container->dispatchPageNotFound();
+        $this->container->dispatch("/System/PageNotFound");
     }
 }

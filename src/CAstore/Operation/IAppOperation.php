@@ -34,42 +34,20 @@ class IAppOperation implements AppOperation
         $this->context = $context;
         $this->dao = ComponentCenter::getDataAccessObject($context, "AppInfoDAO");
     }
+    
+    public function append($app_info)
+    {}
+    public function edit($app_info)
+    {}
+    
+    public function delete($id)
+    {}
+    
+    public function getAppInfoById($id)
+    {}
+    public function getAppInfoByPackage($package)
+    {}
+    public function getAppInfoByKeyword($keyword)
+    {}
 
-    public function getTarget($entity)
-    {
-        return $this->target;
-    }
-
-    /**
-     * @param mixed $target
-     */
-    public function setTarget($target)
-    {
-        $this->target = $target;
-    }
-
-    public function append()
-    {
-
-    }
-
-    public function delete()
-    {
-
-    }
-
-    public function edit()
-    {
-
-    }
-
-    public function update()
-    {
-
-    }
-
-    public function queryById($id)
-    {
-        return $this->dao->queryById($id);
-    }
 }

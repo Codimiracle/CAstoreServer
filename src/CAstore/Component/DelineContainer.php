@@ -49,7 +49,11 @@ class DelineContainer implements Container
      */
     public function dispatch($node_pathname)
     {
-        $this->nodePath = new NodePath($node_pathname);
+        if (is_string($node_pathname)) {
+            $this->nodePath = new NodePath($node_pathname);
+        } else {
+            $this->nodePath = $node_pathname;
+        }
         $this->handle($this->nodePath);
     }
 
@@ -60,30 +64,32 @@ class DelineContainer implements Container
     public function handle($node_path)
     {
         global $logger;
-        $logger->addDebug("retrieving NodePath",array("node" => strval($node_path)));
+        $logger->addDebug("DelineContainer", array("procedure"=>"handle", "node_pathname"=> $this->getNodePathname()));
         $action_name = $node_path->getMainNodeName();
-        if ($action_name == "") {
+        $logger->addDebug("DelineContainer", array("procedure"=>"handle", "action_name"=>$action_name));
+        if (!$action_name) {
             return;
         }
         /** @var AbstractAction $action */
         $action = ComponentCenter::getAction($this, $action_name);
+        $logger->addDebug("DelineContainer", array("procedure"=>"handle", "action_availiable" => boolval($action)));
         if ($action) {
             try {
-                $logger->addInfo("AbstractAction Start", array("AbstractAction Name"=> $action_name, "AbstractAction Class"=> get_class($action)));
+                $logger->addInfo("DelineContainer", array("procedure" => "action", "name"=> $action_name, "class"=> get_class($action), "status"=>"start"));
                 $action->onActionStart();
                 $action->onActionHandle();
                 $action->onActionEnd();
-                $logger->addInfo("AbstractAction End");
+                $logger->addInfo("DelineContainer", array("procedure" => "action", "name"=> $action_name, "class"=> get_class($action), "status"=>"end"));
                 return;
             } catch (PermissionDeniedException $exception) {
-                $logger->addWarning("AbstractAction invoking failed!", array("error-src" => $exception->getFile()));
+                $logger->addWarning("Action invoking failed!", array("error-src" => $exception->getFile()));
                 $this->dispatchPermissionDenied($exception->getMessage());
             } catch (\Exception $exception) {
-                $logger->addWarning("AbstractAction invoking failed!", array("error-src" => $exception->getFile()));
+                $logger->addWarning("Action invoking failed!", array("error-src" => $exception->getFile()));
                 $this->dispatchPageError($exception->getMessage());
             }
         } else {
-            $logger->addWarning("AbstractAction invoking failed!", array("message"=>"Page Not Found"));
+            $logger->addWarning("Action invoking failed!", array("message"=>"Page Not Found"));
             $this->dispatchPageNotFound();
         }
     }
@@ -150,8 +156,10 @@ class DelineContainer implements Container
      */
     public function init()
     {
+        global $logger;
         $this->getSession()->setUserInfoDAO(ComponentCenter::getDataAccessObject($this, "UserInfoDAO"));
         $this->getSession()->setRoleInfoDAO(ComponentCenter::getDataAccessObject($this, "RoleInfoDAO"));
+        $logger->addDebug("DelineContainer", array("node" => $this->getNodePathname()));
     }
 
     /**
@@ -189,13 +197,13 @@ class DelineContainer implements Container
             $node_path = $this->getNodePath();
             $action_name = $node_path->getMainNodeName();
             if ($action_name == "") {
-                $this->dispatch(new NodePath("/Home"));
+                $this->dispatch("/Home");
             } else {
-                $this->dispatch($node_path);
+                $this->dispatch($this->getNodePathname());
             }
         } catch (NodePathFormatException $exception) {
             $logger->addError("Node Path Format Error", array("node" => $this->getNodePathname()));
-            $this->dispatch(new NodePath("/System/NodePathError"));
+            $this->dispatch("/System/NodePathError");
         }
     }
 

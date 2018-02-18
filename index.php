@@ -1,4 +1,5 @@
 <?php
+$TAG = "DelineContainer";
 
 require __DIR__ . '/vendor/autoload.php';
 
@@ -15,16 +16,19 @@ $container = new CAstore\Component\DelineContainer();
 
 try {
     // initial Container
-    $logger->addDebug("Deline Container initial.");
+    $logger->addDebug($TAG, array("procedure" => "init-start"));
     $container->init();
-
+    $logger->addDebug($TAG, array("procedure" => "init-end"));
+    
     // power on
-    $logger->addDebug("Deline Container invoking.");
+    $logger->addDebug($TAG, array("procedure" => "invoke-start"));
     $container->invoke();
-
+    $logger->addDebug($TAG, array("procedure" => "invoke-end"));
+    
     // destroy Container
-    $logger->addDebug("Deline Container destroy.");
+    $logger->addDebug($TAG, array("procedure"=> "destroy-start"));
     $container->destroy();
+    $logger->addDebug($TAG, array("procedure"=> "destroy-end"));
     $logger->addInfo("===================================================");
 } catch (Exception $exception) {
     echo $exception->getMessage();

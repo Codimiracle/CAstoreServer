@@ -14,7 +14,7 @@ class ActionFactory
         "Home" => HomeAction::class,
         "User" => UserAction::class,
         "Apps" => AppsAction::class,
-        "About" => AboutAbstractAction::class,
+        "About" => AboutAction::class,
         "System" => SystemAction::class
     );
 
@@ -26,8 +26,8 @@ class ActionFactory
     public static function getAction($context, $name) {
         if (isset(self::$actions[$name])) {
             $action_class = self::$actions[$name];
-            /** @var AbstractAction $action */
             $action = new $action_class;
+            /** @var AbstractAction $action */
             $action->setContainer($context);
             return $action;
         } else {

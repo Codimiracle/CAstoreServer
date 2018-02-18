@@ -76,13 +76,13 @@ abstract class AbstractAction
     {
         global $logger;
         $pathname = strval($this->getNodePath());
-        $logger->addDebug("AbstractAction Pathname matching: ".$pathname);
+        $logger->addDebug("Action Pathname matching: ".$pathname);
         return $pathname;
     }
     public function onActionHandle() {
         global $logger;
         $method_name = $this->mapper->match($this->getCurrentNodePathname());
-        $logger->addDebug("AbstractAction Method invoking: ".$method_name);
+        $logger->addDebug("Action Method invoking: ".$method_name);
         if ($method_name) {
             $this->$method_name();
         } else {
