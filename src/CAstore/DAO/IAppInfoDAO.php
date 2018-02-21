@@ -5,7 +5,6 @@
  * Date: 18-1-22
  * Time: 下午9:42
  */
-
 namespace CAstore\DAO;
 
 use CAstore\Entity\AppInfo;
@@ -13,23 +12,33 @@ use PDOException;
 
 class IAppInfoDAO extends AbstractDAO implements AppInfoDAO
 {
+
     const INSERT_CONTENT = "INSERT INTO content(title, name, content) VALUES (:title, :name, :description)";
+
     const INSERT_APP = "INSERT INTO app(cid, package, developer, platform, version) VALUES (:cid, :package, :developer, :platform, :version)";
 
     const DELETE_CONTENT = "DELETE FROM content WHERE id = (SELECT cid FROM app WHERE id = :id)";
+
     const DELETE_APP = "DELETE FROM app WHERE id = :id";
 
     const UPDATE_CONTENT = "UPDATE content SET title = :title, name = :name, content = :description WHERE id = (SELECT cid FROM app WHERE id = :id)";
+
     const UPDATE_APP = "UPDATE app SET package = :package, developer = :developer, platform = :platform, version = :version WHERE id = :id";
 
     const QUERY = "SELECT * FROM app_info";
-    const QUERY_BY_TAG = self::QUERY." WHERE EXISTS (SELECT 1 FROM tag, app WHERE app.cid = tag.cid AND app.id = app_info.id AND tag.name LIKE concat('%',replace(:tag, ' ', '%'), '%'))";
-    const QUERY_BY_DEVELOPER = self::QUERY." WHERE developer LIKE concat('%',replace(:developer, ' ', '%'), '%'))";
-    const QUERY_BY_PACKAGE = self::QUERY." WHERE package LIKE concat('%',replace(:package, ' ', '%'), '%'))";
-    const QUERY_BY_KEYWORD = self::QUERY." WHERE name LIKE concat('%',replace(:keyword, ' ', '%'), '%')) OR package LIKE concat('%',replace(:keyword, ' ', '%'), '%')) OR developer LIKE concat('%',replace(:keyword, ' ', '%'), '%')) OR EXISTS (SELECT 1 FROM tag, app WHERE app.cid = tag.cid AND app.id = app_info.id AND tag.name LIKE concat('%',replace(:tag, ' ', '%'), '%'))";
-    const QUERY_BY_ID = self::QUERY." WHERE id = :id";
+
+    const QUERY_BY_TAG = "SELECT * FROM app_info WHERE EXISTS (SELECT 1 FROM tag, app WHERE app.cid = tag.cid AND app.id = app_info.id AND tag.name LIKE concat('%',replace(:tag, ' ', '%'), '%'))";
+
+    const QUERY_BY_DEVELOPER = "SELECT * FROM app_info WHERE developer LIKE concat('%',replace(:developer, ' ', '%'), '%'))";
+
+    const QUERY_BY_PACKAGE = "SELECT * FROM app_info WHERE package LIKE concat('%',replace(:package, ' ', '%'), '%'))";
+
+    const QUERY_BY_KEYWORD = "SELECT * FROM app_info WHERE name LIKE concat('%',replace(:keyword, ' ', '%'), '%')) OR package LIKE concat('%',replace(:keyword, ' ', '%'), '%')) OR developer LIKE concat('%',replace(:keyword, ' ', '%'), '%')) OR EXISTS (SELECT 1 FROM tag, app WHERE app.cid = tag.cid AND app.id = app_info.id AND tag.name LIKE concat('%',replace(:tag, ' ', '%'), '%'))";
+
+    const QUERY_BY_ID = "SELECT * FROM app_info WHERE id = :id";
 
     /**
+     *
      * @return AppInfo
      */
     public function getTarget()
@@ -43,17 +52,24 @@ class IAppInfoDAO extends AbstractDAO implements AppInfoDAO
         try {
             $connection->beginTransaction();
             $prepared = $connection->prepare(self::INSERT_CONTENT);
-            $prepared->bindValue(":title", $this->getTarget()->getTitle());
-            $prepared->bindValue(":name", $this->getTarget()->getName());
-            $prepared->bindValue(":description", $this->getTarget()->getDescription());
+            $prepared->bindValue(":title", $this->getTarget()
+                ->getTitle());
+            $prepared->bindValue(":name", $this->getTarget()
+                ->getName());
+            $prepared->bindValue(":description", $this->getTarget()
+                ->getDescription());
             $prepared->execute();
             $inserted_id = $connection->lastInsertId("id");
             $prepared = $connection->prepare(self::INSERT_APP);
             $prepared->bindValue(":cid", $inserted_id);
-            $prepared->bindValue(":package", $this->getTarget()->getPackage());
-            $prepared->bindValue(":developer", $this->getTarget()->getDeveloper());
-            $prepared->bindValue(":platform", $this->getTarget()->getPlatform());
-            $prepared->bindValue(":version", $this->getTarget()->getVersion());
+            $prepared->bindValue(":package", $this->getTarget()
+                ->getPackage());
+            $prepared->bindValue(":developer", $this->getTarget()
+                ->getDeveloper());
+            $prepared->bindValue(":platform", $this->getTarget()
+                ->getPlatform());
+            $prepared->bindValue(":version", $this->getTarget()
+                ->getVersion());
             $prepared->execute();
             $connection->commit();
         } catch (PDOException $e) {
@@ -67,9 +83,13 @@ class IAppInfoDAO extends AbstractDAO implements AppInfoDAO
         $connection = $this->getDataSource()->getConnection();
         try {
             $connection->beginTransaction();
-            foreach (array(self::DELETE_CONTENT, self::DELETE_APP) as $sentence) {
+            foreach (array(
+                self::DELETE_CONTENT,
+                self::DELETE_APP
+            ) as $sentence) {
                 $prepared = $connection->prepare($sentence);
-                $prepared->bindValue(":id", $this->getTarget()->getId());
+                $prepared->bindValue(":id", $this->getTarget()
+                    ->getId());
                 $prepared->execute();
             }
             $connection->commit();
@@ -85,17 +105,26 @@ class IAppInfoDAO extends AbstractDAO implements AppInfoDAO
         $connection->beginTransaction();
         try {
             $prepared = $connection->prepare(self::UPDATE_CONTENT);
-            $prepared->bindValue(":title", $this->getTarget()->getTitle());
-            $prepared->bindValue(":name", $this->getTarget()->getName());
-            $prepared->bindValue(":description", $this->getTarget()->getDescription());
-            $prepared->bindValue("id", $this->getTarget()->getId());
+            $prepared->bindValue(":title", $this->getTarget()
+                ->getTitle());
+            $prepared->bindValue(":name", $this->getTarget()
+                ->getName());
+            $prepared->bindValue(":description", $this->getTarget()
+                ->getDescription());
+            $prepared->bindValue("id", $this->getTarget()
+                ->getId());
             $prepared->execute();
             $prepared = $connection->prepare(self::UPDATE_APP);
-            $prepared->bindValue(":package", $this->getTarget()->getPackage());
-            $prepared->bindValue(":platform", $this->getTarget()->getPlatform());
-            $prepared->bindValue(":developer", $this->getTarget()->getDeveloper());
-            $prepared->bindValue(":version", $this->getTarget()->getVersion());
-            $prepared->bindValue(":id", $this->getTarget()->getId());
+            $prepared->bindValue(":package", $this->getTarget()
+                ->getPackage());
+            $prepared->bindValue(":platform", $this->getTarget()
+                ->getPlatform());
+            $prepared->bindValue(":developer", $this->getTarget()
+                ->getDeveloper());
+            $prepared->bindValue(":version", $this->getTarget()
+                ->getVersion());
+            $prepared->bindValue(":id", $this->getTarget()
+                ->getId());
             $prepared->execute();
             $connection->commit();
         } catch (PDOException $e) {
@@ -111,27 +140,36 @@ class IAppInfoDAO extends AbstractDAO implements AppInfoDAO
 
     public function queryById($id)
     {
-        return $this->getEntity(self::QUERY_BY_ID, array(":id" => $id), AppInfo::class);
+        return $this->getEntity(self::QUERY_BY_ID, array(
+            ":id" => $id
+        ), AppInfo::class);
     }
 
     public function queryByTag($tag)
     {
-        return $this->getEntities(self::QUERY_BY_TAG, array(":tag"=>$tag), AppInfo::class);
+        return $this->getEntities(self::QUERY_BY_TAG, array(
+            ":tag" => $tag
+        ), AppInfo::class);
     }
 
     public function queryByDeveloper($developer)
     {
-        return $this->getEntities(self::QUERY_BY_DEVELOPER, array(":developer" => $developer), AppInfo::class);
+        return $this->getEntities(self::QUERY_BY_DEVELOPER, array(
+            ":developer" => $developer
+        ), AppInfo::class);
     }
 
     public function queryByKeyword($keyword)
     {
-        return $this->getEntities(self::QUERY_BY_KEYWORD, array(":keyword" => $keyword), AppInfo::class);
+        return $this->getEntities(self::QUERY_BY_KEYWORD, array(
+            ":keyword" => $keyword
+        ), AppInfo::class);
     }
-
 
     public function queryByPackage($package)
     {
-        return $this->getEntities(self::QUERY_BY_PACKAGE, array(":package" => $package), AppInfo::class);
+        return $this->getEntities(self::QUERY_BY_PACKAGE, array(
+            ":package" => $package
+        ), AppInfo::class);
     }
 }

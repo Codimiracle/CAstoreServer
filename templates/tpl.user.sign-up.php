@@ -20,7 +20,7 @@
                         <div class="form-group">
                             <label for="password">密码</label>
                             <input id="password" type="password" pattern="[A-Za-z0-9\\$\\^!@#%&_-]{9,16}" class="form-control" name="password" placeholder="密码" />
-                            <p class="help-block">密码为字母和数字以及任何“!@#$%^&_-”特殊字符组成！</p>
+                            <p class="help-block">密码为字母和数字以及任何“!@#$%^&amp;_-”特殊字符组成！</p>
                         </div>
                     </div>
                 </div>

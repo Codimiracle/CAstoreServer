@@ -5,19 +5,23 @@
  * Date: 18-1-26
  * Time: 下午9:23
  */
-
 namespace CAstore\Entity;
-
 
 class CommentInfo implements Entity
 {
+
     public $id;
+
     public $contentId;
+
     public $content;
+
     public $createdTime;
+
     public $userId;
 
     /**
+     *
      * @return mixed
      */
     public function getId()
@@ -26,6 +30,7 @@ class CommentInfo implements Entity
     }
 
     /**
+     *
      * @return mixed
      */
     public function getContentId()
@@ -34,6 +39,7 @@ class CommentInfo implements Entity
     }
 
     /**
+     *
      * @param mixed $contentId
      */
     public function setContentId($contentId)
@@ -41,8 +47,8 @@ class CommentInfo implements Entity
         $this->contentId = $contentId;
     }
 
-
     /**
+     *
      * @return mixed
      */
     public function getContent()
@@ -51,6 +57,7 @@ class CommentInfo implements Entity
     }
 
     /**
+     *
      * @param mixed $content
      */
     public function setContent($content)
@@ -59,6 +66,7 @@ class CommentInfo implements Entity
     }
 
     /**
+     *
      * @return mixed
      */
     public function getCreatedTime()
@@ -67,6 +75,7 @@ class CommentInfo implements Entity
     }
 
     /**
+     *
      * @param mixed $createdTime
      */
     public function setCreatedTime($createdTime)
@@ -75,6 +84,7 @@ class CommentInfo implements Entity
     }
 
     /**
+     *
      * @return mixed
      */
     public function getUserId()
@@ -83,12 +93,11 @@ class CommentInfo implements Entity
     }
 
     /**
+     *
      * @param mixed $userId
      */
     public function setUserId($userId)
     {
         $this->userId = $userId;
     }
-
-
 }

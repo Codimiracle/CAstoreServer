@@ -9,6 +9,8 @@
 namespace CAstore\Utils;
 
 use CAstore\Component\MySQLDataSource;
+use CAstore\DAO\ICommentInfoDAO;
+use CAstore\Entity\CommentInfo;
 use PHPUnit\Framework\TestCase;
 
 class ICommentInfoDAOTest extends TestCase

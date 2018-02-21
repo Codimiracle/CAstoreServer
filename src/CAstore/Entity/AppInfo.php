@@ -5,64 +5,78 @@
  * Date: 18-1-19
  * Time: 下午3:50
  */
-
 namespace CAstore\Entity;
-
 
 class AppInfo implements Entity
 {
 
     /**
      * App Id
+     * 
      * @var string
      */
     public $id;
+
     /**
      * App 显示名称
+     * 
      * @var string
      */
     public $title;
+
     /**
      * App 名称
+     * 
      * @var string
      */
     public $name;
+
     /**
      * App 描述
+     * 
      * @var string
      */
     public $description;
+
     /**
      * App 包名
+     * 
      * @var string
      */
     public $package;
+
     /**
      * App 平台
      * 不要产生 Windows 平台以及其他平台。
      * <ul>
-     *  <li>android-x86</li>
-     *  <li>android-x86_64</li>
-     *  <li>android-arm</li>
-     *  <li>android-arm64</li>
-     *  <li>android-aarch</li>
-     *  <li>android-aarch64</li>
+     * <li>android-x86</li>
+     * <li>android-x86_64</li>
+     * <li>android-arm</li>
+     * <li>android-arm64</li>
+     * <li>android-aarch</li>
+     * <li>android-aarch64</li>
      * </ul>
+     * 
      * @var string
      */
     public $platform;
+
     /**
      * App 开发者
+     * 
      * @var string;
      */
     public $developer;
+
     /**
      * App 版本
+     * 
      * @var string
      */
     public $version;
 
     /**
+     *
      * @return string
      */
     public function getId()
@@ -71,6 +85,7 @@ class AppInfo implements Entity
     }
 
     /**
+     *
      * @return string
      */
     public function getTitle()
@@ -79,6 +94,7 @@ class AppInfo implements Entity
     }
 
     /**
+     *
      * @param string $title
      */
     public function setTitle($title)
@@ -87,6 +103,7 @@ class AppInfo implements Entity
     }
 
     /**
+     *
      * @return string
      */
     public function getName()
@@ -95,6 +112,7 @@ class AppInfo implements Entity
     }
 
     /**
+     *
      * @param string $name
      */
     public function setName($name)
@@ -103,6 +121,7 @@ class AppInfo implements Entity
     }
 
     /**
+     *
      * @return string
      */
     public function getDescription()
@@ -111,6 +130,7 @@ class AppInfo implements Entity
     }
 
     /**
+     *
      * @param string $description
      */
     public function setDescription($description)
@@ -119,6 +139,7 @@ class AppInfo implements Entity
     }
 
     /**
+     *
      * @return string
      */
     public function getPackage()
@@ -127,6 +148,7 @@ class AppInfo implements Entity
     }
 
     /**
+     *
      * @param string $package
      */
     public function setPackage($package)
@@ -135,6 +157,7 @@ class AppInfo implements Entity
     }
 
     /**
+     *
      * @return string
      */
     public function getPlatform()
@@ -143,6 +166,7 @@ class AppInfo implements Entity
     }
 
     /**
+     *
      * @param string $platform
      */
     public function setPlatform($platform)
@@ -151,6 +175,7 @@ class AppInfo implements Entity
     }
 
     /**
+     *
      * @return string
      */
     public function getDeveloper()
@@ -159,6 +184,7 @@ class AppInfo implements Entity
     }
 
     /**
+     *
      * @param string $developer
      */
     public function setDeveloper($developer)
@@ -167,6 +193,7 @@ class AppInfo implements Entity
     }
 
     /**
+     *
      * @return string
      */
     public function getVersion()
@@ -175,11 +202,11 @@ class AppInfo implements Entity
     }
 
     /**
+     *
      * @param string $version
      */
     public function setVersion($version)
     {
         $this->version = $version;
     }
-
 }

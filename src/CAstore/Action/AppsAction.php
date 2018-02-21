@@ -5,18 +5,14 @@
  * Date: 18-1-30
  * Time: 下午9:22
  */
-
 namespace CAstore\Action;
 
-
 use CAstore\Component\ComponentCenter;
-use CAstore\Component\Container;
-use CAstore\Entity\AppInfo;
 use CAstore\Verifier\AppsAppendVerifier;
-use CAstore\Operation\AppOperation;
 
 class AppsAction extends AbstractEntityAction
 {
+
     const SUBMIT_ID_APP_APPEND = "apps_append";
 
     /** @var  AppOperation */
@@ -30,9 +26,7 @@ class AppsAction extends AbstractEntityAction
     }
 
     public function onActionEnd()
-    {
-
-    }
+    {}
 
     public function onEntityAppend()
     {
@@ -55,26 +49,22 @@ class AppsAction extends AbstractEntityAction
         /** @var AppInfo $entity */
         $entity = $this->appOperation->queryById($this->getEntityId());
         if ($entity) {
-            $this->view->setPageTitle("编辑应用 - ".$entity->getName());
+            $this->view->setPageTitle("编辑应用 - " . $entity->getName());
         } else {
             $this->container->dispatch("/System/PageNotFound");
         }
     }
 
     public function onEntityDelete()
-    {
-
-    }
+    {}
 
     public function onEntityUpdate()
-    {
-
-    }
+    {}
 
     public function onEntityDetails()
     {
         $id = $this->getEntityId();
-        if ($id != -1) {
+        if ($id != - 1) {
             $entity = $this->appOperation->queryById($id);
             if ($entity) {
                 $this->view->setData("app_info", $entity);

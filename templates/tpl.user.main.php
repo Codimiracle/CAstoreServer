@@ -15,7 +15,7 @@ $userdata = $parameters["userdata"];
             </div>
         </div>
         <div class="col-md-9">
-            <div class="user-details-view"
+            <div class="user-details-view"></div>
         </div>
     </div>
 

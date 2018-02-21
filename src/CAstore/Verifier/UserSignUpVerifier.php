@@ -5,26 +5,30 @@
  * Date: 18-2-12
  * Time: 下午5:03
  */
-
 namespace CAstore\Verifier;
-
 
 class UserSignUpVerifier extends AbstractVerifier
 {
 
-
     public function __construct()
     {
-        if (!(isset($_POST["nickname"]) && $_POST["nickname"]))
+        if (! (isset($_POST["nickname"]) && $_POST["nickname"]))
             $_POST["nickname"] = $_POST["username"];
     }
 
     /**
+     *
      * @return array
      */
     public function getFields()
     {
-        return array("username", "password", "gender", "nickname", "license");
+        return array(
+            "username",
+            "password",
+            "gender",
+            "nickname",
+            "license"
+        );
     }
 
     public function getPattern($field)

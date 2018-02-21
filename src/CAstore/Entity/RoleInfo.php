@@ -5,16 +5,17 @@
  * Date: 18-1-28
  * Time: 下午10:59
  */
-
 namespace CAstore\Entity;
-
 
 class RoleInfo implements Entity
 {
+
     public $id;
+
     public $permission;
 
     /**
+     *
      * @return int
      */
     public function getId()
@@ -23,6 +24,7 @@ class RoleInfo implements Entity
     }
 
     /**
+     *
      * @param int $id
      */
     public function setId($id)
@@ -31,6 +33,7 @@ class RoleInfo implements Entity
     }
 
     /**
+     *
      * @return string
      */
     public function getPermission()
@@ -39,12 +42,11 @@ class RoleInfo implements Entity
     }
 
     /**
+     *
      * @param string $permission
      */
     public function setPermission($permission)
     {
         $this->permission = $permission;
     }
-
-
 }

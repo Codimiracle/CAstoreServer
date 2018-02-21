@@ -5,17 +5,15 @@
  * Date: 18-2-16
  * Time: 下午12:21
  */
-
 namespace CAstore\Entity;
 
-
-use CAstore\Entity\Generable;
-use CAstore\Entity\UserInfo;
+use CAstore\Component\Security;
 
 class UserInfoGenerator extends EntityGenerator
 {
+
     private $entity;
-    
+
     public function __construct()
     {
         $this->entity = new UserInfo();
@@ -23,13 +21,17 @@ class UserInfoGenerator extends EntityGenerator
 
     public function getFields()
     {
-        return array("username", "");
+        return array(
+            "username",
+            ""
+        );
     }
+
     public function getEntity()
     {
         return $this->entity;
     }
-    
+
     public function generate()
     {
         $userInfo->setName($_POST["username"]);

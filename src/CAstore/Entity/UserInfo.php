@@ -5,55 +5,69 @@
  * Date: 18-1-17
  * Time: 下午9:56
  */
-
 namespace CAstore\Entity;
-
 
 class UserInfo implements Entity
 {
+
     /**
      * 用户Id
+     * 
      * @var integer
      */
     public $id;
+
     /**
      * 用户名
+     * 
      * @var string
      */
     public $name;
+
     /**
      * 用户昵称
+     * 
      * @var string
      */
     public $nickname;
+
     /**
      * 用户密码
+     * 
      * @var string
      */
     public $password;
+
     /**
      * 用户性别
+     * 
      * @var int
      */
     public $gender;
+
     /**
      * 用户描述
+     * 
      * @var string
      */
     public $description;
 
     /**
      * 用户头像
+     * 
      * @var string
      */
     public $avatar;
+
     /**
      * 用户角色
+     * 
      * @var int
      */
     public $roleId;
 
     /**
+     *
      * @return int
      */
     public function getId()
@@ -62,6 +76,7 @@ class UserInfo implements Entity
     }
 
     /**
+     *
      * @return string
      */
     public function getName()
@@ -70,6 +85,7 @@ class UserInfo implements Entity
     }
 
     /**
+     *
      * @param string $name
      */
     public function setName($name)
@@ -78,6 +94,7 @@ class UserInfo implements Entity
     }
 
     /**
+     *
      * @return string
      */
     public function getNickname()
@@ -86,6 +103,7 @@ class UserInfo implements Entity
     }
 
     /**
+     *
      * @param string $nickname
      */
     public function setNickname($nickname)
@@ -94,6 +112,7 @@ class UserInfo implements Entity
     }
 
     /**
+     *
      * @return string
      */
     public function getPassword()
@@ -102,6 +121,7 @@ class UserInfo implements Entity
     }
 
     /**
+     *
      * @param string $password
      */
     public function setPassword($password)
@@ -110,6 +130,7 @@ class UserInfo implements Entity
     }
 
     /**
+     *
      * @return int
      */
     public function getGender()
@@ -118,6 +139,7 @@ class UserInfo implements Entity
     }
 
     /**
+     *
      * @param int $gender
      */
     public function setGender($gender)
@@ -126,6 +148,7 @@ class UserInfo implements Entity
     }
 
     /**
+     *
      * @return string
      */
     public function getDescription()
@@ -134,6 +157,7 @@ class UserInfo implements Entity
     }
 
     /**
+     *
      * @param string $description
      */
     public function setDescription($description)
@@ -142,6 +166,7 @@ class UserInfo implements Entity
     }
 
     /**
+     *
      * @return mixed
      */
     public function getAvatar()
@@ -150,6 +175,7 @@ class UserInfo implements Entity
     }
 
     /**
+     *
      * @param mixed $avatar
      */
     public function setAvatar($avatar)
@@ -157,8 +183,8 @@ class UserInfo implements Entity
         $this->avatar = $avatar;
     }
 
-
     /**
+     *
      * @param mixed $roleId
      */
     public function setRoleId($roleId)
@@ -167,6 +193,7 @@ class UserInfo implements Entity
     }
 
     /**
+     *
      * @return mixed
      */
     public function getRoleId()

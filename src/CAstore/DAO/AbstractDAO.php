@@ -5,30 +5,34 @@
  * Date: 18-1-22
  * Time: 下午9:59
  */
-
 namespace CAstore\DAO;
-
 
 use CAstore\Component\DataSource;
 
 abstract class AbstractDAO implements DataAccessObject
 {
+
     /**
+     *
      * @var Entity
      */
     private $target;
 
     /**
+     *
      * @var Pager
      */
     private $pager;
+
     /**
+     *
      * @var DataSource
      */
     private $dataSource;
 
     /**
      * 获取目标
+     * 
      * @return mixed
      */
     public function getTarget()
@@ -38,6 +42,7 @@ abstract class AbstractDAO implements DataAccessObject
 
     /**
      * 设置目标
+     * 
      * @param mixed $target
      */
     public function setTarget($target)
@@ -47,6 +52,7 @@ abstract class AbstractDAO implements DataAccessObject
 
     /**
      * 获取分页器
+     * 
      * @return Pager
      */
     public function getPager()
@@ -56,6 +62,7 @@ abstract class AbstractDAO implements DataAccessObject
 
     /**
      * 设置分页器
+     * 
      * @param Pager $pager
      */
     public function setPager($pager)
@@ -65,6 +72,7 @@ abstract class AbstractDAO implements DataAccessObject
 
     /**
      * 获取数据库服务器
+     * 
      * @return DataSource
      */
     public function getDataSource()
@@ -74,6 +82,7 @@ abstract class AbstractDAO implements DataAccessObject
 
     /**
      * 数据库访问器
+     * 
      * @param DataSource $data_source
      */
     public function setDataSource($data_source)
@@ -83,27 +92,35 @@ abstract class AbstractDAO implements DataAccessObject
 
     /**
      * 查询预处理针对多记录
+     * 
      * @param string $sentence
      * @return \PDOStatement
      */
-    private function preparingMultirecords($sentence) {
-        if (!is_null($this->getPager())) {
+    private function preparingMultirecords($sentence)
+    {
+        if (! is_null($this->getPager())) {
             $sentence = $this->getPager()->getTranformSQL($sentence);
         }
-        $prepared = $this->getDataSource()->getConnection()->prepare($sentence);
-        if (!is_null($this->getPager())) {
-            $prepared->bindParam(":offset", $this->getPager()->getOffset());
-            $prepared->bindParam(":length", $this->getPager()->getLength());
+        $prepared = $this->getDataSource()
+            ->getConnection()
+            ->prepare($sentence);
+        if (! is_null($this->getPager())) {
+            $prepared->bindParam(":offset", $this->getPager()
+                ->getOffset());
+            $prepared->bindParam(":length", $this->getPager()
+                ->getLength());
         }
         return $prepared;
     }
 
     /**
      * 将结果集映射到 Entity 。
+     * 
      * @param string $query
      * @return array|null
      */
-    protected function getEntities($query, $args, $class) {
+    protected function getEntities($query, $args, $class)
+    {
         $prepared = $this->preparingMultirecords($query);
         foreach ($args as $parameter => $value) {
             $prepared->bindValue($parameter, $value);
@@ -117,11 +134,15 @@ abstract class AbstractDAO implements DataAccessObject
 
     /**
      * 将结果集单条记录映射到 Entity 。
-     * @param $prepared
-     * @param $class
+     * 
+     * @param
+     *            $prepared
+     * @param
+     *            $class
      * @return mixed|null
      */
-    protected function getEntity($query, $args, $class) {
+    protected function getEntity($query, $args, $class)
+    {
         $results = $this->getEntities($query, $args, $class);
         if (isset($results[0])) {
             return $results[0];

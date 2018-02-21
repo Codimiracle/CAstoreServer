@@ -5,9 +5,7 @@
  * Date: 18-1-28
  * Time: 下午11:31
  */
-
 namespace CAstore\DAO;
-
 
 class IRoleInfoDAO extends AbstractDAO implements RoleInfoDAO
 {

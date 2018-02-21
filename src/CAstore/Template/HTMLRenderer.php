@@ -5,15 +5,17 @@
  * Date: 18-1-17
  * Time: 下午10:08
  */
-
 namespace CAstore\Template;
-
 
 class HTMLRenderer implements Renderer
 {
+
     const HEADER = "header";
+
     const FOOTER = "footer";
+
     private $parameters = array();
+
     private $attributes = null;
 
     public function __construct()
@@ -22,14 +24,15 @@ class HTMLRenderer implements Renderer
         $this->attributes = $website;
     }
 
-
     // 设置 Renderer Variable.
-    public function setParameter($key, $value) {
+    public function setParameter($key, $value)
+    {
         $this->parameters[$key] = $value;
     }
 
     // 获取 Renderer Variable.
-    public function getParameter($key) {
+    public function getParameter($key)
+    {
         if (isset($this->parameters[$key])) {
             return $this->parameters[$key];
         } else {
@@ -38,8 +41,9 @@ class HTMLRenderer implements Renderer
     }
 
     // 加载 HTML 模板
-    private function load($page_name) {
-        $template_file =  getcwd() . "/templates/tpl." .$page_name.".php";
+    private function load($page_name)
+    {
+        $template_file = getcwd() . "/templates/tpl." . $page_name . ".php";
         if (file_exists($template_file)) {
             $attributes = $this->attributes;
             $parameters = $this->parameters;

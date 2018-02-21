@@ -5,28 +5,23 @@
  * Date: 18-1-21
  * Time: 下午8:48
  */
-
 namespace CAstore\Component;
 
-
-use CAstore\Action\AbstractAction;
-use CAstore\Action\ActionFactory;
-use CAstore\Action\Context;
-use CAstore\Template\HTMLRenderer;
-use CAstore\Template\JSONRenderer;
-use CAstore\Template\Renderer;
 use CAstore\Template\RendererCreator;
 use CAstore\Template\RendererSetter;
-use CAstore\Utils\IUserInfoDAO;
 
 class DelineContainer implements Container
 {
+
     /** @var  DataSource */
     private $dataSource = null;
+
     /** @var  NodePath */
     private $nodePath = null;
+
     /** @var  SessionManager */
     private $session = null;
+
     /** @var  Renderer */
     private $renderer = null;
 
@@ -35,16 +30,18 @@ class DelineContainer implements Container
 
     /**
      * URL 重定向
+     * 
      * @param string $node_pathname
      */
     public function redirect($node_pathname)
     {
-
         $this->redirecting = true;
-        header("Location: index.php?".$this->getAccessingType()."=".$node_pathname);
+        header("Location: index.php?" . $this->getAccessingType() . "=" . $node_pathname);
     }
+
     /**
      * 请求分发
+     * 
      * @param string $node_pathname
      */
     public function dispatch($node_pathname)
@@ -59,42 +56,69 @@ class DelineContainer implements Container
 
     /**
      * 处理 NodePath
+     * 
      * @param NodePath $node_path
      */
     public function handle($node_path)
     {
         global $logger;
-        $logger->addDebug("DelineContainer", array("procedure"=>"handle", "node_pathname"=> $this->getNodePathname()));
+        $logger->addDebug("DelineContainer", array(
+            "procedure" => "handle",
+            "node_pathname" => $this->getNodePathname()
+        ));
         $action_name = $node_path->getMainNodeName();
-        $logger->addDebug("DelineContainer", array("procedure"=>"handle", "action_name"=>$action_name));
-        if (!$action_name) {
+        $logger->addDebug("DelineContainer", array(
+            "procedure" => "handle",
+            "action_name" => $action_name
+        ));
+        if (! $action_name) {
             return;
         }
         /** @var AbstractAction $action */
         $action = ComponentCenter::getAction($this, $action_name);
-        $logger->addDebug("DelineContainer", array("procedure"=>"handle", "action_availiable" => boolval($action)));
+        $logger->addDebug("DelineContainer", array(
+            "procedure" => "handle",
+            "action_availiable" => boolval($action)
+        ));
         if ($action) {
             try {
-                $logger->addInfo("DelineContainer", array("procedure" => "action", "name"=> $action_name, "class"=> get_class($action), "status"=>"start"));
+                $logger->addInfo("DelineContainer", array(
+                    "procedure" => "action",
+                    "name" => $action_name,
+                    "class" => get_class($action),
+                    "status" => "start"
+                ));
                 $action->onActionStart();
                 $action->onActionHandle();
                 $action->onActionEnd();
-                $logger->addInfo("DelineContainer", array("procedure" => "action", "name"=> $action_name, "class"=> get_class($action), "status"=>"end"));
+                $logger->addInfo("DelineContainer", array(
+                    "procedure" => "action",
+                    "name" => $action_name,
+                    "class" => get_class($action),
+                    "status" => "end"
+                ));
                 return;
             } catch (PermissionDeniedException $exception) {
-                $logger->addWarning("Action invoking failed!", array("error-src" => $exception->getFile()));
+                $logger->addWarning("Action invoking failed!", array(
+                    "error-src" => $exception->getFile()
+                ));
                 $this->dispatchPermissionDenied($exception->getMessage());
             } catch (\Exception $exception) {
-                $logger->addWarning("Action invoking failed!", array("error-src" => $exception->getFile()));
+                $logger->addWarning("Action invoking failed!", array(
+                    "error-src" => $exception->getFile()
+                ));
                 $this->dispatchPageError($exception->getMessage());
             }
         } else {
-            $logger->addWarning("Action invoking failed!", array("message"=>"Page Not Found"));
+            $logger->addWarning("Action invoking failed!", array(
+                "message" => "Page Not Found"
+            ));
             $this->dispatchPageNotFound();
         }
     }
 
     /**
+     *
      * @return DataSource
      */
     public function getDataSource()
@@ -106,6 +130,7 @@ class DelineContainer implements Container
     }
 
     /**
+     *
      * @return Renderer
      */
     public function getRenderer()
@@ -117,6 +142,7 @@ class DelineContainer implements Container
     }
 
     /**
+     *
      * @return SessionManager
      */
     public function getSession()
@@ -126,9 +152,12 @@ class DelineContainer implements Container
         }
         return $this->session;
     }
-    private function getAccessingType() {
+
+    private function getAccessingType()
+    {
         return isset($_GET["api"]) ? "api" : (isset($_GET["node"]) ? "node" : (isset($_GET["res"]) ? "res" : "node"));
     }
+
     private function getRendererType()
     {
         return isset($_GET["api"]) ? "json" : (isset($_GET["node"]) ? "html" : (isset($_GET["res"]) ? "resource" : "html"));
@@ -139,7 +168,9 @@ class DelineContainer implements Container
         $type = $this->getAccessingType();
         return isset($_GET[$type]) ? $_GET[$type] : "/";
     }
+
     /**
+     *
      * @return NodePath
      */
     public function getNodePath()
@@ -159,23 +190,29 @@ class DelineContainer implements Container
         global $logger;
         $this->getSession()->setUserInfoDAO(ComponentCenter::getDataAccessObject($this, "UserInfoDAO"));
         $this->getSession()->setRoleInfoDAO(ComponentCenter::getDataAccessObject($this, "RoleInfoDAO"));
-        $logger->addDebug("DelineContainer", array("node" => $this->getNodePathname()));
+        $logger->addDebug("DelineContainer", array(
+            "node" => $this->getNodePathname()
+        ));
     }
 
     /**
+     *
      * @param string $message
      */
-    public function dispatchPageError($message) {
+    public function dispatchPageError($message)
+    {
         $this->dispatch("/System/PageError");
         $view = new RendererSetter($this->getRenderer());
         $view->setMessage("error", $message);
     }
 
-    public function dispatchPageNotFound() {
+    public function dispatchPageNotFound()
+    {
         $this->dispatch("/System/PageNotFound");
     }
 
-    public function dispatchPermissionDenied($message) {
+    public function dispatchPermissionDenied($message)
+    {
         $this->dispatch("/System/PermissionDenied");
         $view = new RendererSetter($this->getRenderer());
         $view->setMessage("error", $message);
@@ -202,7 +239,9 @@ class DelineContainer implements Container
                 $this->dispatch($this->getNodePathname());
             }
         } catch (NodePathFormatException $exception) {
-            $logger->addError("Node Path Format Error", array("node" => $this->getNodePathname()));
+            $logger->addError("Node Path Format Error", array(
+                "node" => $this->getNodePathname()
+            ));
             $this->dispatch("/System/NodePathError");
         }
     }
@@ -212,7 +251,7 @@ class DelineContainer implements Container
      */
     public function destroy()
     {
-        if (!$this->redirecting) {
+        if (! $this->redirecting) {
             $this->getRenderer()->render();
         }
     }

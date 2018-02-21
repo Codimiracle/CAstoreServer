@@ -5,9 +5,7 @@
  * Date: 18-1-29
  * Time: 下午7:59
  */
-
 namespace CAstore\Operation;
-
 
 use CAstore\Action\Context;
 use CAstore\Component\ComponentCenter;
@@ -18,18 +16,23 @@ use CAstore\DAO\UserInfoDAO;
 
 class IUserOperation implements UserOperation
 {
+
     const SIGN_OUT_MESSAGE = "user.sign.out.message";
+
     /**
+     *
      * @var UserInfoDAO
      */
     private $dao;
 
     /**
+     *
      * @var Context
      */
     private $context;
 
     /**
+     *
      * @param Context $context
      */
     public function setContext($context)
@@ -39,6 +42,7 @@ class IUserOperation implements UserOperation
     }
 
     /**
+     *
      * @return Context
      */
     public function getContext()
@@ -47,8 +51,11 @@ class IUserOperation implements UserOperation
     }
 
     /**
-     * @param $username
-     * @param $password
+     *
+     * @param
+     *            $username
+     * @param
+     *            $password
      * @return int
      */
     public function signIn($username, $password)
@@ -63,13 +70,14 @@ class IUserOperation implements UserOperation
                 return 0;
             }
         } else {
-            return -1;
+            return - 1;
         }
-
     }
 
     /**
-     * @param $userInfo
+     *
+     * @param
+     *            $userInfo
      * @return int
      */
     public function signUp($userInfo)
@@ -80,11 +88,11 @@ class IUserOperation implements UserOperation
             $this->dao->insert();
             return 1;
         } catch (\Exception $exception) {
-            $logger->addError("User sign up error:".$exception->getMessage());
+            $logger->addError("User sign up error:" . $exception->getMessage());
             if ($exception->getCode() == "23000") {
                 return 0;
             }
-            return -1;
+            return - 1;
         }
     }
 

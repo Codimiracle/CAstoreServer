@@ -5,15 +5,15 @@
  * Date: 18-1-23
  * Time: 上午10:01
  */
-
 namespace CAstore\DAO;
-
 
 class SimplePager implements Pager
 {
+
     const LIMIT_CAUSE = " LIMIT ?,?";
 
     private $offset;
+
     private $length;
 
     public function getOffset()
@@ -28,6 +28,6 @@ class SimplePager implements Pager
 
     public function getTranformSQL($sentence)
     {
-        return $sentence.self::LIMIT_CAUSE;
+        return $sentence . self::LIMIT_CAUSE;
     }
 }

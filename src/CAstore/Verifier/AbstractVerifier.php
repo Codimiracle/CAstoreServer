@@ -5,17 +5,19 @@
  * Date: 18-2-2
  * Time: 下午4:13
  */
-
 namespace CAstore\Verifier;
-
 
 abstract class AbstractVerifier implements Verifier
 {
-    private $hit = -1;
+
+    private $hit = - 1;
+
     private $hittedField = null;
+
     private $codes = array();
 
-    private function check($field) {
+    private function check($field)
+    {
         if (isset($_POST[$field]) && ($value = $_POST[$field]) != "") {
             if (preg_match($this->getPattern($field), $value)) {
                 return Verifier::RESULT_OK;
@@ -28,12 +30,17 @@ abstract class AbstractVerifier implements Verifier
     }
 
     /**
+     *
      * @return array
      */
     public abstract function getFields();
+
     public abstract function getPattern($field);
+
     public abstract function getPassedMessage($field);
+
     public abstract function getEmptyMessage($field);
+
     public abstract function getUnrecognizedMessage($field);
 
     public function isValidity()
@@ -43,7 +50,7 @@ abstract class AbstractVerifier implements Verifier
 
     public function verifyAll()
     {
-        $this->hit = -1;
+        $this->hit = - 1;
         foreach ($this->getFields() as $field) {
             $this->verify($field);
         }
@@ -51,6 +58,7 @@ abstract class AbstractVerifier implements Verifier
             $this->hit = 0;
         }
     }
+
     public function verify($field)
     {
         $code = $this->check($field);
