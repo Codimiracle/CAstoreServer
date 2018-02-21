@@ -1,11 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: codimiracle
- * Date: 18-1-19
- * Time: 下午3:50
- */
+
 namespace CAstore\Entity;
+
+use Deline\Entity\Entity;
 
 class AppInfo implements Entity
 {

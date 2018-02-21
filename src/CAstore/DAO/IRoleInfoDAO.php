@@ -7,6 +7,8 @@
  */
 namespace CAstore\DAO;
 
+use Deline\DAO\AbstractDAO;
+
 class IRoleInfoDAO extends AbstractDAO implements RoleInfoDAO
 {
 

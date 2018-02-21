@@ -1,15 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: codimiracle
- * Date: 18-2-16
- * Time: 下午12:21
- */
+
 namespace CAstore\Entity;
 
-use CAstore\Component\Security;
+use Deline\Component\Security;
 
-class UserInfoGenerator extends EntityGenerator
+class UserInfoGenerator
 {
 
     private $entity;

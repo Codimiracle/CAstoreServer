@@ -7,6 +7,8 @@
  */
 namespace CAstore\Verifier;
 
+use Deline\Verifier\AbstractVerifier;
+
 class UserSignUpVerifier extends AbstractVerifier
 {
 

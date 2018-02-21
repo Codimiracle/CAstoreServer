@@ -7,6 +7,8 @@
  */
 namespace CAstore\DAO;
 
+use Deline\DAO\DataAccessObject;
+
 interface CommentInfoDAO extends DataAccessObject
 {
 

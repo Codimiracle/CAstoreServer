@@ -7,8 +7,8 @@
  */
 namespace CAstore\Utils;
 
-use CAstore\Component\DataSource;
-use PHPUnit\Runner\Exception;
+use Deline\Component\DataSource;
+use Exception;
 
 class FiveStar
 {

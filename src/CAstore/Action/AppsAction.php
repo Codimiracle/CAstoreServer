@@ -1,14 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: codimiracle
- * Date: 18-1-30
- * Time: 下午9:22
- */
 namespace CAstore\Action;
 
-use CAstore\Component\ComponentCenter;
+use CAstore\Operation\AppOperation;
 use CAstore\Verifier\AppsAppendVerifier;
+use Deline\Action\AbstractEntityAction;
+use Deline\Component\ComponentCenter;
 
 class AppsAction extends AbstractEntityAction
 {
@@ -22,7 +18,7 @@ class AppsAction extends AbstractEntityAction
     {
         parent::onActionStart();
         $this->attachAction("/^\\/$/", "onAppRoot");
-        $this->appOperation = ComponentCenter::getOperation($this->container, "AppOperation");
+        $this->appOperation = ComponentCenter::getService($this->container, "AppOperation");
     }
 
     public function onActionEnd()

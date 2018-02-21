@@ -12,7 +12,7 @@ $logger = new Monolog\Logger("CAstoreServer");
 $logger->pushHandler(new StreamHandler(__DIR__."/server.log", Monolog\Logger::DEBUG));
 
 // create a new instance of Container
-$container = new CAstore\Component\DelineContainer();
+$container = new Deline\Component\DelineContainer();
 
 try {
     // initial Container

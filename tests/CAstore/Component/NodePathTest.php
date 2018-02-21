@@ -1,13 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: codimiracle
- * Date: 18-1-25
- * Time: 下午10:54
- */
 
 namespace CAstore\Component;
 
+use Deline\Component\NodePath;
 use PHPUnit\Framework\TestCase;
 
 class NodePathTest extends TestCase

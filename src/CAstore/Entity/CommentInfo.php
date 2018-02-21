@@ -1,11 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: codimiracle
- * Date: 18-1-26
- * Time: 下午9:23
- */
+
 namespace CAstore\Entity;
+
+use Deline\Entity\Entity;
 
 class CommentInfo implements Entity
 {

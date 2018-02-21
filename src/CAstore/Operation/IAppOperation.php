@@ -7,7 +7,8 @@
  */
 namespace CAstore\Operation;
 
-use CAstore\Component\ComponentCenter;
+use CAstore\DAO\AppInfoDAO;
+use Deline\Component\ComponentCenter;
 
 class IAppOperation implements AppOperation
 {

@@ -1,11 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: codimiracle
- * Date: 18-1-30
- * Time: 下午3:32
- */
+
 namespace CAstore\Action;
+
+use Deline\Action\AbstractAction;
 
 class SystemAction extends AbstractAction
 {

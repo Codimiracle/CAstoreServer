@@ -8,8 +8,7 @@
 
 namespace CAstore\Utils;
 
-use CAstore\Component\DataSource;
-use CAstore\Component\MySQLDataSource;
+use Deline\Component\MySQLDataSource;
 use PHPUnit\Framework\TestCase;
 
 class VotingTest extends TestCase

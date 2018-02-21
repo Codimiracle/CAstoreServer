@@ -7,9 +7,10 @@
  */
 namespace CAstore\DAO;
 
+use Deline\DAO\Pager;
+
 class SimplePager implements Pager
 {
-
     const LIMIT_CAUSE = " LIMIT ?,?";
 
     private $offset;

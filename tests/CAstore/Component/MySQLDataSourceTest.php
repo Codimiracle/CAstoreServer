@@ -1,13 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: codimiracle
- * Date: 18-1-25
- * Time: 下午3:30
- */
 
 namespace CAstore\Component;
 
+use Deline\Component\MySQLDataSource;
 use PHPUnit\Framework\TestCase;
 
 class MySQLDataSourceTest extends TestCase

@@ -8,6 +8,7 @@
 namespace CAstore\DAO;
 
 use CAstore\Entity\UserInfo;
+use Deline\DAO\AbstractDAO;
 
 class IUserInfoDAO extends AbstractDAO implements UserInfoDAO
 {

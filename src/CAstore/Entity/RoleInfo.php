@@ -1,11 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: codimiracle
- * Date: 18-1-28
- * Time: 下午10:59
- */
+
 namespace CAstore\Entity;
+
+use Deline\Entity\Entity;
 
 class RoleInfo implements Entity
 {

@@ -1,16 +1,13 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: codimiracle
- * Date: 18-1-30
- * Time: 下午3:45
- */
+
 namespace CAstore\Action;
 
-use CAstore\Component\ComponentCenter;
-use CAstore\Component\Security;
 use CAstore\Entity\UserInfo;
+use CAstore\Operation\UserOperation;
 use CAstore\Verifier\UserSignUpVerifier;
+use Deline\Action\AbstractAction;
+use Deline\Component\ComponentCenter;
+use Deline\Component\Security;
 
 class UserAction extends AbstractAction
 {
@@ -36,7 +33,7 @@ class UserAction extends AbstractAction
         $this->attachAction("/^\\/SignIn$/", "onUserSignIn");
         $this->attachAction("/^\\/SignOut$/", "onUserSignOut");
         
-        $this->userOperation = ComponentCenter::getOperation($this->container, "UserOperation");
+        $this->userOperation = ComponentCenter::getService($this->container, "UserOperation");
     }
 
     public function onUserRoot()

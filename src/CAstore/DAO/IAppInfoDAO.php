@@ -8,11 +8,11 @@
 namespace CAstore\DAO;
 
 use CAstore\Entity\AppInfo;
+use Deline\DAO\AbstractDAO;
 use PDOException;
 
 class IAppInfoDAO extends AbstractDAO implements AppInfoDAO
 {
-
     const INSERT_CONTENT = "INSERT INTO content(title, name, content) VALUES (:title, :name, :description)";
 
     const INSERT_APP = "INSERT INTO app(cid, package, developer, platform, version) VALUES (:cid, :package, :developer, :platform, :version)";

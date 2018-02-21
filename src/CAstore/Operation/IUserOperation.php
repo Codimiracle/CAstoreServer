@@ -7,12 +7,11 @@
  */
 namespace CAstore\Operation;
 
-use CAstore\Action\Context;
-use CAstore\Component\ComponentCenter;
-use CAstore\Component\Security;
-use CAstore\Component\SessionManager;
-use CAstore\Entity\UserInfo;
 use CAstore\DAO\UserInfoDAO;
+use Deline\Action\Context;
+use Deline\Component\ComponentCenter;
+use Deline\Component\Security;
+use Deline\Component\SessionManager;
 
 class IUserOperation implements UserOperation
 {

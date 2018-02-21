@@ -7,6 +7,8 @@
  */
 namespace CAstore\Action;
 
+use Deline\Action\AbstractAction;
+
 class AboutAction extends AbstractAction
 {
 

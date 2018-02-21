@@ -8,9 +8,9 @@
 
 namespace CAstore\Utils;
 
-use CAstore\Component\MySQLDataSource;
 use CAstore\DAO\IAppInfoDAO;
 use CAstore\Entity\AppInfo;
+use Deline\Component\MySQLDataSource;
 use PHPUnit\Framework\TestCase;
 
 class IAppInfoDAOTest extends TestCase

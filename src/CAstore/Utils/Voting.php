@@ -7,7 +7,7 @@
  */
 namespace CAstore\Utils;
 
-use CAstore\Component\DataSource;
+use Deline\Component\DataSource;
 
 class Voting
 {

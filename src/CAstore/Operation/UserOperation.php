@@ -7,11 +7,10 @@
  */
 namespace CAstore\Operation;
 
-use CAstore\DAO\UserInfoDAO;
+use Deline\Operation\Operation;
 
 interface UserOperation extends Operation
 {
-
     public function signIn($username, $password);
 
     public function signUp($userInfo);
