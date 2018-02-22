@@ -1,19 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: codimiracle
- * Date: 18-1-25
- * Time: 下午4:22
- */
-
 namespace CAstore\Utils;
 
-use CAstore\Component\MySQLDataSource;
-use CAstore\DAO\IUserInfoDAO;
-use CAstore\Entity\UserInfo;
+use CAstore\Model\Entity\UserInfo;
+use Deline\Model\Database\MySQLDataSource;
 use PHPUnit\Framework\TestCase;
 
-class IUserInfoDAOTest extends TestCase
+class UserInfoDAOImplTest extends TestCase
 {
     private $accessor;
     /**

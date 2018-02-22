@@ -4,21 +4,25 @@ namespace Deline\Component;
 use Deline\View\HTMLRenderer;
 use Deline\View\JSONRenderer;
 use Deline\View\ResourceRenderer;
+use Deline\Controller\SystemController;
+use Deline\Service\Service;
 
 abstract class AbstractComponentCenter implements ComponentCenter
 {
 
-    protected $renderers = array(
+    private $renderers = array(
         "html" => HTMLRenderer::class,
         "json" => JSONRenderer::class,
         "resource" => ResourceRenderer::class
     );
 
-    protected $services = array();
+    private $services = array();
 
-    protected $controllers = array();
+    private $controllers = array(
+        "System" => SystemController::class
+    );
 
-    protected $daos = array();
+    private $daos = array();
 
     /** @var Container **/
     private $container;
@@ -41,6 +45,74 @@ abstract class AbstractComponentCenter implements ComponentCenter
     public function setContainer($container)
     {
         $this->container = $container;
+    }
+
+    /**
+     * 获取所有的渲染器
+     * @return multitype:string 
+     */
+    public function getRenderers()
+    {
+        return $this->renderers;
+    }
+
+    /**
+     * 获取所有的服务
+     * @return multitype:string
+     */
+    public function getServices()
+    {
+        return $this->services;
+    }
+
+    /**
+     * 获取所有的控制器
+     * @return multitype:string 
+     */
+    public function getControllers()
+    {
+        return $this->controllers;
+    }
+
+    /**
+     * 获取所有数据访问对象
+     * @return multitype:string
+     */
+    public function getDAOs()
+    {
+        return $this->daos;
+    }
+
+    /**
+     * @param multitype:string  $renderers
+     */
+    public function setRenderers($renderers)
+    {
+        $this->renderers = $renderers;
+    }
+
+    /**
+     * @param multitype:string $services
+     */
+    public function setServices($services)
+    {
+        $this->services = $services;
+    }
+
+    /**
+     * @param multitype:string  $controllers
+     */
+    public function setControllers($controllers)
+    {
+        $this->controllers = $controllers;
+    }
+
+    /**
+     * @param multitype:string $daos
+     */
+    public function setDAOs($daos)
+    {
+        $this->daos = $daos;
     }
 
     private function getComponentClass($map, $name)

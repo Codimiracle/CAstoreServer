@@ -2,7 +2,7 @@
 
 namespace CAstore\Utils;
 
-use Deline\Component\MySQLDataSource;
+use Deline\Model\Database\MySQLDataSource;
 use PHPUnit\Framework\TestCase;
 
 class FiveStarTest extends TestCase

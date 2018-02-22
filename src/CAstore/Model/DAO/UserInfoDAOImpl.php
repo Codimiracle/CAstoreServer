@@ -1,7 +1,7 @@
 <?php
 namespace CAstore\Model\DAO;
 
-use CAstore\Entity\UserInfo;
+use CAstore\Model\Entity\UserInfo;
 use Deline\Model\DAO\AbstractDAO;
 
 class UserInfoDAOImpl extends AbstractDAO implements UserInfoDAO

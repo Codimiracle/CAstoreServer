@@ -8,12 +8,11 @@
 
 namespace CAstore\Utils;
 
-use CAstore\DAO\ICommentInfoDAO;
-use CAstore\Entity\CommentInfo;
-use Deline\Component\MySQLDataSource;
+use CAstore\Model\Entity\CommentInfo;
+use Deline\Model\Database\MySQLDataSource;
 use PHPUnit\Framework\TestCase;
 
-class ICommentInfoDAOTest extends TestCase
+class CommentInfoDAOImplTest extends TestCase
 {
     private $commentInfo;
     private $dao;

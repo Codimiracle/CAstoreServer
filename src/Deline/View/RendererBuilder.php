@@ -1,7 +1,7 @@
 <?php
 namespace Deline\View;
 
-class RendererSetter
+class RendererBuilder
 {
 
     const MESSAGE_ICON_INFO = "info";

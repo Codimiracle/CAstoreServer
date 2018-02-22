@@ -1,7 +1,7 @@
 <?php
 namespace CAstore\Model\DAO;
 
-use CAstore\Entity\AppInfo;
+use CAstore\Model\Entity\AppInfo;
 use Deline\Model\DAO\AbstractDAO;
 use PDOException;
 

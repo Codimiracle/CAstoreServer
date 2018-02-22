@@ -1,7 +1,7 @@
 <?php
 namespace CAstore\Model\DAO;
 
-use CAstore\Entity\CommentInfo;
+use CAstore\Model\Entity\CommentInfo;
 use Deline\Model\DAO\AbstractDAO;
 
 class CommentInfoDAOImpl extends AbstractDAO implements CommentInfoDAO

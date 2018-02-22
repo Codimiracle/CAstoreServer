@@ -6,13 +6,18 @@ require __DIR__ . '/vendor/autoload.php';
 require_once "settings.php";
 
 use Monolog\Handler\StreamHandler;
+use CAstore\Component\CAstoreComponentCenter;
 
 
 $logger = new Monolog\Logger("CAstoreServer");
 $logger->pushHandler(new StreamHandler(__DIR__."/server.log", Monolog\Logger::DEBUG));
 
-// create a new instance of Container
+//创建组件中心
+$components = new CAstoreComponentCenter();
+
+//创建容器
 $container = new Deline\Component\DelineContainer();
+$container->setComponentCenter($components);
 
 try {
     // initial Container

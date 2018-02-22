@@ -2,7 +2,7 @@
 
 namespace CAstore\Action;
 
-use CAstore\Entity\UserInfo;
+use CAstore\Model\Entity\UserInfo;
 use CAstore\Verifier\UserSignUpVerifier;
 use Deline\Component\ComponentCenter;
 use Deline\Component\Security;

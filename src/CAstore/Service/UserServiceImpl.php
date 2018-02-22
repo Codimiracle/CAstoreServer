@@ -1,14 +1,13 @@
 <?php
 namespace CAstore\Service;
 
-use CAstore\DAO\UserInfoDAO;
 use Deline\Component\ComponentCenter;
-use Deline\Component\Context;
 use Deline\Component\Security;
-use Deline\Component\SessionManager;
+use Deline\Component\Session;
 
 class UserServiceImpl implements UserService
 {
+    const SESSION_USER_INFO = "session.user.info";
 
     const SIGN_OUT_MESSAGE = "user.sign.out.message";
 
@@ -100,7 +99,7 @@ class UserServiceImpl implements UserService
     {
         $data = array();
         /** @var UserInfo $userInfo */
-        $userInfo = $this->context->getSession()->getParameter(SessionManager::SESSION_LOGGED_USER);
+        $userInfo = $this->context->getSession()->getParameter(self::SESSION_USER_INFO);
         $data["username"] = $userInfo->getName();
         $data["nickname"] = $userInfo->getNickname();
         $data["uid"] = $userInfo->getId();

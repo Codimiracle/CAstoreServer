@@ -1,8 +1,7 @@
 <?php
 namespace CAstore\Service;
 
-use CAstore\DAO\AppInfoDAO;
-use CAstore\Entity\AppInfo;
+use CAstore\Model\Entity\AppInfo;
 use Deline\Component\ComponentCenter;
 use Deline\Component\Context;
 

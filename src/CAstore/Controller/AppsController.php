@@ -4,20 +4,21 @@ namespace CAstore\Controller;
 use CAstore\Verifier\AppsAppendVerifier;
 use Deline\Component\ComponentCenter;
 use Deline\Controller\AbstractEntityController;
+use CAstore\Service\AppService;
 
 class AppsController extends AbstractEntityController
 {
 
     const SUBMIT_ID_APP_APPEND = "apps_append";
 
-    /** @var  AppOperation */
-    private $appOperation;
+    /** @var  AppService */
+    private $appService;
 
     public function onControllerStart()
     {
         parent::onActionStart();
         $this->attachAction("/^\\/$/", "onAppRoot");
-        $this->appOperation = ComponentCenter::getService($this->container, "AppOperation");
+        $this->appService = ComponentCenter::getService($this->container, "AppService");
     }
 
     public function onControllerEnd()
@@ -42,7 +43,7 @@ class AppsController extends AbstractEntityController
     public function onEntityEdit()
     {
         /** @var AppInfo $entity */
-        $entity = $this->appOperation->queryById($this->getEntityId());
+        $entity = $this->appService->queryById($this->getEntityId());
         if ($entity) {
             $this->view->setPageTitle("编辑应用 - " . $entity->getName());
         } else {
@@ -60,7 +61,7 @@ class AppsController extends AbstractEntityController
     {
         $id = $this->getEntityId();
         if ($id != - 1) {
-            $entity = $this->appOperation->queryById($id);
+            $entity = $this->appService->queryById($id);
             if ($entity) {
                 $this->view->setData("app_info", $entity);
             }

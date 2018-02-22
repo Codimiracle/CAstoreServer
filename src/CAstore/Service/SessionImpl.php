@@ -7,7 +7,7 @@
  */
 namespace Deline\Component;
 
-class SessionManager
+class SessionImpl
 {
 
     const ANONYMOUS_ROLE_ID = 1;
@@ -84,32 +84,7 @@ class SessionManager
         return $this->roleInfoDAO->queryById($roleId);
     }
 
-    /**
-     * 设置会话参数
-     * 
-     * @param string $key
-     * @param mixed $value
-     */
-    public function setParameter($key, $value)
-    {
-        $_SESSION[$key] = $value;
-    }
 
-    /**
-     * 获取会话参数
-     * 
-     * @param
-     *            $key
-     * @return mixed|null
-     */
-    public function getParameter($key)
-    {
-        if (isset($_SESSION[$key])) {
-            return $_SESSION[$key];
-        } else {
-            return null;
-        }
-    }
 
     /**
      * 登录会话

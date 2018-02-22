@@ -1,8 +1,5 @@
 <?php
-
-namespace CAstore\Controller;
-
-use Deline\Controller\AbstractController;
+namespace Deline\Controller;
 
 class SystemController extends AbstractController
 {

@@ -1,6 +1,8 @@
 <?php
 namespace Deline\View;
 
+use Deline\Component\Container;
+
 class JSONRenderer implements Renderer
 {
 
@@ -13,18 +15,35 @@ class JSONRenderer implements Renderer
     private $attributes = array();
 
     private $json = array(
+        "system" => "deline",
         "version" => self::RENDERER_VERSION,
-        "result" => array()
+        "extra" => array()
     );
 
+    /**
+     * @return Container
+     */
+    public function getContainer()
+    {
+        return $this->container;
+    }
+    
+    /**
+     * @param Container $container
+     */
+    public function setContainer($container)
+    {
+        $this->container = $container;
+    }
+    
     public function setParameter($key, $value)
     {
-        $this->json["result"][$key] = $value;
+        $this->json["extra"][$key] = $value;
     }
 
     public function getParameter($key)
     {
-        return $this->json["result"][$key];
+        return $this->json["extra"][$key];
     }
 
     public function render()
