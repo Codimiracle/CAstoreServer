@@ -1,8 +1,8 @@
 <?php
 
-namespace CAstore\Entity;
+namespace CAstore\Model\Entity;
 
-use Deline\Entity\Entity;
+use Deline\Model\Entity\Entity;
 
 class CommentInfo implements Entity
 {

@@ -1,5 +1,4 @@
 <?php
-
 namespace Deline\Component;
 
 class NodePath
@@ -22,7 +21,7 @@ class NodePath
 
     /**
      * get representation of the node path via String.
-     * 
+     *
      * @return string
      */
     public function __toString()
@@ -35,7 +34,7 @@ class NodePath
 
     /**
      * 获取第一个节点名称
-     * 
+     *
      * @return string
      */
     public function getMainNodeName()

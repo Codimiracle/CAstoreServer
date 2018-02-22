@@ -1,16 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: codimiracle
- * Date: 18-1-26
- * Time: 下午9:38
- */
-namespace CAstore\DAO;
+namespace CAstore\Model\DAO;
 
 use CAstore\Entity\CommentInfo;
-use Deline\DAO\AbstractDAO;
+use Deline\Model\DAO\AbstractDAO;
 
-class ICommentInfoDAO extends AbstractDAO implements CommentInfoDAO
+class CommentInfoDAOImpl extends AbstractDAO implements CommentInfoDAO
 {
     const INSERT_CONTENT = "INSERT INTO content(title, name, content) VALUES ('comment_title', 'comment_name', :content)";
 

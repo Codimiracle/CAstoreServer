@@ -1,13 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: codimiracle
- * Date: 18-1-23
- * Time: 上午10:01
- */
-namespace CAstore\DAO;
+namespace CAstore\Model\DAO;
 
-use Deline\DAO\Pager;
+use Deline\Model\DAO\Pager;
 
 class SimplePager implements Pager
 {

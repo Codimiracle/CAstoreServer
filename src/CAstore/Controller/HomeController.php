@@ -1,13 +1,13 @@
 <?php
 
-namespace CAstore\Action;
+namespace CAstore\Controller;
 
-use Deline\Action\AbstractAction;
+use Deline\Controller\AbstractController;
 
-class HomeAction extends AbstractAction
+class HomeController extends AbstractController
 {
 
-    public function onActionStart()
+    public function onControllerStart()
     {
         $this->attachAction("/^\\/$/", "onHoming");
         $this->attachAction("/^\\/Test$/", "onTest");
@@ -37,7 +37,7 @@ class HomeAction extends AbstractAction
         $this->view->setPageName("page-error");
     }
 
-    public function onActionEnd()
+    public function onControllerEnd()
     {
         // TODO: Implement onActionEnd() method.
     }

@@ -1,6 +1,7 @@
 <?php
 namespace Deline\Component;
 
+use Deline\Model\Database\DataSource;
 use Deline\View\Renderer;
 
 interface Context

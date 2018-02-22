@@ -1,20 +1,18 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: codimiracle
- * Date: 18-2-14
- * Time: 下午7:17
- */
-namespace CAstore\Operation;
+namespace CAstore\Service;
 
 use CAstore\DAO\AppInfoDAO;
+use CAstore\Entity\AppInfo;
 use Deline\Component\ComponentCenter;
+use Deline\Component\Context;
 
-class IAppOperation implements AppOperation
+class AppServiceImpl implements AppService
 {
 
+    /** @var Context **/
     private $context;
 
+    /** @var AppInfo **/
     private $target;
 
     /** @var  AppInfoDAO */

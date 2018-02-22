@@ -1,13 +1,13 @@
 <?php
 
-namespace CAstore\Action;
+namespace CAstore\Controller;
 
-use Deline\Action\AbstractAction;
+use Deline\Controller\AbstractController;
 
-class SystemAction extends AbstractAction
+class SystemController extends AbstractController
 {
 
-    public function onActionStart()
+    public function onControllerStart()
     {
         $this->attachAction("/^\\/$/", "onSystemRoot");
         $this->attachAction("/^\\/PageNotFound$/", "onPageNotFound");
@@ -41,6 +41,6 @@ class SystemAction extends AbstractAction
         $this->view->setPageName("system.page-error");
     }
 
-    public function onActionEnd()
+    public function onControllerEnd()
     {}
 }

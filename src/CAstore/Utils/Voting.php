@@ -1,13 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: codimiracle
- * Date: 18-1-28
- * Time: 下午11:01
- */
 namespace CAstore\Utils;
 
-use Deline\Component\DataSource;
+use Deline\Model\Database\DataSource;
 
 class Voting
 {

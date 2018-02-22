@@ -1,6 +1,6 @@
 <?php
 
-namespace CAstore\Entity;
+namespace CAstore\Model\Entity;
 
 use Deline\Component\Security;
 

@@ -1,19 +1,13 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: codimiracle
- * Date: 18-1-29
- * Time: 下午7:59
- */
-namespace CAstore\Operation;
+namespace CAstore\Service;
 
 use CAstore\DAO\UserInfoDAO;
-use Deline\Action\Context;
 use Deline\Component\ComponentCenter;
+use Deline\Component\Context;
 use Deline\Component\Security;
 use Deline\Component\SessionManager;
 
-class IUserOperation implements UserOperation
+class UserServiceImpl implements UserService
 {
 
     const SIGN_OUT_MESSAGE = "user.sign.out.message";
@@ -51,10 +45,8 @@ class IUserOperation implements UserOperation
 
     /**
      *
-     * @param
-     *            $username
-     * @param
-     *            $password
+     * @param string $username
+     * @param string $password
      * @return int
      */
     public function signIn($username, $password)
@@ -120,6 +112,4 @@ class IUserOperation implements UserOperation
     {
         $this->dao->queryById($id);
     }
-
-
 }

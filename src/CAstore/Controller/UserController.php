@@ -3,13 +3,12 @@
 namespace CAstore\Action;
 
 use CAstore\Entity\UserInfo;
-use CAstore\Operation\UserOperation;
 use CAstore\Verifier\UserSignUpVerifier;
-use Deline\Action\AbstractAction;
 use Deline\Component\ComponentCenter;
 use Deline\Component\Security;
+use Deline\Controller\AbstractController;
 
-class UserAction extends AbstractAction
+class UserController extends AbstractController
 {
 
     const SUBMIT_ID_USER_SIGN_IN = "user_sign_in";
@@ -26,7 +25,7 @@ class UserAction extends AbstractAction
      */
     private $userOperation;
 
-    public function onActionStart()
+    public function onControllerStart()
     {
         $this->attachAction("/^\\/$/", "onUserRoot");
         $this->attachAction("/^\\/SignUp$/", "onUserSignUp");
@@ -139,7 +138,7 @@ class UserAction extends AbstractAction
             $context->redirect("/User/SignIn");
         }
     }
-
-    public function onActionEnd()
+    public function onControllerEnd()
     {}
+
 }

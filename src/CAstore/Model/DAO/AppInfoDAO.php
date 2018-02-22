@@ -1,13 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: codimiracle
- * Date: 18-1-19
- * Time: 下午3:50
- */
-namespace CAstore\DAO;
+namespace CAstore\Model\DAO;
 
-use Deline\DAO\DataAccessObject;
+use Deline\Model\DAO\DataAccessObject;
 
 interface AppInfoDAO extends DataAccessObject
 {

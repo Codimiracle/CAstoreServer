@@ -89,7 +89,7 @@ abstract class AbstractController implements Controller
         return $pathname;
     }
 
-    public function onActionHandle()
+    public function onControllerHandle()
     {
         global $logger;
         $method_name = $this->mapper->match($this->getCurrentNodePathname());
@@ -101,10 +101,10 @@ abstract class AbstractController implements Controller
         }
     }
 
-    public function onActionDefaultHandle()
+    public function onControllerDefaultHandle()
     {}
 
-    public abstract function onActionStart();
+    public abstract function onControllerStart();
 
-    public abstract function onActionEnd();
+    public abstract function onControllerEnd();
 }

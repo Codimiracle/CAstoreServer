@@ -1,12 +1,11 @@
 <?php
-namespace CAstore\Action;
+namespace CAstore\Controller;
 
-use CAstore\Operation\AppOperation;
 use CAstore\Verifier\AppsAppendVerifier;
-use Deline\Action\AbstractEntityAction;
 use Deline\Component\ComponentCenter;
+use Deline\Controller\AbstractEntityController;
 
-class AppsAction extends AbstractEntityAction
+class AppsController extends AbstractEntityController
 {
 
     const SUBMIT_ID_APP_APPEND = "apps_append";
@@ -14,14 +13,14 @@ class AppsAction extends AbstractEntityAction
     /** @var  AppOperation */
     private $appOperation;
 
-    public function onActionStart()
+    public function onControllerStart()
     {
         parent::onActionStart();
         $this->attachAction("/^\\/$/", "onAppRoot");
         $this->appOperation = ComponentCenter::getService($this->container, "AppOperation");
     }
 
-    public function onActionEnd()
+    public function onControllerEnd()
     {}
 
     public function onEntityAppend()

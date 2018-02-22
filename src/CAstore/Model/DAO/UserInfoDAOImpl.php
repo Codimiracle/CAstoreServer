@@ -1,16 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: codimiracle
- * Date: 18-1-23
- * Time: 下午10:36
- */
-namespace CAstore\DAO;
+namespace CAstore\Model\DAO;
 
 use CAstore\Entity\UserInfo;
-use Deline\DAO\AbstractDAO;
+use Deline\Model\DAO\AbstractDAO;
 
-class IUserInfoDAO extends AbstractDAO implements UserInfoDAO
+class UserInfoDAOImpl extends AbstractDAO implements UserInfoDAO
 {
 
     const INSERT_CONTENT = "INSERT INTO content(title, name, content) VALUES (:nickname, 'userdata', :description)";

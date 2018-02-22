@@ -1,7 +1,7 @@
 <?php
 namespace Deline\Model\DAO;
 
-use Deline\Component\DataSource;
+use Deline\Model\Database\DataSource;
 use Deline\Model\Entity\Entity;
 
 abstract class AbstractDAO implements DataAccessObject

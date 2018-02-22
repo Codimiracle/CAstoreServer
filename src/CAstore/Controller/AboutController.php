@@ -5,14 +5,14 @@
  * Date: 18-1-31
  * Time: 下午10:05
  */
-namespace CAstore\Action;
+namespace CAstore\Controller;
 
-use Deline\Action\AbstractAction;
+use Deline\Controller\AbstractController;
 
-class AboutAction extends AbstractAction
+class AboutController extends AbstractController
 {
 
-    public function onActionStart()
+    public function onControllerStart()
     {
         $this->attachAction("/^\\/License$/", "onLicenseVisiting");
     }
@@ -23,8 +23,6 @@ class AboutAction extends AbstractAction
         $this->view->setPageName("about.license");
     }
 
-    public function onActionEnd()
-    {
-        // TODO: Implement onActionEnd() method.
-    }
+    public function onControllerEnd()
+    {}
 }

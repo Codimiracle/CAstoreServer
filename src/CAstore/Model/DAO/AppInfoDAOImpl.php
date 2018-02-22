@@ -1,17 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: codimiracle
- * Date: 18-1-22
- * Time: 下午9:42
- */
-namespace CAstore\DAO;
+namespace CAstore\Model\DAO;
 
 use CAstore\Entity\AppInfo;
-use Deline\DAO\AbstractDAO;
+use Deline\Model\DAO\AbstractDAO;
 use PDOException;
 
-class IAppInfoDAO extends AbstractDAO implements AppInfoDAO
+class AppInfoDAOImpl extends AbstractDAO implements AppInfoDAO
 {
     const INSERT_CONTENT = "INSERT INTO content(title, name, content) VALUES (:title, :name, :description)";
 

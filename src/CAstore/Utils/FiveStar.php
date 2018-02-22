@@ -1,13 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: codimiracle
- * Date: 18-1-28
- * Time: 下午11:08
- */
 namespace CAstore\Utils;
 
-use Deline\Component\DataSource;
+use Deline\Model\Database\DataSource;
 use Exception;
 
 class FiveStar
@@ -20,7 +14,7 @@ class FiveStar
     const STATS_BY_CONTENT_ID_AND_USER_ID = "SELECT stars FROM mark WHERE ccid = :ccid AND uid = :uid";
 
     /**
-     *
+     *  
      * @var DataSource
      */
     private $dataSource;

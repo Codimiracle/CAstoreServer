@@ -1,15 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: codimiracle
- * Date: 18-1-17
- * Time: 下午8:30
- */
-namespace CAstore\Operation;
+namespace CAstore\Service;
 
-use Deline\Operation\Operation;
+use Deline\Service\Service;
 
-interface UserOperation extends Operation
+interface UserService extends Service
 {
     public function signIn($username, $password);
 

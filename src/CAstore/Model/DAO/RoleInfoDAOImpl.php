@@ -1,15 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: codimiracle
- * Date: 18-1-28
- * Time: 下午11:31
- */
-namespace CAstore\DAO;
+namespace CAstore\Model\DAO;
 
-use Deline\DAO\AbstractDAO;
+use Deline\Model\DAO\AbstractDAO;
 
-class IRoleInfoDAO extends AbstractDAO implements RoleInfoDAO
+class RoleInfoDAOImpl extends AbstractDAO implements RoleInfoDAO
 {
 
     public function insert()

@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: codimiracle
- * Date: 18-2-12
- * Time: 下午5:20
- */
 namespace CAstore\Verifier;
 
 use Deline\Verifier\AbstractVerifier;
