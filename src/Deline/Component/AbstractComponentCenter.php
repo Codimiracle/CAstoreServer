@@ -6,6 +6,8 @@ use Deline\View\JSONRenderer;
 use Deline\View\ResourceRenderer;
 use Deline\Controller\SystemController;
 use Deline\Service\Service;
+use Deline\Model\DAO\DataAccessObject;
+use Deline\View\Renderer;
 
 abstract class AbstractComponentCenter implements ComponentCenter
 {
@@ -127,13 +129,25 @@ abstract class AbstractComponentCenter implements ComponentCenter
     public function getRenderer($type = "html")
     {
         $class = $this->getComponentClass($this->renderers, $type);
-        return $class ? new $class() : null;
+        if ($class) {
+            /** @var Renderer $renderer **/
+            $renderer = new $class;
+            $renderer->setContainer($this->container);
+            return $renderer;
+        }
+        return null;
     }
 
     public function getDataAccessObject($name)
     {
         $class = $this->getComponentClass($this->daos, $name);
-        return $class ? new $class() : null;
+        if ($class) {
+            /** @var DataAccessObject  $dao **/
+            $dao = new $class;
+            $dao->setDataSource($this->container->getDataSource());
+            return $dao;
+        }
+        return null;
     }
 
     public function getController($name)

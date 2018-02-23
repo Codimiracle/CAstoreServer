@@ -30,4 +30,9 @@ interface Context
      * @return NodePath
      */
     public function getNodePath();
+    
+    /**
+     * @return ComponentCenter
+     */
+    public function getComponentCenter();
 }

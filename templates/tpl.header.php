@@ -1,5 +1,5 @@
 <?php
-$userdata = $_SESSION["logged_user"];
+$userdata = isset($session["logged_user"]) ? $session["logged_user"] : null;
 ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -39,16 +39,14 @@ $userdata = $_SESSION["logged_user"];
     </div>
     <div id="navbar" class="collapse navbar-collapse">
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="?node=/User"><?= $userdata ? $userdata->getNickname() : "" ?></a></li>
-            <li><a href="?node=/User/SignIn"><span class="glyphicon glyphicon-log-in"></span></a></li>
-            <li><a href="?node=/User/SignOut"><span class="glyphicon glyphicon-log-out"></span>登出</a></li>
+        	<?php if ($userdata): ?>
+            	<li><a href="?node=/User"><?= $userdata ? $userdata->getNickname() : "" ?></a></li>
+            	<li><a href="?node=/User/SignOut"><span class="glyphicon glyphicon-log-out"></span>登出</a></li>
+            <?php else: ?>
+            	<li><a href="?node=/User/SignIn"><span class="glyphicon glyphicon-log-in"></span>登入</a></li>
+            	<li><a href="?node=/User/SignUp"><span class="glyphicon glyphicon-user"></span>注册</a></li>
+            <?php endif;?>
         </ul>
     </div>
 </nav>
 <?php
-/**
- * Created by PhpStorm.
- * User: codimiracle
- * Date: 18-1-17
- * Time: 下午10:27
- */

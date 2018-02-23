@@ -22,17 +22,17 @@ $container->setComponentCenter($components);
 try {
     // initial Container
     $logger->addDebug($TAG, array("procedure" => "init-start"));
-    $container->init();
+    @$container->init();
     $logger->addDebug($TAG, array("procedure" => "init-end"));
     
     // power on
     $logger->addDebug($TAG, array("procedure" => "invoke-start"));
-    $container->invoke();
+    @$container->invoke();
     $logger->addDebug($TAG, array("procedure" => "invoke-end"));
     
     // destroy Container
     $logger->addDebug($TAG, array("procedure"=> "destroy-start"));
-    $container->destroy();
+    @$container->destroy();
     $logger->addDebug($TAG, array("procedure"=> "destroy-end"));
     $logger->addInfo("===================================================");
 } catch (Exception $exception) {

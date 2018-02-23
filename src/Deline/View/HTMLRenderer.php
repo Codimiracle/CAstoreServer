@@ -61,6 +61,7 @@ class HTMLRenderer implements Renderer
         if (file_exists($template_file)) {
             $attributes = $this->attributes;
             $parameters = $this->parameters;
+            $session = $this->container->getSession()->getSessionData();
             require $template_file;
         }
     }

@@ -1,10 +1,9 @@
 <?php
-
 namespace CAstore\Action;
 
 use CAstore\Model\Entity\UserInfo;
+use CAstore\Service\UserService;
 use CAstore\Verifier\UserSignUpVerifier;
-use Deline\Component\ComponentCenter;
 use Deline\Component\Security;
 use Deline\Controller\AbstractController;
 
@@ -21,9 +20,9 @@ class UserController extends AbstractController
 
     /**
      *
-     * @var UserOperation
+     * @var UserService
      */
-    private $userOperation;
+    private $userService;
 
     public function onControllerStart()
     {
@@ -32,19 +31,20 @@ class UserController extends AbstractController
         $this->attachAction("/^\\/SignIn$/", "onUserSignIn");
         $this->attachAction("/^\\/SignOut$/", "onUserSignOut");
         
-        $this->userOperation = ComponentCenter::getService($this->container, "UserOperation");
+        $this->userService = $this->container->getComponentCenter()->getService("UserService");
     }
 
     public function onUserRoot()
     {
-        if (! $this->container->getSession()->isLogged()) {
+        if (! $this->userService->isLogged()) {
             $this->container->getSession()->setParameter(self::USER_SIGN_IN_MESSAGE, "你必须先登录才能查看您的信息！");
             $this->container->redirect("/User/SignIn");
             return;
         }
         $this->view->setPageTitle("个人中心");
         $this->view->setPageName("user.main");
-        $this->view->setData("userdata", $this->userOperation->getUserData());
+        $this->view->setData("userdata", $this->userService->getUserData());
+        
     }
 
     // 处理用户注册
@@ -70,7 +70,7 @@ class UserController extends AbstractController
                     $userInfo->setGender($_POST["gender"]);
                     $userInfo->setRoleId(1); // 普通用户
                                              // 调用业务处理
-                    $result = $this->userOperation->signUp($userInfo);
+                    $result = $this->userService->signUp($userInfo);
                     if ($result == 1) {
                         $message = "注册成功";
                         $this->view->setPageName("system.info");
@@ -93,52 +93,44 @@ class UserController extends AbstractController
     public function onUserSignIn()
     {
         $this->view->setPageTitle("登录");
-        $session = $this->container->getSession();
-        if ($session->isLogged()) {
+        if ($this->userService->isLogged()) {
             $this->view->setPageName("system.info");
             $this->view->setMessage("info", "你已经登录啦！");
             return;
         } else {
             $this->view->setPageName("user.sign-in");
         }
-        $message = $session->getParameter(self::USER_SIGN_IN_MESSAGE);
-        $session->setParameter(self::USER_SIGN_IN_MESSAGE, null);
+        $message = $this->container->getSession()->getParameter(self::USER_SIGN_IN_MESSAGE);
+        $this->container->getSession()->setParameter(self::USER_SIGN_IN_MESSAGE, null);
         if ($this->isSubmit(self::SUBMIT_ID_USER_SIGN_IN)) {
             $username = $_POST["username"];
             $password = $_POST["password"];
             $verifier = $_POST["verifier"];
-            try {
-                $result = $this->userOperation->signIn($username, $password);
-                if ($result == 1) { // 登录成功
-                    $this->view->setPageName("system.info");
-                    $message = "登录成功";
-                } else { // 用户不存在或密码错误
-                    $message = "用户名或密码不正确！";
-                }
-            } catch (\RuntimeException $exception) {
-                $message = $exception->getMessage();
+            $result = $this->userService->signIn($username, $password);
+            if ($result == 1) { // 登录成功
+                $this->view->setPageName("system.info");
+                $message = "登录成功";
+            } else { // 用户不存在或密码错误
+                $message = "用户名或密码不正确！";
             }
         }
-        
         $this->view->setMessage("info", $message);
     }
 
     public function onUserSignOut()
     {
-        $success = $this->userOperation->signOut();
+        $success = $this->userService->signOut();
         if ($success) {
             $message = "你已成功退出登录！";
             $this->view->setPageTitle("登出");
             $this->view->setMessage("info", $message);
         } else {
-            /** @var DelineContainer $context */
-            $context = $this->container;
             $message = "你必须先登录才能注销登录！";
-            $context->getSession()->setParameter(self::USER_SIGN_IN_MESSAGE, $message);
-            $context->redirect("/User/SignIn");
+            $this->container->getSession()->setParameter(self::USER_SIGN_IN_MESSAGE, $message);
+            $this->container->redirect("/User/SignIn");
         }
     }
+
     public function onControllerEnd()
     {}
-
 }

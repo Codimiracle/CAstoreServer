@@ -12,10 +12,12 @@ class JSONRenderer implements Renderer
 
     const RESULT_TYPE_ERROR = "error";
 
+    private $container;
+    
     private $attributes = array();
 
     private $json = array(
-        "system" => "deline",
+        "code" => "deline-core-dev",
         "version" => self::RENDERER_VERSION,
         "extra" => array()
     );

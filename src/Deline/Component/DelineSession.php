@@ -3,6 +3,7 @@ namespace Deline\Component;
 
 class DelineSession implements Session
 {
+
     public function __construct()
     {
         if (session_id() == "") {
@@ -17,12 +18,25 @@ class DelineSession implements Session
 
     public function getParameter($key)
     {
-        return $_SESSION[$key];
+        return isset($_SESSION[$key]) ? $_SESSION[$key] : null;
     }
     
-    public function destroy() {
+    public function getSessionData()
+    {
+        return $_SESSION;
+    }
+
+    public function destroy()
+    {
         session_destroy();
     }
 
+    public function restart()
+    {
+        if (session_id() != "") {
+            session_destroy();
+            session_start();
+        }
+    }
 }
 

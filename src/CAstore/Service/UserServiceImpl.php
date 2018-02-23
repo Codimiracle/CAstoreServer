@@ -1,13 +1,18 @@
 <?php
 namespace CAstore\Service;
 
-use Deline\Component\ComponentCenter;
+use CAstore\Model\DAO\RoleInfoDAO;
+use CAstore\Model\DAO\UserInfoDAO;
+use CAstore\Model\Entity\UserInfo;
+use Deline\Component\Container;
 use Deline\Component\Security;
-use Deline\Component\Session;
 
 class UserServiceImpl implements UserService
 {
-    const SESSION_USER_INFO = "session.user.info";
+
+    const ANONYMOUS_ROLE_ID = 1;
+
+    const SESSION_LOGGED_USER_INFO = "logged_user";
 
     const SIGN_OUT_MESSAGE = "user.sign.out.message";
 
@@ -15,34 +20,44 @@ class UserServiceImpl implements UserService
      *
      * @var UserInfoDAO
      */
-    private $dao;
+    private $userInfoDAO;
 
     /**
      *
-     * @var Context
+     * @var RoleInfoDAO
      */
-    private $context;
+    private $roleInfoDAO;
 
     /**
      *
-     * @param Context $context
+     * @var Container
      */
-    public function setContext($context)
+    private $container;
+
+    /**
+     * 设置服务运行容器
+     *
+     * @param Container $context
+     */
+    public function setContainer($container)
     {
-        $this->context = $context;
-        $this->dao = ComponentCenter::getDataAccessObject($context, "UserInfoDAO");
+        $this->container = $container;
+        $this->userInfoDAO = $container->getComponentCenter()->getDataAccessObject("UserInfoDAO");
+        $this->roleInfoDAO = $container->getComponentCenter()->getDataAccessObject("RoleInfoDAO");
     }
 
     /**
+     * 获取服务运行容器
      *
-     * @return Context
+     * @return Container
      */
-    public function getContext()
+    public function getContainer()
     {
-        return $this->context;
+        return $this->container;
     }
 
     /**
+     * 登录用户
      *
      * @param string $username
      * @param string $password
@@ -51,10 +66,10 @@ class UserServiceImpl implements UserService
     public function signIn($username, $password)
     {
         /** @var UserInfo $userInfo */
-        $userInfo = $this->dao->queryByName($username);
+        $userInfo = $this->userInfoDAO->queryByName($username);
         if ($userInfo) {
-            if ($userInfo->getPassword() == Security::password($password)) {
-                $this->context->getSession()->setUserInfo($userInfo);
+            if ($userInfo->getPassword() === Security::password($password)) {
+                $this->setUserInfo($userInfo);
                 return 1;
             } else {
                 return 0;
@@ -66,16 +81,15 @@ class UserServiceImpl implements UserService
 
     /**
      *
-     * @param
-     *            $userInfo
+     * @param UserInfo $userInfo
      * @return int
      */
     public function signUp($userInfo)
     {
         global $logger;
         try {
-            $this->dao->setTarget($userInfo);
-            $this->dao->insert();
+            $this->userInfoDAO->setTarget($userInfo);
+            $this->userInfoDAO->insert();
             return 1;
         } catch (\Exception $exception) {
             $logger->addError("User sign up error:" . $exception->getMessage());
@@ -88,18 +102,20 @@ class UserServiceImpl implements UserService
 
     public function signOut()
     {
-        if ($this->context->getSession()->isLogged()) {
-            $this->context->getSession()->logout();
+        if ($this->isLogged()) {
+            $session = $this->container->getSession();
+            $session->destroy();
+            return false;
+        } else {
             return true;
         }
-        return false;
     }
 
     public function getUserData()
     {
         $data = array();
         /** @var UserInfo $userInfo */
-        $userInfo = $this->context->getSession()->getParameter(self::SESSION_USER_INFO);
+        $userInfo = $this->container->getSession()->getParameter(self::SESSION_LOGGED_USER_INFO);
         $data["username"] = $userInfo->getName();
         $data["nickname"] = $userInfo->getNickname();
         $data["uid"] = $userInfo->getId();
@@ -107,8 +123,37 @@ class UserServiceImpl implements UserService
         return $data;
     }
 
-    public function getUserInfo($id)
+    public function isLogged()
     {
-        $this->dao->queryById($id);
+        return $this->getUserInfo() ? true : false;
     }
+
+    public function setUserInfo($userInfo)
+    {
+        $session = $this->container->getSession();
+        $session->setParameter(self::SESSION_LOGGED_USER_INFO, $userInfo);
+    }
+
+    public function getUserInfo()
+    {
+        $session = $this->container->getSession();
+        $userInfo = $session->getParameter(self::SESSION_LOGGED_USER_INFO);
+        return $userInfo;
+    }
+
+    public function getRoleInfo()
+    {
+        $roleId = null;
+        if ($this->isLogged()) {
+            $roleId = $this->getUserInfo()->getRoleId();
+        } else {
+            $roleId = self::ANONYMOUS_ROLE_ID;
+        }
+        return $this->roleInfoDAO->queryById($roleId);
+    }
+    public function getUserInfoById($id)
+    {
+        $this->userInfoDAO->queryById($id);
+    }
+
 }
