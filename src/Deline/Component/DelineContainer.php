@@ -15,6 +15,9 @@ class DelineContainer implements Container
     /** @var  NodePath */
     private $nodePath = null;
 
+    /** @var Permission */
+    private $permission;
+    
     /** @var  Session */
     private $session = null;
 
@@ -46,6 +49,14 @@ class DelineContainer implements Container
         $this->componentCenter->setContainer($this);
     }
 
+    public function getPermission()
+    {
+        if (is_null($this->permission)) {
+            $this->permission = new DelinePermission();
+            $this->permission->setContainer($this);
+        }
+        return $this->permission;
+    }
     /**
      * 重定向
      *
@@ -116,19 +127,19 @@ class DelineContainer implements Container
                     "status" => "end"
                 ));
                 return;
-            } catch (PermissionDeniedException $exception) {
-                $logger->addWarning("Controller invoking failed!", array(
-                    "error-src" => $exception->getFile()
+            } catch (PermissionException $exception) {
+                $logger->addWarning("Controller", array("message" => $exception->getMessage(),
+                    "trace" => $exception->getTrace()
                 ));
                 $this->dispatchPermissionDenied($exception->getMessage());
             } catch (\Exception $exception) {
-                $logger->addWarning("Controller invoking failed!", array(
-                    "error-src" => $exception->getFile()
+                $logger->addWarning("Controller", array("message"=>$exception->getMessage(),
+                    "trace" => $exception->getTrace()
                 ));
                 $this->dispatchPageError($exception->getMessage());
             }
         } else {
-            $logger->addWarning("Controller invoking failed!", array(
+            $logger->addWarning("Controller", array(
                 "message" => "Page Not Found"
             ));
             $this->dispatchPageNotFound();
@@ -271,4 +282,5 @@ class DelineContainer implements Container
             $this->getRenderer()->render();
         }
     }
+
 }
