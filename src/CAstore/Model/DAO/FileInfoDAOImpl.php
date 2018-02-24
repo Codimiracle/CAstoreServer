@@ -5,6 +5,7 @@ use Deline\Model\DAO\AbstractDAO;
 
 class FileInfoDAOImpl extends AbstractDAO
 {
+    const QUERY = "SELECT * FROM";
     public function query()
     {}
 
