@@ -1,80 +1,77 @@
 <?php
 namespace CAstore\Service;
 
-use CAstore\Model\Entity\AppInfo;
-use Deline\Component\ComponentCenter;
-use Deline\Component\Context;
+use Deline\Component\Container;
 
 class AppServiceImpl implements AppService
 {
 
-    /** @var Context **/
-    private $context;
-
-    /** @var AppInfo **/
-    private $target;
-
-    /** @var  AppInfoDAO */
+    private $container;
+    
     private $dao;
+    
+    private $target;
+    
 
     /**
      *
+     * @return Container
+     */
+    public function getContainer()
+    {
+        return $this->container;
+    }
+
+    /**
+     *
+     * @param Container $container
+     */
+    public function setContainer($container)
+    {
+        $this->container = $container;
+        $this->dao = $container->getComponentCenter()->getDataAccessObject("AppInfoDAO");
+    }
+    
+    
+
+    /**
      * @return mixed
      */
-    public function getContext()
+    public function getTarget()
     {
-        return $this->context;
+        return $this->target;
     }
 
     /**
-     *
-     * @param mixed $context
+     * @param mixed $target
      */
-    public function setContext($context)
+    public function setTarget($target)
     {
-        $this->context = $context;
-        $this->dao = ComponentCenter::getDataAccessObject($context, "AppInfoDAO");
+        $this->target = $target;
     }
 
-    public function append($app_info)
+    public function edit()
     {
-        $this->dao->setTarget($app_info);
-        $this->dao->append();
+        
     }
 
-    public function edit($app_info)
+    public function delete()
     {
-        $this->dao->setTarget($app_info);
-        $this->dao->update();
+        
     }
 
-    public function delete($id)
-    {}
-
-    public function getAppInfoById($id)
+    public function append()
+    {
+        
+    }
+    
+    public function queryById($id)
     {
         return $this->dao->queryById($id);
     }
-
-    public function getAppInfoByPackage($package)
-    {
-        return $this->dao->queryByPackage($package);
-    }
-
-    public function getAppInfoByKeyword($keyword)
-    {
-        return $this->dao->queryByKeyword($keyword);
-    }
-
-    public function getTarget($entity)
-    {}
-
+    
     public function queryByKeyword($keyword)
-    {}
-
-    public function setTarget($entity)
-    {}
-
-    public function queryById($id)
-    {}
+    {
+        
+    }
 }

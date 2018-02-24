@@ -6,7 +6,7 @@ interface EntityService extends Service
 
     public function setTarget($entity);
 
-    public function getTarget($entity);
+    public function getTarget();
 
     public function append();
 

@@ -123,6 +123,7 @@ class UserController extends AbstractController
         if ($success) {
             $message = "你已成功退出登录！";
             $this->view->setPageTitle("登出");
+            $this->view->setPageName("system.info");
             $this->view->setMessage("info", $message);
         } else {
             $message = "你必须先登录才能注销登录！";

@@ -14,9 +14,3 @@
 </body>
 </html>
 <?php
-/**
- * Created by PhpStorm.
- * User: codimiracle
- * Date: 18-1-17
- * Time: 下午10:27
- */

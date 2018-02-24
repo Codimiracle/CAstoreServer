@@ -11,6 +11,7 @@ use CAstore\Model\DAO\RoleInfoDAOImpl;
 use CAstore\Model\DAO\AppInfoDAOImpl;
 use CAstore\Service\UserService;
 use CAstore\Service\UserServiceImpl;
+use CAstore\Service\AppServiceImpl;
 
 class CAstoreComponentCenter extends AbstractComponentCenter
 {
@@ -30,7 +31,8 @@ class CAstoreComponentCenter extends AbstractComponentCenter
             "AppInfoDAO" => AppInfoDAOImpl::class
         ));
         $this->setServices(array(
-           "UserService" => UserServiceImpl::class
+           "UserService" => UserServiceImpl::class,
+            "AppService" => AppServiceImpl::class
         ));
     }
 }

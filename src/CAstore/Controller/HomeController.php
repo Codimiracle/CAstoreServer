@@ -26,17 +26,6 @@ class HomeController extends AbstractController
         $this->view->setMessage("info", "Hello World");
     }
 
-    public function onPageNotFound()
-    {
-        $this->onActionDefaultHandle();
-    }
-
-    public function onPageError()
-    {
-        $this->view->setPageTitle("Page Error");
-        $this->view->setPageName("page-error");
-    }
-
     public function onControllerEnd()
     {
         // TODO: Implement onActionEnd() method.

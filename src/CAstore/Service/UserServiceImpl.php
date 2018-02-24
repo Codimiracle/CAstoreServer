@@ -105,9 +105,9 @@ class UserServiceImpl implements UserService
         if ($this->isLogged()) {
             $session = $this->container->getSession();
             $session->destroy();
-            return false;
-        } else {
             return true;
+        } else {
+            return false;
         }
     }
 

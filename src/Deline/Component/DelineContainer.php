@@ -132,6 +132,11 @@ class DelineContainer implements Container
                     "trace" => $exception->getTrace()
                 ));
                 $this->dispatchPermissionDenied($exception->getMessage());
+            } catch (PageNotFoundException $exception){
+                $logger->addWarning("Controller", array("message" => $exception->getMessage(),
+                   "trace" => $exception->getTrace()
+                ));
+                $this->dispatchPageNotFound();
             } catch (\Exception $exception) {
                 $logger->addWarning("Controller", array("message"=>$exception->getMessage(),
                     "trace" => $exception->getTrace()
@@ -140,7 +145,8 @@ class DelineContainer implements Container
             }
         } else {
             $logger->addWarning("Controller", array(
-                "message" => "Page Not Found"
+                "message" => "Page Not Found",
+                "node" => $this->getNodePathname()
             ));
             $this->dispatchPageNotFound();
         }

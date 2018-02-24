@@ -5,6 +5,7 @@ use CAstore\Verifier\AppsAppendVerifier;
 use Deline\Component\ComponentCenter;
 use Deline\Controller\AbstractEntityController;
 use CAstore\Service\AppService;
+use Deline\Component\PageNotFoundException;
 
 class AppsController extends AbstractEntityController
 {
@@ -18,7 +19,7 @@ class AppsController extends AbstractEntityController
     {
         parent::onActionStart();
         $this->attachAction("/^\\/$/", "onAppRoot");
-        $this->appService = ComponentCenter::getService($this->container, "AppService");
+        $this->appService = $this->container->getComponentCenter()->getService("AppService");
     }
 
     public function onControllerEnd()
@@ -42,12 +43,13 @@ class AppsController extends AbstractEntityController
 
     public function onEntityEdit()
     {
+        $id = $this->getEntityId();
         /** @var AppInfo $entity */
-        $entity = $this->appService->queryById($this->getEntityId());
+        $entity = $this->appService->queryById($id);
         if ($entity) {
             $this->view->setPageTitle("编辑应用 - " . $entity->getName());
         } else {
-            $this->container->dispatch("/System/PageNotFound");
+            throw new PageNotFoundException("无法找到 ID 为\"".$id."\"的应用实体进行编辑操作！");
         }
     }
 
@@ -66,6 +68,6 @@ class AppsController extends AbstractEntityController
                 $this->view->setData("app_info", $entity);
             }
         }
-        $this->container->dispatch("/System/PageNotFound");
+        throw new PageNotFoundException("Id 为\"".$id."\"并不存在！");
     }
 }
