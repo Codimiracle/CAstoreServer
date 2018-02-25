@@ -1,9 +1,10 @@
 <?php
-use CAstore\Model\DAO\RoleInfoDAOImpl;
+namespace CAstore\Model\DAO;
+
 use CAstore\Model\Entity\RoleInfo;
+use Deline\Model\Database\DataSource;
 use Deline\Model\Database\MySQLDataSource;
 use PHPUnit\Framework\TestCase;
-use Deline\Model\Database\DataSource;
 
 /**
  * RoleInfoDAOImpl test case.
@@ -12,13 +13,14 @@ class RoleInfoDAOImplTest extends TestCase
 {
 
     /**
-     * 
+     *
      * @var DataSource
      */
     private $dataSource;
+
     /**
      *
-     * @var RoleInfoDAOImpl
+     * @var RoleInfoDAO
      */
     private $roleInfoDAOImpl;
 
@@ -37,8 +39,7 @@ class RoleInfoDAOImplTest extends TestCase
         $this->dataSource = new MySQLDataSource($database);
         $this->roleInfoDAOImpl->setDataSource($this->dataSource);
         $this->dataSource->getConnection()->exec("
-            TRUNCATE `role`;"
-            );
+            TRUNCATE `role`;");
     }
 
     /**
@@ -58,10 +59,11 @@ class RoleInfoDAOImplTest extends TestCase
         $role = new RoleInfo();
         $role->setPermission("aaaa,bbb,cc");
         $this->roleInfoDAOImpl->setTarget($role);
+        self::assertNotNull($this->roleInfoDAOImpl->getTarget(), "target must not null.");
         $this->roleInfoDAOImpl->insert();
-        $inserted = $this->roleInfoImpl->query()[0];
-        assertNotNull($inserted);
-        assertEquals("aaaa,bbb,cc", $inserted->getPermission());
+        $inserted = $this->roleInfoDAOImpl->query()[0];
+        self::assertNotNull($inserted);
+        self::assertEquals("aaaa,bbb,cc", $inserted->getPermission());
     }
 
     /**
@@ -74,7 +76,7 @@ class RoleInfoDAOImplTest extends TestCase
         $this->roleInfoDAOImpl->setTarget($inserted);
         $this->roleInfoDAOImpl->delete();
         $deleted = $this->roleInfoDAOImpl->queryById($inserted->getId());
-        assertNull($deleted);
+        self::assertNull($deleted);
     }
 
     /**
@@ -82,10 +84,15 @@ class RoleInfoDAOImplTest extends TestCase
      */
     public function testUpdate()
     {
-        // TODO Auto-generated RoleInfoDAOImplTest->testUpdate()
-        $this->markTestIncomplete("update test not implemented");
-        
-        $this->roleInfoDAOImpl->update(/* parameters */);
+        $this->testInsert();
+        $inserted = $this->roleInfoDAOImpl->query()[0];
+        $inserted->setPermission("console,sfsf,sfsf");
+        $this->roleInfoDAOImpl->setTarget($inserted);
+        $this->roleInfoDAOImpl->update();
+        $result = $this->roleInfoDAOImpl->query()[0];
+        self::assertNotNull($result);
+        self::assertEquals("console,sfsf,sfsf", $result->getPermission());
+        self::assertEquals($inserted->getId(), $result->getId());
     }
 
     /**
@@ -93,10 +100,11 @@ class RoleInfoDAOImplTest extends TestCase
      */
     public function testQuery()
     {
-        // TODO Auto-generated RoleInfoDAOImplTest->testQuery()
-        $this->markTestIncomplete("query test not implemented");
-        
-        $this->roleInfoDAOImpl->query(/* parameters */);
+        $roleInfoList = $this->roleInfoDAOImpl->query();
+        self::assertEquals(0, count($roleInfoList));
+        $this->testInsert();
+        $roleInfoList = $this->roleInfoDAOImpl->query();
+        self::assertEquals(1, count($roleInfoList));
     }
 
     /**
@@ -104,10 +112,11 @@ class RoleInfoDAOImplTest extends TestCase
      */
     public function testQueryById()
     {
-        // TODO Auto-generated RoleInfoDAOImplTest->testQueryById()
-        $this->markTestIncomplete("queryById test not implemented");
-        
-        $this->roleInfoDAOImpl->queryById(/* parameters */);
+        $result = $this->roleInfoDAOImpl->queryById(1);
+        self::assertNull(null, $result);
+        $this->testInsert();
+        $result = $this->roleInfoDAOImpl->queryById(1);
+        self::assertNotNull($result);
     }
 }
 

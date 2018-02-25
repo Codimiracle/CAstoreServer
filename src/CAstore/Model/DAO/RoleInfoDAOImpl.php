@@ -8,7 +8,7 @@ use CAstore\Model\Entity\RoleInfo;
 class RoleInfoDAOImpl extends AbstractDAO implements RoleInfoDAO
 {
 
-    const INSERT_SENTENCE = "INSERT INTO role VALUES (:permission)";
+    const INSERT_SENTENCE = "INSERT INTO role(permission) VALUES (:permission)";
 
     const DELETE_SENTENCE = "DELETE FROM role WHERE id = :id";
 
@@ -26,7 +26,7 @@ class RoleInfoDAOImpl extends AbstractDAO implements RoleInfoDAO
      */
     public function getTarget()
     {
-        parent::getTarget();
+        return parent::getTarget();
     }
 
     /**

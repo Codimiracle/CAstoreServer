@@ -1,12 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: codimiracle
- * Date: 18-1-26
- * Time: 下午10:08
- */
-
-namespace CAstore\Utils;
+namespace CAstore\Model\DAO;
 
 use CAstore\Model\Entity\CommentInfo;
 use Deline\Model\Database\MySQLDataSource;
@@ -14,8 +7,11 @@ use PHPUnit\Framework\TestCase;
 
 class CommentInfoDAOImplTest extends TestCase
 {
+
     private $commentInfo;
+
     private $dao;
+
     private $dataSource;
 
     protected function setUp()
@@ -26,12 +22,11 @@ class CommentInfoDAOImplTest extends TestCase
         $database["database_name"] = "test";
         $database["database_username"] = "root";
         $database["database_password"] = "Codimiracle855866";
-        $this->dao = new ICommentInfoDAO();
+        $this->dao = new CommentInfoDAOImpl();
         $this->dataSource = new MySQLDataSource($database);
         $this->dataSource->getConnection()->exec("
             TRUNCATE `comment`;
-            TRUNCATE `content`;"
-        );
+            TRUNCATE `content`;");
         $this->dao->setDataSource($this->dataSource);
         $this->commentInfo = new CommentInfo();
         $this->commentInfo->content = "Hello Comment";
@@ -39,18 +34,20 @@ class CommentInfoDAOImplTest extends TestCase
         $this->commentInfo->contentId = 2;
     }
 
-    public function testQueryNull() {
+    public function testQueryNull()
+    {
         $list = $this->dao->query();
         self::assertEmpty($list);
     }
 
-    public function testQueryByIdNull() {
+    public function testQueryByIdNull()
+    {
         $entity = $this->dao->queryById(1);
         self::assertNull($entity);
     }
 
-
-    public function testInsert() {
+    public function testInsert()
+    {
         $this->dao->setTarget($this->commentInfo);
         $this->dao->insert();
         $commentInfo = $this->dao->queryById(1);
@@ -58,10 +55,10 @@ class CommentInfoDAOImplTest extends TestCase
         self::assertEquals($this->commentInfo->content, $commentInfo->getContent());
         self::assertEquals($this->commentInfo->userId, $commentInfo->getUserId());
         self::assertEquals($this->commentInfo->contentId, $commentInfo->getContentId());
-
     }
 
-    public function testDelete() {
+    public function testDelete()
+    {
         $this->testInsert();
         $target = $this->dao->queryById(1);
         self::assertNotNull($target);
@@ -70,7 +67,9 @@ class CommentInfoDAOImplTest extends TestCase
         $result = $this->dao->queryById(1);
         self::assertNull($result);
     }
-    public function testUpdate() {
+
+    public function testUpdate()
+    {
         $this->testInsert();
         $target = $this->dao->queryById(1);
         self::assertNotNull($target);
@@ -78,7 +77,7 @@ class CommentInfoDAOImplTest extends TestCase
         $this->dao->setTarget($target);
         $this->dao->update();
         $new = $this->dao->queryById(1);
-        self::assertEquals($target->getContent(),$new->getContent());
+        self::assertEquals($target->getContent(), $new->getContent());
         self::assertEquals($this->commentInfo->userId, $new->getUserId());
         self::assertEquals($this->commentInfo->contentId, $new->getContentId());
     }
