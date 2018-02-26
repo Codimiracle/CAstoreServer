@@ -11,6 +11,8 @@ use CAstore\Model\DAO\UserInfoDAOImpl;
 use CAstore\Service\AppServiceImpl;
 use CAstore\Service\UserServiceImpl;
 use Deline\Component\AbstractComponentCenter;
+use CAstore\Service\FileServiceImpl;
+use CAstore\Model\DAO\FileInfoDAOImpl;
 
 class CAstoreComponentCenter extends AbstractComponentCenter
 {
@@ -27,11 +29,13 @@ class CAstoreComponentCenter extends AbstractComponentCenter
         $this->setDAOs(array(
             "UserInfoDAO" => UserInfoDAOImpl::class,
             "RoleInfoDAO" => RoleInfoDAOImpl::class,
-            "AppInfoDAO" => AppInfoDAOImpl::class
+            "AppInfoDAO" => AppInfoDAOImpl::class,
+            "FileInfoDAO" => FileInfoDAOImpl::class
         ));
         $this->setServices(array(
             "UserService" => UserServiceImpl::class,
-            "AppService" => AppServiceImpl::class
+            "AppService" => AppServiceImpl::class,
+            "FileService" => FileServiceImpl::class
         ));
     }
 }

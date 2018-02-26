@@ -5,6 +5,7 @@ use CAstore\Service\AppService;
 use CAstore\Verifier\AppsAppendVerifier;
 use Deline\Component\PageNotFoundException;
 use Deline\Controller\AbstractEntityController;
+use CAstore\Service\FileService;
 
 class AppsController extends AbstractEntityController
 {
@@ -13,12 +14,15 @@ class AppsController extends AbstractEntityController
 
     /** @var  AppService */
     private $appService;
+    /** @var FileService */
+    private $fileService;
 
     public function onControllerStart()
     {
         parent::onControllerStart();
         $this->attachAction("/^\\/$/", "onAppRoot");
         $this->appService = $this->container->getComponentCenter()->getService("AppService");
+        $this->fileService = $this->container->getComponentCenter()->getService("FileService");
     }
 
     public function onControllerEnd()
@@ -64,7 +68,10 @@ class AppsController extends AbstractEntityController
         if ($id != - 1) {
             $entity = $this->appService->queryById($id);
             if ($entity) {
+                $this->view->setPageTitle($entity->getTitle());
+                $this->view->setPageName("apps.details");
                 $this->view->setData("app_info", $entity);
+                return;
             }
         }
         throw new PageNotFoundException("Id 为\"" . $id . "\"并不存在！");
