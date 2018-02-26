@@ -113,8 +113,8 @@
 		</div>
 	</div>
 	<style type="text/css">
-@import url("static/css/apps-details.css");
-</style>
+        @import url("static/css/apps-details.css");
+    </style>
 </div>
 
 <?php
