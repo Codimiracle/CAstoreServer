@@ -44,7 +44,6 @@ class UserController extends AbstractController
         $this->view->setPageTitle("个人中心");
         $this->view->setPageName("user.main");
         $this->view->setData("userdata", $this->userService->getUserData());
-        
     }
 
     // 处理用户注册

@@ -5,6 +5,7 @@ use Deline\Model\DAO\Pager;
 
 class SimplePager implements Pager
 {
+
     const LIMIT_CAUSE = " LIMIT ?,?";
 
     private $offset;

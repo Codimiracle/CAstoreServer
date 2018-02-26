@@ -1,5 +1,4 @@
 <?php
-
 namespace Deline\Controller;
 
 abstract class AbstractEntityController extends AbstractController
@@ -13,9 +12,10 @@ abstract class AbstractEntityController extends AbstractController
         $this->attachAction("/^\\/[0-9]+\\/Delete/", "onEntityDelete");
         $this->attachAction("/^\\/[0-9]+\\/Update/", "onEntityUpdate");
     }
+
     /**
      * 获取实体ID
-     * 
+     *
      * @return int
      */
     public function getEntityId()

@@ -1,5 +1,4 @@
 <?php
-
 namespace CAstore\Component;
 
 use Deline\Model\Database\MySQLDataSource;
@@ -7,7 +6,9 @@ use PHPUnit\Framework\TestCase;
 
 class MySQLDataSourceTest extends TestCase
 {
+
     /**
+     *
      * @var DataSource
      */
     private $accessor;
@@ -23,10 +24,10 @@ class MySQLDataSourceTest extends TestCase
         $this->accessor = new MySQLDataSource($database);
     }
 
-    public function testConnection() {
+    public function testConnection()
+    {
         self::assertNotNull($this->accessor->getConnection(), "DatabaseAccessor 的 connection 不能为空！");
     }
-
 
     protected function tearDown()
     {

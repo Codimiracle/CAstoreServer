@@ -89,16 +89,26 @@ abstract class AbstractController implements Controller
     public function onControllerHandle()
     {
         global $logger;
-        $logger->addDebug("Controller", array("class" => get_class($this)));
+        $logger->addDebug("Controller", array(
+            "class" => get_class($this)
+        ));
         $pathname = $this->getCurrentNodePathname();
-        $logger->addInfo("Controller", array("matching" => $pathname));
+        $logger->addInfo("Controller", array(
+            "matching" => $pathname
+        ));
         $method_name = $this->mapper->match($pathname);
-        $logger->addInfo("Controller", array("matched"=> boolval($method_name)));
+        $logger->addInfo("Controller", array(
+            "matched" => boolval($method_name)
+        ));
         if ($method_name) {
-            $logger->addInfo("Controller", array("invoking" => $method_name));
+            $logger->addInfo("Controller", array(
+                "invoking" => $method_name
+            ));
             $this->$method_name();
         } else {
-            $logger->addInfo("Controller", array("invoking" => "onControllerDefaultHandle"));
+            $logger->addInfo("Controller", array(
+                "invoking" => "onControllerDefaultHandle"
+            ));
             $this->onControllerDefaultHandle();
         }
     }

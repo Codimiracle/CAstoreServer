@@ -1,5 +1,4 @@
 <?php
-
 namespace CAstore\Component;
 
 use Deline\Component\NodePath;
@@ -7,7 +6,9 @@ use PHPUnit\Framework\TestCase;
 
 class NodePathTest extends TestCase
 {
+
     /**
+     *
      * @var NodePath
      */
     private $nodePath;
@@ -18,16 +19,18 @@ class NodePathTest extends TestCase
         $this->nodePath = new NodePath("/Node");
     }
 
-    public function testToString() {
+    public function testToString()
+    {
         self::assertEquals("/Node", strval($this->nodePath));
     }
 
-
-    public function testMainNodeName() {
+    public function testMainNodeName()
+    {
         self::assertEquals("Node", $this->nodePath->getMainNodeName());
     }
 
-    public function testSubNodePath() {
+    public function testSubNodePath()
+    {
         self::assertEquals(strval($this->nodePath->getSubnodePath()), strval(new NodePath("/")));
     }
 }

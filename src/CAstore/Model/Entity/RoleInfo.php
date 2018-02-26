@@ -1,5 +1,4 @@
 <?php
-
 namespace CAstore\Model\Entity;
 
 use Deline\Model\Entity\Entity;
@@ -18,15 +17,6 @@ class RoleInfo implements Entity
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     *
-     * @param int $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
     }
 
     /**

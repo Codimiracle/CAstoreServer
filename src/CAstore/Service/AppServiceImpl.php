@@ -2,16 +2,15 @@
 namespace CAstore\Service;
 
 use Deline\Component\Container;
+use CAstore\Model\DAO\AppInfoDAO;
 
 class AppServiceImpl implements AppService
 {
 
     private $container;
-    
+
+    /** @var AppInfoDAO **/
     private $dao;
-    
-    private $target;
-    
 
     /**
      *
@@ -31,47 +30,32 @@ class AppServiceImpl implements AppService
         $this->container = $container;
         $this->dao = $container->getComponentCenter()->getDataAccessObject("AppInfoDAO");
     }
-    
-    
 
-    /**
-     * @return mixed
-     */
-    public function getTarget()
+    public function edit($entity)
     {
-        return $this->target;
+        $this->dao->setTarget($entity);
+        $this->dao->update();
     }
 
-    /**
-     * @param mixed $target
-     */
-    public function setTarget($target)
+    public function queryByKeyword($keyword)
     {
-        $this->target = $target;
+        return $this->dao->queryByKeyword($keyword);
     }
 
-    public function edit()
+    public function delete($entity)
     {
-        
+        $this->dao->setTarget($entity);
+        $this->dao->delete();
     }
 
-    public function delete()
+    public function append($entity)
     {
-        
+        $this->dao->setTarget($entity);
+        $this->dao->insert();
     }
 
-    public function append()
-    {
-        
-    }
-    
     public function queryById($id)
     {
         return $this->dao->queryById($id);
-    }
-    
-    public function queryByKeyword($keyword)
-    {
-        
     }
 }

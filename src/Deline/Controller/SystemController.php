@@ -35,7 +35,7 @@ class SystemController extends AbstractController
         $this->view->setPageName("system.page-not-found");
         $this->view->setMessage("alert", "Page Not Found");
     }
-    
+
     public function onPermissionDenied()
     {
         $this->view->setPageTitle("Permission Denied");

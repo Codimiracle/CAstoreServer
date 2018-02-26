@@ -46,7 +46,8 @@ class RoleInfoDAOImpl extends AbstractDAO implements RoleInfoDAO
         try {
             $connection->beginTransaction();
             $prepared = $connection->prepare(self::INSERT_SENTENCE);
-            $prepared->bindValue(":permission", $this->getTarget()->getPermission());
+            $prepared->bindValue(":permission", $this->getTarget()
+                ->getPermission());
             $prepared->execute();
             $connection->commit();
         } catch (PDOException $e) {

@@ -7,9 +7,10 @@ use PDOException;
 
 class AppInfoDAOImpl extends AbstractDAO implements AppInfoDAO
 {
+
     const INSERT_CONTENT = "INSERT INTO content(title, name, content) VALUES (:title, :name, :description)";
 
-    const INSERT_APP = "INSERT INTO app(cid, package, developer, platform, version) VALUES (:cid, :package, :developer, :platform, :version)";
+    const INSERT_APP = "INSERT INTO app(cid, package, developer, platform, version, createdTime, updatedTime) VALUES (:cid, :package, :developer, :platform, :version, NOW(), NOW())";
 
     const DELETE_CONTENT = "DELETE FROM content WHERE id = (SELECT cid FROM app WHERE id = :id)";
 
@@ -17,7 +18,7 @@ class AppInfoDAOImpl extends AbstractDAO implements AppInfoDAO
 
     const UPDATE_CONTENT = "UPDATE content SET title = :title, name = :name, content = :description WHERE id = (SELECT cid FROM app WHERE id = :id)";
 
-    const UPDATE_APP = "UPDATE app SET package = :package, developer = :developer, platform = :platform, version = :version WHERE id = :id";
+    const UPDATE_APP = "UPDATE app SET package = :package, developer = :developer, platform = :platform, version = :version, updatedTime = NOW() WHERE id = :id";
 
     const QUERY = "SELECT * FROM app_info";
 

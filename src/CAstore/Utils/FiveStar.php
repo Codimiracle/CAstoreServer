@@ -14,7 +14,7 @@ class FiveStar
     const STATS_BY_CONTENT_ID_AND_USER_ID = "SELECT stars FROM mark WHERE ccid = :ccid AND uid = :uid";
 
     /**
-     *  
+     *
      * @var DataSource
      */
     private $dataSource;

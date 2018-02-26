@@ -13,7 +13,7 @@ class UserServiceImpl implements UserService
     const ANONYMOUS_ROLE_ID = 1;
 
     const SESSION_LOGGED_USER_INFO = "logged_user";
-    
+
     const SIGN_OUT_MESSAGE = "user.sign.out.message";
 
     /**
@@ -97,7 +97,10 @@ class UserServiceImpl implements UserService
             $this->userInfoDAO->insert();
             return 1;
         } catch (\Exception $exception) {
-            $logger->addError("UserService", array("title" => "signing up failed!", "message" => $exception->getMessage()));
+            $logger->addError("UserService", array(
+                "title" => "signing up failed!",
+                "message" => $exception->getMessage()
+            ));
             if ($exception->getCode() == "23000") {
                 return 0;
             }
@@ -133,6 +136,7 @@ class UserServiceImpl implements UserService
     {
         return $this->getUserInfo() ? true : false;
     }
+
     public function setUserPermissionByRoleId($roleId)
     {
         $roleInfo = $this->roleInfoDAO->queryById($roleId);
@@ -149,7 +153,7 @@ class UserServiceImpl implements UserService
     {
         return $this->setUserPermissionByRoleId($userInfo->getRoleId());
     }
-    
+
     public function setUserInfo($userInfo)
     {
         $session = $this->container->getSession();
@@ -173,9 +177,9 @@ class UserServiceImpl implements UserService
         }
         return $this->roleInfoDAO->queryById($roleId);
     }
+
     public function getUserInfoById($id)
     {
         $this->userInfoDAO->queryById($id);
     }
-
 }

@@ -17,7 +17,7 @@ class DelineContainer implements Container
 
     /** @var Permission */
     private $permission;
-    
+
     /** @var  Session */
     private $session = null;
 
@@ -57,6 +57,7 @@ class DelineContainer implements Container
         }
         return $this->permission;
     }
+
     /**
      * 重定向
      *
@@ -100,7 +101,7 @@ class DelineContainer implements Container
             "procedure" => "handle",
             "controller name" => $controller_name
         ));
-        if (!$controller_name) {
+        if (! $controller_name) {
             return;
         }
         /** @var Action $action */
@@ -128,17 +129,20 @@ class DelineContainer implements Container
                 ));
                 return;
             } catch (PermissionException $exception) {
-                $logger->addWarning("Controller", array("message" => $exception->getMessage(),
+                $logger->addWarning("Controller", array(
+                    "message" => $exception->getMessage(),
                     "trace" => $exception->getTrace()
                 ));
                 $this->dispatchPermissionDenied($exception->getMessage());
-            } catch (PageNotFoundException $exception){
-                $logger->addWarning("Controller", array("message" => $exception->getMessage(),
-                   "trace" => $exception->getTrace()
+            } catch (PageNotFoundException $exception) {
+                $logger->addWarning("Controller", array(
+                    "message" => $exception->getMessage(),
+                    "trace" => $exception->getTrace()
                 ));
                 $this->dispatchPageNotFound();
             } catch (\Exception $exception) {
-                $logger->addWarning("Controller", array("message"=>$exception->getMessage(),
+                $logger->addWarning("Controller", array(
+                    "message" => $exception->getMessage(),
                     "trace" => $exception->getTrace()
                 ));
                 $this->dispatchPageError($exception->getMessage());
@@ -288,5 +292,4 @@ class DelineContainer implements Container
             $this->getRenderer()->render();
         }
     }
-
 }

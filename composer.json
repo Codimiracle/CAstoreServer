@@ -1,7 +1,7 @@
 {
 	"name" : "CAstore/CAstore",
 	"description" : "CAstore is a App Store.",
-	"minimum-stability" : "alpha",
+	"minimum-stability" : "stable",
 	"license" : "LGPL2.0",
 	"authors" : [{
 			"name" : "Codimiracle",
@@ -13,10 +13,14 @@
 		"monolog/monolog" : "1.0.*"
 	},
 	"require-dev" : {
-		"php" : ">=7.0",
 		"phpunit/phpunit" : "6.5.6"
 	},
 	"autoload" : {
+		"classmap" : [
+			"src/"
+		]
+	},
+	"autoload-dev" : {
 		"classmap" : [
 			"src/"
 		]

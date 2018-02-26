@@ -1,5 +1,4 @@
 <?php
-
 namespace CAstore\Model\Entity;
 
 use Deline\Model\Entity\Entity;
@@ -9,56 +8,56 @@ class UserInfo implements Entity
 
     /**
      * 用户Id
-     * 
+     *
      * @var integer
      */
     public $id;
 
     /**
      * 用户名
-     * 
+     *
      * @var string
      */
     public $name;
 
     /**
      * 用户昵称
-     * 
+     *
      * @var string
      */
     public $nickname;
 
     /**
      * 用户密码
-     * 
+     *
      * @var string
      */
     public $password;
 
     /**
      * 用户性别
-     * 
+     *
      * @var int
      */
     public $gender;
 
     /**
      * 用户描述
-     * 
+     *
      * @var string
      */
     public $description;
 
     /**
      * 用户头像
-     * 
+     *
      * @var string
      */
-    public $avatar;
+    public $avatar = "default-avtar.png";
 
     /**
      * 用户角色
-     * 
+     *
      * @var int
      */
     public $roleId;
@@ -182,11 +181,11 @@ class UserInfo implements Entity
 
     /**
      *
-     * @param mixed $roleId
+     * @param mixed $roleInfoId
      */
-    public function setRoleId($roleId)
+    public function setRoleId($roleInfoId)
     {
-        $this->roleId = $roleId;
+        $this->roleId = $roleInfoId;
     }
 
     /**

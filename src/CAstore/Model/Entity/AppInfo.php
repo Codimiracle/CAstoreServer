@@ -1,5 +1,4 @@
 <?php
-
 namespace CAstore\Model\Entity;
 
 use Deline\Model\Entity\Entity;
@@ -9,35 +8,35 @@ class AppInfo implements Entity
 
     /**
      * App Id
-     * 
+     *
      * @var string
      */
     public $id;
 
     /**
      * App 显示名称
-     * 
+     *
      * @var string
      */
     public $title;
 
     /**
      * App 名称
-     * 
+     *
      * @var string
      */
     public $name;
 
     /**
      * App 描述
-     * 
+     *
      * @var string
      */
     public $description;
 
     /**
      * App 包名
-     * 
+     *
      * @var string
      */
     public $package;
@@ -53,25 +52,30 @@ class AppInfo implements Entity
      * <li>android-aarch</li>
      * <li>android-aarch64</li>
      * </ul>
-     * 
+     *
      * @var string
      */
     public $platform;
 
     /**
      * App 开发者
-     * 
+     *
      * @var string;
      */
     public $developer;
 
     /**
      * App 版本
-     * 
+     *
      * @var string
      */
     public $version;
 
+    /** @var string */
+    public $createdtTime;
+    
+    /** @var string */
+    public $updatedTime;
     /**
      *
      * @return string
@@ -206,4 +210,36 @@ class AppInfo implements Entity
     {
         $this->version = $version;
     }
+    /**
+     * @return string
+     */
+    public function getCreatedtTime()
+    {
+        return $this->createdtTime;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUpdatedTime()
+    {
+        return $this->updatedTime;
+    }
+
+    /**
+     * @param string $createdtTime
+     */
+    public function setCreatedtTime($createdtTime)
+    {
+        $this->createdtTime = $createdtTime;
+    }
+
+    /**
+     * @param string $updatedTime
+     */
+    public function setUpdatedTime($updatedTime)
+    {
+        $this->updatedTime = $updatedTime;
+    }
+
 }

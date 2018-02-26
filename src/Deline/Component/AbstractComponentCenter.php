@@ -51,7 +51,8 @@ abstract class AbstractComponentCenter implements ComponentCenter
 
     /**
      * 获取所有的渲染器
-     * @return multitype:string 
+     * 
+     * @return multitype:string
      */
     public function getRenderers()
     {
@@ -60,6 +61,7 @@ abstract class AbstractComponentCenter implements ComponentCenter
 
     /**
      * 获取所有的服务
+     * 
      * @return multitype:string
      */
     public function getServices()
@@ -69,7 +71,8 @@ abstract class AbstractComponentCenter implements ComponentCenter
 
     /**
      * 获取所有的控制器
-     * @return multitype:string 
+     * 
+     * @return multitype:string
      */
     public function getControllers()
     {
@@ -78,6 +81,7 @@ abstract class AbstractComponentCenter implements ComponentCenter
 
     /**
      * 获取所有数据访问对象
+     * 
      * @return multitype:string
      */
     public function getDAOs()
@@ -86,7 +90,8 @@ abstract class AbstractComponentCenter implements ComponentCenter
     }
 
     /**
-     * @param multitype:string  $renderers
+     *
+     * @param multitype:string $renderers
      */
     public function setRenderers($renderers)
     {
@@ -94,6 +99,7 @@ abstract class AbstractComponentCenter implements ComponentCenter
     }
 
     /**
+     *
      * @param multitype:string $services
      */
     public function setServices($services)
@@ -102,7 +108,8 @@ abstract class AbstractComponentCenter implements ComponentCenter
     }
 
     /**
-     * @param multitype:string  $controllers
+     *
+     * @param multitype:string $controllers
      */
     public function setControllers($controllers)
     {
@@ -110,6 +117,7 @@ abstract class AbstractComponentCenter implements ComponentCenter
     }
 
     /**
+     *
      * @param multitype:string $daos
      */
     public function setDAOs($daos)
@@ -131,7 +139,7 @@ abstract class AbstractComponentCenter implements ComponentCenter
         $class = $this->getComponentClass($this->renderers, $type);
         if ($class) {
             /** @var Renderer $renderer **/
-            $renderer = new $class;
+            $renderer = new $class();
             $renderer->setContainer($this->container);
             return $renderer;
         }
@@ -143,7 +151,7 @@ abstract class AbstractComponentCenter implements ComponentCenter
         $class = $this->getComponentClass($this->daos, $name);
         if ($class) {
             /** @var DataAccessObject  $dao **/
-            $dao = new $class;
+            $dao = new $class();
             $dao->setDataSource($this->container->getDataSource());
             return $dao;
         }

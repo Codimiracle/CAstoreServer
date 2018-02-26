@@ -4,15 +4,11 @@ namespace Deline\Service;
 interface EntityService extends Service
 {
 
-    public function setTarget($entity);
+    public function append($entity);
 
-    public function getTarget();
+    public function delete($entity);
 
-    public function append();
-
-    public function delete();
-
-    public function edit();
+    public function edit($entity);
 
     public function queryById($id);
 }

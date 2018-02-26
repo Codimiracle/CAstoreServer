@@ -1,5 +1,4 @@
 <?php
-
 namespace CAstore\Controller;
 
 use Deline\Controller\AbstractController;

@@ -30,12 +30,15 @@ interface Context
      * @return NodePath
      */
     public function getNodePath();
-    
+
     /**
+     *
      * @return Permission
      */
     public function getPermission();
+
     /**
+     *
      * @return ComponentCenter
      */
     public function getComponentCenter();

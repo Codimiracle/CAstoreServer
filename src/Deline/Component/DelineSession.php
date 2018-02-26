@@ -20,7 +20,7 @@ class DelineSession implements Session
     {
         return isset($_SESSION[$key]) ? $_SESSION[$key] : null;
     }
-    
+
     public function getSessionData()
     {
         return $_SESSION;

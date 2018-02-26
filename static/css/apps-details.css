@@ -1,12 +1,12 @@
 @charset "UTF-8";
 
-.app-powerpoint > .body > ul {
-    position: relative;
-    left: 0;
-    display: flex;
-}
-.app-powerpoint > .body > ul img {
-    height: 320px;
-    min-width: 168px;
+.app-powerpoint>.body>ul {
+	position: relative;
+	left: 0;
+	display: flex;
 }
 
+.app-powerpoint>.body>ul img {
+	height: 320px;
+	min-width: 168px;
+}

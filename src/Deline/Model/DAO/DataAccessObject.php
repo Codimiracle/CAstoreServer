@@ -1,11 +1,10 @@
 <?php
-
 namespace Deline\Model\DAO;
 
 /**
  * Interface DataAccessObject
  * Abstract Document Pattern.
- * 
+ *
  * @package Core\Utils
  */
 interface DataAccessObject

@@ -1,7 +1,6 @@
 <?php
 namespace Deline\Component;
 
-
 class DelinePermission implements Permission
 {
 
@@ -26,7 +25,7 @@ class DelinePermission implements Permission
     {
         $this->container = $container;
         $permissions = $this->container->getSession()->getParameter(self::SESSION_PERMISSION);
-        if (!$permissions) {
+        if (! $permissions) {
             $permissions = array();
         }
         $this->container->getSession()->setParameter(self::SESSION_PERMISSION, $permissions);
@@ -36,7 +35,7 @@ class DelinePermission implements Permission
     {
         $permissions = $this->getPermissions();
         $index = array_search($permission, $permissions);
-        if (!is_null($index)) {
+        if (! is_null($index)) {
             unset($permissions[$index]);
             $this->container->getSession()->setParameter(self::SESSION_PERMISSION, $permissions);
         }
@@ -45,8 +44,8 @@ class DelinePermission implements Permission
     public function check($permission)
     {
         $granted = array_search($permission, $this->getPermissions());
-        if (!$granted) {
-            throw new PermissionException("你需要 ".$permission." 权限才能访问！");
+        if (! $granted) {
+            throw new PermissionException("你需要 " . $permission . " 权限才能访问！");
         }
     }
 
@@ -57,10 +56,11 @@ class DelinePermission implements Permission
         $this->container->getSession()->setParameter(self::SESSION_PERMISSION, $permissons);
     }
 
-    public function setPermissions($permissions) {
+    public function setPermissions($permissions)
+    {
         $this->container->getSession()->setParameter(self::SESSION_PERMISSION, $permissions);
     }
-    
+
     public function getPermissions()
     {
         return $this->container->getSession()->getParameter(self::SESSION_PERMISSION);

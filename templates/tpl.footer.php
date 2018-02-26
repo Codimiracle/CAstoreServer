@@ -1,8 +1,8 @@
 <nav class="navbar navbar-inverse navbar-fixed-bottom">
-    <ul class="nav navbar-text">
-        <li>&copy; 2017 <?= $attributes["company"] ?></li>
-        <li>Powered by Deline</li>
-    </ul>
+	<ul class="nav navbar-text">
+		<li>&copy; 2017 <?= $attributes["company"] ?></li>
+		<li>Powered by Deline</li>
+	</ul>
 </nav>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="static/bootstrap/js/jquery-1.12.4.js"></script>

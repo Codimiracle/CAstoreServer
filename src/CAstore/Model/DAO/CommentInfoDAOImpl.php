@@ -6,9 +6,10 @@ use Deline\Model\DAO\AbstractDAO;
 
 class CommentInfoDAOImpl extends AbstractDAO implements CommentInfoDAO
 {
+
     const INSERT_CONTENT = "INSERT INTO content(title, name, content) VALUES ('comment_title', 'comment_name', :content)";
 
-    const INSERT_COMMENT = "INSERT INTO comment(cid, tid, createdTime, uid) VALUES (:cid, :tid, now(), :uid)";
+    const INSERT_COMMENT = "INSERT INTO comment(cid, tid, createdTime, uid) VALUES (:cid, :tid, NOW(), :uid)";
 
     const UPDATE_CONTENT = "UPDATE content SET content = :content WHERE id = (SELECT cid FROM comment WHERE id = :id)";
 
@@ -20,7 +21,7 @@ class CommentInfoDAOImpl extends AbstractDAO implements CommentInfoDAO
 
     const QUERY_BY_ID = "SELECT * FROM comment_info WHERE id = :id";
 
-    const QUERY_BY_CONTENT_ID = "SELECT * FROM comment_info WHERE contentId = :contentId";
+    const QUERY_BY_CONTENT_ID = "SELECT * FROM comment_info WHERE targetId = :targetId";
 
     /**
      *
@@ -34,7 +35,7 @@ class CommentInfoDAOImpl extends AbstractDAO implements CommentInfoDAO
     public function queryByContentId($content_id)
     {
         $this->getEntities(self::QUERY_BY_CONTENT_ID, array(
-            ":contentId" => $content_id
+            ":targetId" => $content_id
         ), CommentInfo::class);
     }
 
@@ -51,7 +52,7 @@ class CommentInfoDAOImpl extends AbstractDAO implements CommentInfoDAO
             $prepared = $connection->prepare(self::INSERT_COMMENT);
             $prepared->bindValue(":cid", $inserted_id);
             $prepared->bindValue(":tid", $this->getTarget()
-                ->getContentId());
+                ->getTargetId());
             $prepared->bindValue(":uid", $this->getTarget()
                 ->getUserId());
             $prepared->execute();

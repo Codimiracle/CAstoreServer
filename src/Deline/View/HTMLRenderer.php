@@ -13,7 +13,7 @@ class HTMLRenderer implements Renderer
     private $parameters = array();
 
     private $attributes = null;
-    
+
     private $container;
 
     public function __construct()
@@ -21,8 +21,9 @@ class HTMLRenderer implements Renderer
         global $website;
         $this->attributes = $website;
     }
-    
+
     /**
+     *
      * @return Container
      */
     public function getContainer()
@@ -31,6 +32,7 @@ class HTMLRenderer implements Renderer
     }
 
     /**
+     *
      * @param Container $container
      */
     public function setContainer($container)

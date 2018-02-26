@@ -1,5 +1,4 @@
 <?php
-
 namespace CAstore\Model\Entity;
 
 use Deline\Model\Entity\Entity;
@@ -9,7 +8,7 @@ class CommentInfo implements Entity
 
     public $id;
 
-    public $contentId;
+    public $targetId;
 
     public $content;
 
@@ -30,18 +29,18 @@ class CommentInfo implements Entity
      *
      * @return mixed
      */
-    public function getContentId()
+    public function getTargetId()
     {
-        return $this->contentId;
+        return $this->targetId;
     }
 
     /**
      *
-     * @param mixed $contentId
+     * @param mixed $targetId
      */
-    public function setContentId($contentId)
+    public function setTargetId($targetId)
     {
-        $this->contentId = $contentId;
+        $this->targetId = $targetId;
     }
 
     /**
@@ -69,15 +68,6 @@ class CommentInfo implements Entity
     public function getCreatedTime()
     {
         return $this->createdTime;
-    }
-
-    /**
-     *
-     * @param mixed $createdTime
-     */
-    public function setCreatedTime($createdTime)
-    {
-        $this->createdTime = $createdTime;
     }
 
     /**
