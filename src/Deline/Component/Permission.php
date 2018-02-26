@@ -12,8 +12,13 @@ interface Permission
     public function getContainer();
 
     /**
+     * 
+     * @param multitype:string $permissions
+     */
+    public function setPermissions($permissions);
+    /**
      *
-     * @return array
+     * @return multitype:string
      */
     public function getPermissions();
 

@@ -13,7 +13,7 @@ class UserServiceImpl implements UserService
     const ANONYMOUS_ROLE_ID = 1;
 
     const SESSION_LOGGED_USER_INFO = "logged_user";
-
+    
     const SIGN_OUT_MESSAGE = "user.sign.out.message";
 
     /**
@@ -70,7 +70,12 @@ class UserServiceImpl implements UserService
         if ($userInfo) {
             if ($userInfo->getPassword() === Security::password($password)) {
                 $this->setUserInfo($userInfo);
-                return 1;
+                if ($this->setUserPermission($userInfo)) {
+                    return 1;
+                } else {
+                    $this->setUserPermissionByRoleId(self::ANONYMOUS_ROLE_ID);
+                    return 2;
+                }
             } else {
                 return 0;
             }
@@ -92,7 +97,7 @@ class UserServiceImpl implements UserService
             $this->userInfoDAO->insert();
             return 1;
         } catch (\Exception $exception) {
-            $logger->addError("User sign up error:" . $exception->getMessage());
+            $logger->addError("UserService", array("title" => "signing up failed!", "message" => $exception->getMessage()));
             if ($exception->getCode() == "23000") {
                 return 0;
             }
@@ -120,6 +125,7 @@ class UserServiceImpl implements UserService
         $data["nickname"] = $userInfo->getNickname();
         $data["uid"] = $userInfo->getId();
         $data["gender"] = $userInfo->getGender();
+        $data["permission"] = $this->container->getPermission()->getPermissions();
         return $data;
     }
 
@@ -127,7 +133,23 @@ class UserServiceImpl implements UserService
     {
         return $this->getUserInfo() ? true : false;
     }
+    public function setUserPermissionByRoleId($roleId)
+    {
+        $roleInfo = $this->roleInfoDAO->queryById($roleId);
+        $permission = $this->container->getPermission();
+        if ($roleInfo) {
+            $permission_list = explode(",", $roleInfo->getPermission());
+            $permission->setPermissions($permission_list);
+            return true;
+        }
+        return false;
+    }
 
+    public function setUserPermission($userInfo)
+    {
+        return $this->setUserPermissionByRoleId($userInfo->getRoleId());
+    }
+    
     public function setUserInfo($userInfo)
     {
         $session = $this->container->getSession();

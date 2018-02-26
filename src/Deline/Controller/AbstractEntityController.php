@@ -5,7 +5,7 @@ namespace Deline\Controller;
 abstract class AbstractEntityController extends AbstractController
 {
 
-    public function onActionStart()
+    public function onControllerStart()
     {
         $this->attachAction("/^\\/Append$/", "onEntityAppend");
         $this->attachAction("/^\\/[0-9]+$/", "onEntityDetails");
@@ -13,7 +13,6 @@ abstract class AbstractEntityController extends AbstractController
         $this->attachAction("/^\\/[0-9]+\\/Delete/", "onEntityDelete");
         $this->attachAction("/^\\/[0-9]+\\/Update/", "onEntityUpdate");
     }
-
     /**
      * 获取实体ID
      * 

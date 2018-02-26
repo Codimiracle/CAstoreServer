@@ -25,6 +25,11 @@ class DelinePermission implements Permission
     public function setContainer($container)
     {
         $this->container = $container;
+        $permissions = $this->container->getSession()->getParameter(self::SESSION_PERMISSION);
+        if (!$permissions) {
+            $permissions = array();
+        }
+        $this->container->getSession()->setParameter(self::SESSION_PERMISSION, $permissions);
     }
 
     public function revoke($permission)
@@ -52,6 +57,10 @@ class DelinePermission implements Permission
         $this->container->getSession()->setParameter(self::SESSION_PERMISSION, $permissons);
     }
 
+    public function setPermissions($permissions) {
+        $this->container->getSession()->setParameter(self::SESSION_PERMISSION, $permissions);
+    }
+    
     public function getPermissions()
     {
         return $this->container->getSession()->getParameter(self::SESSION_PERMISSION);

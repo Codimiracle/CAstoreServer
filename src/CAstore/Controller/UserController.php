@@ -63,12 +63,13 @@ class UserController extends AbstractController
                 try {
                     // 生成对应的用户信息
                     $userInfo = new UserInfo();
+                    $userInfo->setAvatar("default-avatar.png");
                     $userInfo->setName($_POST["username"]);
                     $userInfo->setNickname($_POST["nickname"]);
                     $userInfo->setPassword(Security::password($_POST["password"]));
                     $userInfo->setDescription(isset($_POST["description"]) ? $_POST["description"] : "");
                     $userInfo->setGender($_POST["gender"]);
-                    $userInfo->setRoleId(1); // 普通用户
+                    $userInfo->setRoleId(2); // 普通用户
                                              // 调用业务处理
                     $result = $this->userService->signUp($userInfo);
                     if ($result == 1) {
@@ -110,6 +111,9 @@ class UserController extends AbstractController
             if ($result == 1) { // 登录成功
                 $this->view->setPageName("system.info");
                 $message = "登录成功";
+            } else if ($result == 2) {
+                $this->view->setPageName("system.info");
+                $message = "用户进行授权时发生错误,已使用匿名权限登录！";
             } else { // 用户不存在或密码错误
                 $message = "用户名或密码不正确！";
             }

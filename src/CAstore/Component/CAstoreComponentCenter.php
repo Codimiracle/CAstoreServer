@@ -32,7 +32,7 @@ class CAstoreComponentCenter extends AbstractComponentCenter
         ));
         $this->setServices(array(
            "UserService" => UserServiceImpl::class,
-            "AppService" => AppServiceImpl::class
+           "AppService" => AppServiceImpl::class
         ));
     }
 }

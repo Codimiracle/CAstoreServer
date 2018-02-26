@@ -47,8 +47,10 @@ class RoleInfoDAOImplTest extends TestCase
      */
     protected function tearDown()
     {
-        $this->roleInfoDAOImpl = null;
         parent::tearDown();
+        $this->roleInfoDAOImpl = null;
+        $this->dataSource->getConnection()->exec("
+            TRUNCATE `role`;");
     }
 
     /**

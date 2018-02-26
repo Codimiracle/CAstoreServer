@@ -9,7 +9,7 @@ class UserInfoDAOImpl extends AbstractDAO implements UserInfoDAO
 
     const INSERT_CONTENT = "INSERT INTO content(title, name, content) VALUES (:nickname, 'userdata', :description)";
 
-    const INSERT_USER = "INSERT INTO user(cid, name, password, gender, rid) VALUES (:cid, :name, :password, :gender, :rid)";
+    const INSERT_USER = "INSERT INTO user(cid, name, password, avatar, gender, rid) VALUES (:cid, :name, :password, :avatar, :gender, :rid)";
 
     const DELETE_CONTENT = "DELETE FROM content WHERE id = (SELECT cid FROM user WHERE id = :id)";
 
@@ -54,6 +54,8 @@ class UserInfoDAOImpl extends AbstractDAO implements UserInfoDAO
                 ->getName());
             $prepared->bindValue(":password", $this->getTarget()
                 ->getPassword());
+            $prepared->bindValue(":avatar", $this->getTarget()
+                ->getAvatar());
             $prepared->bindValue(":gender", $this->getTarget()
                 ->getGender());
             $prepared->bindValue(":rid", $this->getTarget()
