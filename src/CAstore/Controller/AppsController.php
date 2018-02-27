@@ -11,6 +11,7 @@ class AppsController extends AbstractEntityController
 {
 
     const SUBMIT_ID_APP_APPEND = "apps_append";
+    const SUBMIT_ID_APP_EDIT = "app_edit";
 
     /** @var  AppService */
     private $appService;
@@ -30,6 +31,7 @@ class AppsController extends AbstractEntityController
 
     public function onEntityAppend()
     {
+        $this->container->getPermission()->check("content");
         if ($this->isSubmit(self::SUBMIT_ID_APP_APPEND)) {
             $verifier = new AppsAppendVerifier();
         } else {
@@ -46,22 +48,32 @@ class AppsController extends AbstractEntityController
 
     public function onEntityEdit()
     {
+        $this->container->getPermission()->check("content");
         $id = $this->getEntityId();
         /** @var AppInfo $entity */
         $entity = $this->appService->queryById($id);
         if ($entity) {
-            $this->view->setPageTitle("编辑应用 - " . $entity->getName());
-            $this->view->setPageName("apps.edit");
+            if ($this->isSubmit(self::SUBMIT_ID_APP_EDIT)) {
+                
+            } else {
+                $this->view->setPageTitle("编辑应用 - " . $entity->getName());
+                $this->view->setPageName("apps.edit");
+                $this->view->setData("app_info", $entity);
+            }
         } else {
             throw new PageNotFoundException("无法找到 ID 为\"" . $id . "\"的应用实体进行编辑操作！");
         }
     }
 
     public function onEntityDelete()
-    {}
+    {
+        $this->container->getPermission()->check("content");
+    }
 
     public function onEntityUpdate()
-    {}
+    {
+        $this->container->getPermission()->check("content");
+    }
 
     public function onEntityDetails()
     {

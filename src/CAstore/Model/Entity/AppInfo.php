@@ -72,7 +72,7 @@ class AppInfo implements Entity
     public $version;
 
     /** @var string */
-    public $createdtTime;
+    public $createdTime;
     
     /** @var string */
     public $updatedTime;
