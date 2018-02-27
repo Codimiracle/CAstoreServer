@@ -51,6 +51,7 @@ class AppsController extends AbstractEntityController
         $entity = $this->appService->queryById($id);
         if ($entity) {
             $this->view->setPageTitle("编辑应用 - " . $entity->getName());
+            $this->view->setPageName("apps.edit");
         } else {
             throw new PageNotFoundException("无法找到 ID 为\"" . $id . "\"的应用实体进行编辑操作！");
         }
