@@ -61,7 +61,7 @@ class AppsController extends AbstractEntityController
                 $this->view->setData("app_info", $entity);
             }
         } else {
-            throw new PageNotFoundException("无法找到 ID 为\"" . $id . "\"的应用实体进行编辑操作！");
+            throw new PageNotFoundException("无法找到 ID 为\"" . $id . "\"的 APP 实体进行编辑操作！");
         }
     }
 
@@ -87,6 +87,6 @@ class AppsController extends AbstractEntityController
                 return;
             }
         }
-        throw new PageNotFoundException("Id 为\"" . $id . "\"并不存在！");
+        throw new PageNotFoundException("Id 为\"" . $id . "\"的 App 实体并不存在！");
     }
 }
