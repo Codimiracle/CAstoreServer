@@ -1,9 +1,9 @@
 <?php
-namespace CAstore\Verifier;
+namespace CAstore\Validator;
 
-use Deline\Verifier\AbstractVerifier;
+use Deline\Validator\AbstractValidator;
 
-class AppsAppendVerifier extends AbstractVerifier
+class AppsAppendingValidator extends AbstractValidator
 {
 
     /**

@@ -3,9 +3,9 @@ namespace CAstore\Action;
 
 use CAstore\Model\Entity\UserInfo;
 use CAstore\Service\UserService;
-use CAstore\Verifier\UserSignUpVerifier;
 use Deline\Component\Security;
 use Deline\Controller\AbstractController;
+use CAstore\Validator\UserSigningUpValidator;
 
 class UserController extends AbstractController
 {
@@ -54,11 +54,11 @@ class UserController extends AbstractController
         $this->view->setPageName("user.sign-up");
         if ($this->isSubmit(self::SUBMIT_ID_USER_SIGN_UP)) {
             // 生成验证器
-            $userVerifier = new UserSignUpVerifier();
+            $userValidator = new UserSigningUpValidator();
             // 验证所有必须字段（nickname跳过了空的情况）
-            $userVerifier->verifyAll();
+            $userValidator->verifyAll();
             // 验证通过
-            if ($userVerifier->isValidity()) {
+            if ($userValidator->isValidity()) {
                 try {
                     // 生成对应的用户信息
                     $userInfo = new UserInfo();
@@ -83,7 +83,7 @@ class UserController extends AbstractController
                     $message = $exception->getMessage();
                 }
             } else {
-                $message = $userVerifier->getResultMessage();
+                $message = $userValidator->getResultMessage();
             }
         }
         $this->view->setMessage("info", $message);

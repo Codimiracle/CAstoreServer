@@ -2,10 +2,10 @@
 namespace CAstore\Controller;
 
 use CAstore\Service\AppService;
-use CAstore\Verifier\AppsAppendVerifier;
 use Deline\Component\PageNotFoundException;
 use Deline\Controller\AbstractEntityController;
 use CAstore\Service\FileService;
+use CAstore\Validator\AppsAppendingValidator;
 
 class AppsController extends AbstractEntityController
 {
@@ -33,7 +33,13 @@ class AppsController extends AbstractEntityController
     {
         $this->container->getPermission()->check("content");
         if ($this->isSubmit(self::SUBMIT_ID_APP_APPEND)) {
-            $verifier = new AppsAppendVerifier();
+            $message = null;
+            $validator = new AppsAppendingValidator();
+            if ($validator->isValidity()) {
+                $message = "添加应用成功！";
+            } else {
+                $message = $validator->getResultMessage();
+            }
         } else {
             $this->view->setPageTitle("添加应用");
             $this->view->setPageName("apps.append");
