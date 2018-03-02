@@ -39,6 +39,7 @@ class DelineUploadService implements UploadService
         }
         return $info;
     }
+    
 
     public function getInfoGroupOf($field)
     {
@@ -61,17 +62,32 @@ class DelineUploadService implements UploadService
         }
         return $infos;
     }
-    private function moveUploadedFileByName($target, $dir) {
+
+    private function moveUploadedFileByName($target, $destination) {
         if (is_uploaded_file($target)) {
-            move_uploaded_file($target, $dir);
+            move_uploaded_file($target, $destination);
         }
     }
 
-    public function moveUploadedFileGroupByField($field, $dir)
-    {}
-
     public function moveUploadedFileByField($field, $dir)
-    {}
+    {
+        if (isset($_FILES[$field]) && !is_array($_FILES[$field]["name"])) {
+            $name = $_FILES[$field]["name"];
+            $this->moveUploadedFileByName($name, $dir);
+        }
+    }
+    
+    public function moveUploadedFileGroupByField($field, $dir)
+    {
+        if (isset($_FILES[$field]) && is_array($_FILES[$field]["name"])) {
+            $names = $_FILES[$field]["name"];
+            foreach ($names as $name) {
+                $this->moveUploadedFileByName($names, $dir);
+            }
+        }
+    }
+
+    
 
 
 
