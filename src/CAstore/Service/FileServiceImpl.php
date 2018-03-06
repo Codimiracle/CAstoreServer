@@ -66,5 +66,10 @@ class FileServiceImpl implements FileService
     {
         return $this->fileInfoDAO->queryByTargetId($targetId);
     }
+    public function getLastInsertedId()
+    {
+        return $this->fileInfoDAO->getLastInsertedId();
+    }
+
 }
 

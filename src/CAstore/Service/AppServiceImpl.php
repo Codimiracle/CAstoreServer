@@ -60,7 +60,7 @@ class AppServiceImpl implements AppService
     }
     public function getLastInsertedId()
     {
-        $this->dao->
+        return $this->dao->getLastInsertedId();
     }
 
 }

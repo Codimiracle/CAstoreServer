@@ -21,6 +21,8 @@ interface DataAccessObject
     public function setPager($pager);
 
     public function getPager();
+    
+    public function getLastInsertedId();
 
     public function insert();
 
