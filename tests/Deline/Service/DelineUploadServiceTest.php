@@ -2,6 +2,7 @@
 namespace Deline\Service;
 
 use PHPUnit\Framework\TestCase;
+
 /**
  * DelineUploadService test case.
  */
@@ -20,9 +21,39 @@ class DelineUploadServiceTest extends TestCase
     protected function setUp()
     {
         parent::setUp();
-        
+        file_put_contents("/tmp/testa.css", ".test {}");
+        file_put_contents("/tmp/testb.css", ".test {}");
+        file_put_contents("/tmp/testc.css", ".test {}");
+        $_FILES["field"] = array(
+            "name" => "testa.css",
+            "type" => "text/css",
+            "size" => 11323,
+            "tmp_name" => "/tmp/testa.css",
+            "error" => 0
+        );
+        $_FILES["fields"] = array(
+            "name" => array(
+                "testb.css",
+                "testc.css"
+            ),
+            "type" => array(
+                "text/css",
+                "text/css"
+            ),
+            "size" => array(
+                12311,
+                412
+            ),
+            "tmp_name" => array(
+                "/tmp/testb.css",
+                "/tmp/testc.css"
+            ),
+            "error" => array(
+                0,
+                0
+            )
+        );
         // TODO Auto-generated DelineUploadServiceTest::setUp()
-        
         $this->uploadService = new DelineUploadService();
     }
 
@@ -31,38 +62,64 @@ class DelineUploadServiceTest extends TestCase
      */
     protected function tearDown()
     {
-        // TODO Auto-generated DelineUploadServiceTest::tearDown()
+        unlink("/tmp/testa.css");
+        unlink("/tmp/testb.css");
+        unlink("/tmp/testc.css");
+        $_FILES = array();
         $this->uploadService = null;
-        
         parent::tearDown();
-    }
-
-    /**
-     * Constructs the test case.
-     */
-    public function __construct()
-    {
-        // TODO Auto-generated constructor
     }
 
     /**
      * Tests DelineUploadService->getInfoOf()
      */
-    public function testGetInfoOf()
+    public function testGetInfoOfField()
     {
-        $_FILES["name"] = array("name" => "test.mp3", "type" => "audio/mp3", "size" => "11323", "tmp_name"=>"/tmp/test.mp3");
-        $this->uploadService->getInfoOf("name");
+        $info = $this->uploadService->getInfo("field");
+        self::assertEquals("testa.css", $info["name"]);
+        self::assertEquals("text/css", $info["type"]);
+        self::assertEquals(11323, $info["size"]);
+        self::assertEquals("/tmp/testa.css", $info["tmp_name"]);
+    }
+
+    /**
+     * Tests DelineUploadService->getInfoOf()
+     */
+    public function testGetInfoOfFieldError()
+    {
+        $_FILES["field"]["error"] = 23013;
+        $info = $this->uploadService->getInfo("field");
+        self::assertNull($info);
     }
 
     /**
      * Tests DelineUploadService->getInfoGroupOf()
      */
-    public function testGetInfoGroupOf()
+    public function testGetInfoOfGroup()
     {
-        // TODO Auto-generated DelineUploadServiceTest->testGetInfoGroupOf()
-        $this->markTestIncomplete("getInfoGroupOf test not implemented");
-        
-        $this->uploadService->getInfoGroupOf(/* parameters */);
+        $infos = $this->uploadService->getInfoGroup("fields");
+        self::assertCount(2, $infos);
+        self::assertEquals("testb.css", $infos[0]["name"], "the name must be 'testb.css'.");
+        self::assertEquals("text/css", $infos[0]["type"], "the type must be 'text/css'.");
+        self::assertEquals(12311, $infos[0]["size"], "the size must be 12311");
+        self::assertEquals("/tmp/testb.css", $infos[0]["tmp_name"], "the tmp_name must be '/tmp/testb.css'");
+        self::assertEquals("testc.css", $infos[1]["name"], "the name must be 'testc.css'.");
+        self::assertEquals("text/css", $infos[1]["type"], "the type must be 'text/css'.");
+        self::assertEquals(412, $infos[1]["size"], "the size must be 12311");
+        self::assertEquals("/tmp/testc.css", $infos[1]["tmp_name"], "the tmp_name must be '/tmp/testc.css'");
+    }
+
+    /**
+     * Tests DelineUploadService->getInfoGroupOf()
+     */
+    public function testGetInfoGroupOfFiledError()
+    {
+        $_FILES["fields"]["error"] = array(
+            6566,
+            23423
+        );
+        $infos = $this->uploadService->getInfoGroup("fields");
+        self::assertCount(0, $infos);
     }
 
     /**
@@ -70,21 +127,17 @@ class DelineUploadServiceTest extends TestCase
      */
     public function testMoveUploadedFileByField()
     {
-        // TODO Auto-generated DelineUploadServiceTest->testMoveUploadedFileByField()
-        $this->markTestIncomplete("moveUploadedFileByField test not implemented");
-        
-        $this->uploadService->moveUploadedFileByField(/* parameters */);
+        $filename = $this->uploadService->moveUploadedFileByField("field", "/tmp");
+        self::assertNotFalse($filename, "you should be return the name of target file.");
+        self::assertFileExists("/tmp/" . $filename, "you should be move the file to the \$dir");
     }
 
-    /**
-     * Tests DelineUploadService->moveUploadedFileGroupByField()
-     */
-    public function testMoveUploadedFileGroupByField()
+    public function testMoveUploadedFileByInfo()
     {
-        // TODO Auto-generated DelineUploadServiceTest->testMoveUploadedFileGroupByField()
-        $this->markTestIncomplete("moveUploadedFileGroupByField test not implemented");
-        
-        $this->uploadService->moveUploadedFileGroupByField(/* parameters */);
+        $info = $this->uploadService->getInfo("field");
+        $filename = $this->uploadService->moveUploadedFileByInfo($info, "/tmp");
+        self::assertNotFalse($filename, "you should be return the name of target file.");
+        self::assertFileExists("/tmp/" . $filename, "you should be move the file to the \$dir");
     }
 }
 

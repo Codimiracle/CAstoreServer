@@ -8,6 +8,7 @@ use Deline\Controller\SystemController;
 use Deline\Service\Service;
 use Deline\Model\DAO\DataAccessObject;
 use Deline\View\Renderer;
+use Deline\Service\DelineUploadService;
 
 abstract class AbstractComponentCenter implements ComponentCenter
 {
@@ -18,7 +19,9 @@ abstract class AbstractComponentCenter implements ComponentCenter
         "resource" => ResourceRenderer::class
     );
 
-    private $services = array();
+    private $services = array(
+        "UploadService" => DelineUploadService::class
+    );
 
     private $controllers = array(
         "System" => SystemController::class

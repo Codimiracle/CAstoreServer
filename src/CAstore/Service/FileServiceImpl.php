@@ -1,16 +1,22 @@
 <?php
 namespace CAstore\Service;
 
-use Deline\Component\Container;
 use CAstore\Model\DAO\FileInfoDAO;
+use Deline\Component\Container;
+use Deline\Service\UploadService;
+
 
 class FileServiceImpl implements FileService
 {
     /** @var FileInfoDAO */
-    private $dao;
+    private $fileInfoDAO;
     
     /** @var Container */
     private $container;
+    
+    /** @var UploadService */
+    private $uploadService;
+    
     /**
      * @return Container
      */
@@ -25,40 +31,40 @@ class FileServiceImpl implements FileService
     public function setContainer($container)
     {
         $this->container = $container;
-        $this->dao = $container->getComponentCenter()->getDataAccessObject("FileInfoDAO");
+        $this->fileInfoDAO = $container->getComponentCenter()->getDataAccessObject("FileInfoDAO");
     }
     
     public function edit($entity)
     {
-        $this->dao->setTarget($entity);
-        $this->dao->update();
+        $this->fileInfoDAO->setTarget($entity);
+        $this->fileInfoDAO->update();
     }
 
     public function delete($entity)
     {
-        $this->dao->setTarget($entity);
-        $this->dao->delete();
+        $this->fileInfoDAO->setTarget($entity);
+        $this->fileInfoDAO->delete();
     }
 
     public function append($entity)
     {
-        $this->dao->setTarget($entity);
-        $this->dao->insert();
+        $this->fileInfoDAO->setTarget($entity);
+        $this->fileInfoDAO->insert();
     }
 
     public function queryById($id)
     {
-        return $this->dao->queryById($id);
+        return $this->fileInfoDAO->queryById($id);
     }
     
     public function query()
     {
-        return $this->dao->query();
+        return $this->fileInfoDAO->query();
     }
     
     public function queryByTargetId($targetId)
     {
-        return $this->dao->queryByTargetId($targetId);
+        return $this->fileInfoDAO->queryByTargetId($targetId);
     }
 }
 

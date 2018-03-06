@@ -6,6 +6,7 @@ use Deline\Component\PageNotFoundException;
 use Deline\Controller\AbstractEntityController;
 use CAstore\Service\FileService;
 use CAstore\Validator\AppsAppendingValidator;
+use Deline\Service\UploadService;
 
 class AppsController extends AbstractEntityController
 {
@@ -17,6 +18,8 @@ class AppsController extends AbstractEntityController
     private $appService;
     /** @var FileService */
     private $fileService;
+    /** @var UploadService */
+    private $uploadService;
 
     public function onControllerStart()
     {
@@ -24,6 +27,7 @@ class AppsController extends AbstractEntityController
         $this->attachAction("/^\\/$/", "onAppRoot");
         $this->appService = $this->container->getComponentCenter()->getService("AppService");
         $this->fileService = $this->container->getComponentCenter()->getService("FileService");
+        $this->uploadService = $this->container->getComponentCenter()->getService("uploadService");
     }
 
     public function onControllerEnd()
@@ -66,6 +70,7 @@ class AppsController extends AbstractEntityController
                 $this->view->setPageName("apps.edit");
                 $this->view->setData("app_info", $entity);
             }
+            
         } else {
             throw new PageNotFoundException("无法找到 ID 为\"" . $id . "\"的 APP 实体进行编辑操作！");
         }

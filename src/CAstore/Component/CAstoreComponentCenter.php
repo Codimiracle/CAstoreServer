@@ -32,11 +32,12 @@ class CAstoreComponentCenter extends AbstractComponentCenter
             "AppInfoDAO" => AppInfoDAOImpl::class,
             "FileInfoDAO" => FileInfoDAOImpl::class
         ));
-        $this->setServices(array(
+        $defaultService = $this->getServices();
+        $this->setServices(array_merge($defaultService, array(
             "UserService" => UserServiceImpl::class,
             "AppService" => AppServiceImpl::class,
             "FileService" => FileServiceImpl::class
-        ));
+        )));
     }
 }
 
