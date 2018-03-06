@@ -129,12 +129,10 @@ abstract class AbstractDAO implements DataAccessObject
 
     /**
      * 将结果集单条记录映射到 Entity 。
-     *
-     * @param
-     *            $prepared
-     * @param
-     *            $class
-     * @return mixed|null
+     * @param string $query
+     * @param mititype:string $args
+     * @param string $class
+     * @return NULL
      */
     protected function getEntity($query, $args, $class)
     {
@@ -145,4 +143,6 @@ abstract class AbstractDAO implements DataAccessObject
             return null;
         }
     }
+    
+    public  abstract function getLastInsertedId();
 }

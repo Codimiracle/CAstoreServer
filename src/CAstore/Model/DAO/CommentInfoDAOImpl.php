@@ -23,6 +23,7 @@ class CommentInfoDAOImpl extends AbstractDAO implements CommentInfoDAO
 
     const QUERY_BY_CONTENT_ID = "SELECT * FROM comment_info WHERE targetId = :targetId";
 
+    private $lastInsertedId;
     /**
      *
      * @return CommentInfo
@@ -38,6 +39,11 @@ class CommentInfoDAOImpl extends AbstractDAO implements CommentInfoDAO
             ":targetId" => $content_id
         ), CommentInfo::class);
     }
+    
+    public function getLastInsertedId()
+    {
+        return $this->lastInsertedId;
+    }
 
     public function insert()
     {
@@ -48,9 +54,9 @@ class CommentInfoDAOImpl extends AbstractDAO implements CommentInfoDAO
             $prepared->bindValue(":content", $this->getTarget()
                 ->getContent());
             $prepared->execute();
-            $inserted_id = $connection->lastInsertId(":id");
+            $this->lastInsertedId = $connection->lastInsertId(":id");
             $prepared = $connection->prepare(self::INSERT_COMMENT);
-            $prepared->bindValue(":cid", $inserted_id);
+            $prepared->bindValue(":cid", $this->lastInsertedId);
             $prepared->bindValue(":tid", $this->getTarget()
                 ->getTargetId());
             $prepared->bindValue(":uid", $this->getTarget()

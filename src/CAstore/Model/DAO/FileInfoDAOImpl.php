@@ -20,6 +20,10 @@ class FileInfoDAOImpl extends AbstractDAO implements FileInfoDAO
 
     const QUERY_BY_TARGET_ID = "SELECT * FROM file WHERE targetId = :targetId";
 
+    public function getLastInsertedId()
+    {
+        return $this->lastInsertedId;
+    }
     /**
      *
      * @return FileInfo
@@ -57,6 +61,7 @@ class FileInfoDAOImpl extends AbstractDAO implements FileInfoDAO
             $prepared->bindValue(":mimeType", $this->getTarget()
                 ->getMimeType());
             $prepared->execute();
+            $this->lastInsertedId = $connection->lastInsertId();
             $connection->commit();
         } catch (PDOException $e) {
             $connection->rollBack();

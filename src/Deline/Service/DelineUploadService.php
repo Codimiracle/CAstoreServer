@@ -7,7 +7,8 @@ class DelineUploadService implements UploadService
 {
 
     private $container;
-
+    
+    private $infos;
     /**
      *
      * @return Container
@@ -26,19 +27,19 @@ class DelineUploadService implements UploadService
         $this->container = $container;
     }
 
-    public function getInfo($field)
+    public function getUploadInfo($field)
     {
         if (! isset($_FILES[$field])) {
             return null;
         }
         $raw = $_FILES[$field];
-        if (! is_array($raw["name"]) && $raw["error"] == 0) {
+        if (!is_array($raw["name"])) {
             return $raw;
         }
         return null;
     }
 
-    public function getInfoGroup($field)
+    public function getUploadInfoGroup($field)
     {
         $infos = array();
         if (! isset($_FILES[$field])) {
@@ -47,14 +48,12 @@ class DelineUploadService implements UploadService
         $raw = $_FILES[$field];
         if (is_array($raw["name"])) {
             for ($i = 0; $i < count($raw["name"]); $i ++) {
-                if ($raw["error"][$i] != 0) {
-                    continue;
-                }
                 $info = array();
                 $info["name"] = $raw["name"][$i];
                 $info["size"] = $raw["size"][$i];
                 $info["type"] = $raw["type"][$i];
                 $info["tmp_name"] = $raw["tmp_name"][$i];
+                $info["error"] = $raw["error"][$i];
                 array_push($infos, $info);
             }
         } else {
@@ -65,12 +64,8 @@ class DelineUploadService implements UploadService
 
     public function getFileExtension($filename)
     {
-        list ($name, $extension) = explode(".", $filename);
-        if ($extension) {
-            return $extension;
-        } else {
-            return "";
-        }
+        $index = strripos($filename, ".");
+        return substr($filename, $index + 1);
     }
 
     public function getUploadedFileExtension($field)
@@ -114,8 +109,28 @@ class DelineUploadService implements UploadService
 
     public function moveUploadedFileByField($field, $dir)
     {
-        $info = $this->getInfo($field);
+        $info = $this->getUploadInfo($field);
         return $this->moveUploadedFileByInfo($info, $dir);
     }
+
+    public function isMimeType($field, $mimeType)
+    {
+        if (isset($_FILES[$field])) {
+            $raw = $_FILES[$field];
+            if (is_array($raw["type"])) {
+                foreach ($raw["type"] as $type) {
+                    if ($type != $mimeType) {
+                        return false;
+                    }
+                }
+                return true;
+            } else {
+                return $raw["type"] == $mimeType;
+            }
+        }
+        return false;
+    }
+    
+    
 }
 

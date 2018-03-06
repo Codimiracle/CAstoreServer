@@ -75,7 +75,7 @@ class DelineUploadServiceTest extends TestCase
      */
     public function testGetInfoOfField()
     {
-        $info = $this->uploadService->getInfo("field");
+        $info = $this->uploadService->getUploadInfo("field");
         self::assertEquals("testa.css", $info["name"]);
         self::assertEquals("text/css", $info["type"]);
         self::assertEquals(11323, $info["size"]);
@@ -88,8 +88,8 @@ class DelineUploadServiceTest extends TestCase
     public function testGetInfoOfFieldError()
     {
         $_FILES["field"]["error"] = 23013;
-        $info = $this->uploadService->getInfo("field");
-        self::assertNull($info);
+        $info = $this->uploadService->getUploadInfo("field");
+        self::assertNotNull($info);
     }
 
     /**
@@ -97,7 +97,7 @@ class DelineUploadServiceTest extends TestCase
      */
     public function testGetInfoOfGroup()
     {
-        $infos = $this->uploadService->getInfoGroup("fields");
+        $infos = $this->uploadService->getUploadInfoGroup("fields");
         self::assertCount(2, $infos);
         self::assertEquals("testb.css", $infos[0]["name"], "the name must be 'testb.css'.");
         self::assertEquals("text/css", $infos[0]["type"], "the type must be 'text/css'.");
@@ -118,8 +118,8 @@ class DelineUploadServiceTest extends TestCase
             6566,
             23423
         );
-        $infos = $this->uploadService->getInfoGroup("fields");
-        self::assertCount(0, $infos);
+        $infos = $this->uploadService->getUploadInfoGroup("fields");
+        self::assertCount(2, $infos);
     }
 
     /**
@@ -134,10 +134,16 @@ class DelineUploadServiceTest extends TestCase
 
     public function testMoveUploadedFileByInfo()
     {
-        $info = $this->uploadService->getInfo("field");
+        $info = $this->uploadService->getUploadInfo("field");
         $filename = $this->uploadService->moveUploadedFileByInfo($info, "/tmp");
         self::assertNotFalse($filename, "you should be return the name of target file.");
         self::assertFileExists("/tmp/" . $filename, "you should be move the file to the \$dir");
+    }
+
+    public function testIsMimeType()
+    {
+        self::assertTrue($this->uploadService->isMimeType("field", "text/css"));
+        self::assertTrue($this->uploadService->isMimeType("fields", "text/css"));
     }
 }
 

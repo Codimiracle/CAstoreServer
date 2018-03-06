@@ -18,6 +18,8 @@ class RoleInfoDAOImpl extends AbstractDAO implements RoleInfoDAO
 
     const QUERY_BY_ID_SENTENCE = "SELECT * FROM role WHERE id = :id";
 
+    private $lastInsertedId;
+    
     /**
      *
      * @return RoleInfo
@@ -39,6 +41,11 @@ class RoleInfoDAOImpl extends AbstractDAO implements RoleInfoDAO
     {
         parent::setTarget($target);
     }
+    
+    public function getLastInsertedId()
+    {
+        return $this->lastInsertedId;
+    }
 
     public function insert()
     {
@@ -49,6 +56,7 @@ class RoleInfoDAOImpl extends AbstractDAO implements RoleInfoDAO
             $prepared->bindValue(":permission", $this->getTarget()
                 ->getPermission());
             $prepared->execute();
+            $this->lastInsertedId = $connection->lastInsertId();
             $connection->commit();
         } catch (PDOException $e) {
             $connection->rollBack();

@@ -27,6 +27,7 @@ class UserInfoDAOImpl extends AbstractDAO implements UserInfoDAO
 
     const QUERY_BY_NAME = "SELECT * FROM user_info WHERE name = :name";
 
+    private $lastInsertedId;
     /**
      *
      * @return UserInfo
@@ -36,6 +37,10 @@ class UserInfoDAOImpl extends AbstractDAO implements UserInfoDAO
         return parent::getTarget();
     }
 
+    public function getLastInsertedId()
+    {
+        return $this->lastInsertedId;
+    }
     public function insert()
     {
         $connection = $this->getDataSource()->getConnection();
@@ -47,9 +52,9 @@ class UserInfoDAOImpl extends AbstractDAO implements UserInfoDAO
             $prepared->bindValue(":description", $this->getTarget()
                 ->getDescription());
             $prepared->execute();
-            $inserted_id = $connection->lastInsertId("id");
+            $this->lastInsertedId = $connection->lastInsertId("id");
             $prepared = $connection->prepare(self::INSERT_USER);
-            $prepared->bindValue(":cid", $inserted_id);
+            $prepared->bindValue(":cid", $this->lastInsertedId);
             $prepared->bindValue(":name", $this->getTarget()
                 ->getName());
             $prepared->bindValue(":password", $this->getTarget()

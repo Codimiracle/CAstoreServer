@@ -7,17 +7,22 @@ use Deline\Controller\AbstractEntityController;
 use CAstore\Service\FileService;
 use CAstore\Validator\AppsAppendingValidator;
 use Deline\Service\UploadService;
+use CAstore\Model\Entity\AppInfo;
+use CAstore\Model\Entity\FileInfo;
 
 class AppsController extends AbstractEntityController
 {
 
     const SUBMIT_ID_APP_APPEND = "apps_append";
+
     const SUBMIT_ID_APP_EDIT = "app_edit";
 
     /** @var  AppService */
     private $appService;
+
     /** @var FileService */
     private $fileService;
+
     /** @var UploadService */
     private $uploadService;
 
@@ -33,14 +38,63 @@ class AppsController extends AbstractEntityController
     public function onControllerEnd()
     {}
 
+    const POWERPOINT_FIELD = "powerpoint";
+
+    const POWERPOINT_MIMETYPE = "image/*";
+
+    const POWERPOINT_DIR = "static/images/apps";
+
     public function onEntityAppend()
     {
         $this->container->getPermission()->check("content");
         if ($this->isSubmit(self::SUBMIT_ID_APP_APPEND)) {
             $message = null;
+            // 创建验证器
             $validator = new AppsAppendingValidator();
-            if ($validator->isValidity()) {
-                $message = "添加应用成功！";
+            if ($validator->isValidity()) { // 是否有效
+                if ($this->uploadService->isMimeType(self::POWERPOINT_FIELD, self::POWERPOINT_MIMETYPE)) {
+                    // 创建 AppInfo 实体
+                    $appInfo = new AppInfo();
+                    $appInfo->setTitle($_POST["titile"]);
+                    $appInfo->setName($_POST["name"]);
+                    $appInfo->setDescription($_POST["description"]);
+                    $appInfo->setDeveloper($_POST["developer"]);
+                    $appInfo->setPackage($_POST["package"]);
+                    $appInfo->setPlatform($_POST["platform"]);
+                    $appInfo->setVersion($_POST["version"]);
+                    $this->appService->append($appInfo);
+                    $appContentId = $this->appService->getLastInsertedId();
+                    
+                    // 处理文件上传
+                    $infos = $this->uploadService->getUploadInfoGroup(self::POWERPOINT_FIELD);
+                    $dir = getcwd() . "/" . self::POWERPOINT_DIR;
+                    $successful = true;
+                    foreach ($infos as $info) {
+                        if ($info["error"] != 0) {
+                            $successful = false;
+                            break; //上传失败
+                        }
+                        $name = $this->uploadService->moveUploadedFileByInfo($info, $dir);
+                        if ($name) {
+                            $fileInfo = new FileInfo();
+                            $fileInfo->setMimeType($info["type"]);
+                            $fileInfo->setPath(self::POWERPOINT_DIR . "/" . $name);
+                            $fileInfo->setSize($info["size"]);
+                            $fileInfo->setTargetId($appContentId);
+                            $this->fileService->append($fileInfo);
+                        } else {
+                            $successful = false;
+                            break; //文件移动失败
+                        }
+                    }
+                    if ($successful) {
+                        $message = "添加应用成功！";
+                    } else {
+                        $message = "添加幻灯片时发生错误, 部分文件没有上传成功！";
+                    }
+                } else {
+                    $message = "幻灯片图片格式不正确，请上传正确的图片格式！";
+                }
             } else {
                 $message = $validator->getResultMessage();
             }
@@ -63,14 +117,11 @@ class AppsController extends AbstractEntityController
         /** @var AppInfo $entity */
         $entity = $this->appService->queryById($id);
         if ($entity) {
-            if ($this->isSubmit(self::SUBMIT_ID_APP_EDIT)) {
-                
-            } else {
+            if ($this->isSubmit(self::SUBMIT_ID_APP_EDIT)) {} else {
                 $this->view->setPageTitle("编辑应用 - " . $entity->getName());
                 $this->view->setPageName("apps.edit");
                 $this->view->setData("app_info", $entity);
             }
-            
         } else {
             throw new PageNotFoundException("无法找到 ID 为\"" . $id . "\"的 APP 实体进行编辑操作！");
         }
