@@ -71,10 +71,15 @@
 								class="form-control" name="title" />
 							<p class="help-block">应用在列表中显示的标题</p>
 						</div>
-						<div class="from-group">
+						<div class="form-group">
 							<label for="package">应用包名</label> <input id="package" type="text"
 								class="form-control" name="package" />
 							<p class="help-block">例如：com.example.app</p>
+						</div>
+						<div class="form-group">
+							<label for="version">应用版本</label><input id="version" type="text"
+								class="form-control" name="version">
+							<p class="help-block">1.0.1</p>
 						</div>
 						<div class="form-group">
 							<label for="description">应用描述</label>
@@ -113,8 +118,8 @@
 		</div>
 	</div>
 	<style type="text/css">
-        @import url("static/css/apps-details.css");
-    </style>
+@import url("static/css/apps-details.css");
+</style>
 </div>
 
 <?php

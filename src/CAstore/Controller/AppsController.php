@@ -47,10 +47,12 @@ class AppsController extends AbstractEntityController
     public function onEntityAppend()
     {
         $this->container->getPermission()->check("content");
+        $this->view->setPageTitle("添加应用");
         if ($this->isSubmit(self::SUBMIT_ID_APP_APPEND)) {
             $message = null;
             // 创建验证器
             $validator = new AppsAppendingValidator();
+            $validator->verifyAll();
             if ($validator->isValidity()) { // 是否有效
                 if ($this->uploadService->isMimeType(self::POWERPOINT_FIELD, self::POWERPOINT_MIMETYPE)) {
                     // 创建 AppInfo 实体
@@ -89,17 +91,23 @@ class AppsController extends AbstractEntityController
                     }
                     if ($successful) {
                         $message = "添加应用成功！";
+                        $this->view->setPageName("system.info");
+                        $this->view->setMessage("info", $message);
+                        return;
                     } else {
                         $message = "添加幻灯片时发生错误, 部分文件没有上传成功！";
                     }
                 } else {
                     $message = "幻灯片图片格式不正确，请上传正确的图片格式！";
                 }
+                
             } else {
                 $message = $validator->getResultMessage();
             }
+            $this->view->setPageName("system.info");
+            $this->view->setMessage("error", $message);
+            return;
         } else {
-            $this->view->setPageTitle("添加应用");
             $this->view->setPageName("apps.append");
         }
     }

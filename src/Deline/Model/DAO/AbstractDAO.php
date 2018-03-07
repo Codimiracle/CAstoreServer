@@ -143,6 +143,4 @@ abstract class AbstractDAO implements DataAccessObject
             return null;
         }
     }
-    
-    public  abstract function getLastInsertedId();
 }

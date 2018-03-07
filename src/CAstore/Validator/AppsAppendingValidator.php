@@ -15,6 +15,7 @@ class AppsAppendingValidator extends AbstractValidator
         return array(
             "name",
             "title",
+            "version",
             "package",
             "description",
             "platform",
@@ -26,32 +27,34 @@ class AppsAppendingValidator extends AbstractValidator
     {
         switch ($field) {
             case "name":
-                return "";
+                return "/.{1,128}/";
             case "title":
-                return "";
+                return "/.{1,255}/";
+            case "version":
+                return "/^[0-9](\.[0-9])*$/";
             case "package":
-                return "";
+                return "/^[a-z](\.[a-z])*$/";
             case "description":
-                return "";
+                return "/^.+$/";
             case "platform":
-                return "";
+                return "/^.{1,128}$/";
             case "developer":
-                return "";
+                return "/^.{1,128}$/";
         }
     }
 
     public function getPassedMessage($field)
     {
-        return "";
+        return $field."验证通过";
     }
 
     public function getEmptyMessage($field)
     {
-        return "";
+        return $field." 不能为空！";
     }
 
     public function getUnrecognizedMessage($field)
     {
-        return "";
+        return $field." 的数据格式不正确！";
     }
 }
