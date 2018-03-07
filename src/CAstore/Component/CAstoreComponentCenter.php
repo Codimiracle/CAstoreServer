@@ -26,12 +26,14 @@ class CAstoreComponentCenter extends AbstractComponentCenter
             "Apps" => AppsController::class,
             "User" => UserController::class
         )));
+        
         $this->setDAOs(array(
             "UserInfoDAO" => UserInfoDAOImpl::class,
             "RoleInfoDAO" => RoleInfoDAOImpl::class,
             "AppInfoDAO" => AppInfoDAOImpl::class,
             "FileInfoDAO" => FileInfoDAOImpl::class
         ));
+        
         $defaultService = $this->getServices();
         $this->setServices(array_merge($defaultService, array(
             "UserService" => UserServiceImpl::class,

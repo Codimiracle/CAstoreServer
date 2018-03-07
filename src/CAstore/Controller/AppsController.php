@@ -32,7 +32,7 @@ class AppsController extends AbstractEntityController
         $this->attachAction("/^\\/$/", "onAppRoot");
         $this->appService = $this->container->getComponentCenter()->getService("AppService");
         $this->fileService = $this->container->getComponentCenter()->getService("FileService");
-        $this->uploadService = $this->container->getComponentCenter()->getService("uploadService");
+        $this->uploadService = $this->container->getComponentCenter()->getService("UploadService");
     }
 
     public function onControllerEnd()

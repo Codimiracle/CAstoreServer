@@ -31,9 +31,9 @@ class AppsAppendingValidator extends AbstractValidator
             case "title":
                 return "/.{1,255}/";
             case "version":
-                return "/^[0-9](\.[0-9])*$/";
+                return "/^[0-9]+(\.[0-9]+)*$/";
             case "package":
-                return "/^[a-z](\.[a-z])*$/";
+                return "/^[a-z]+(\.[a-z]+)*$/";
             case "description":
                 return "/^.+$/";
             case "platform":

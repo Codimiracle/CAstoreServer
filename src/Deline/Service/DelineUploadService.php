@@ -7,8 +7,9 @@ class DelineUploadService implements UploadService
 {
 
     private $container;
-    
+
     private $infos;
+
     /**
      *
      * @return Container
@@ -33,7 +34,7 @@ class DelineUploadService implements UploadService
             return null;
         }
         $raw = $_FILES[$field];
-        if (!is_array($raw["name"])) {
+        if (! is_array($raw["name"])) {
             return $raw;
         }
         return null;
@@ -113,9 +114,29 @@ class DelineUploadService implements UploadService
         return $this->moveUploadedFileByInfo($info, $dir);
     }
 
+    private function isMimeTypeByMediatype($field, $mediatype)
+    {
+        if (is_array($_FILES[$field])) {
+            foreach ($_FILES[$field]["type"] as $type) {
+                if (stripos($_FILES[$field]["type"], $mediatype) != 0) {
+                    return false;
+                }
+            }
+            return true;
+        } else {
+            return stripos($_FILES[$field]["type"], $mediatype) == 0;
+        }
+    }
+
     public function isMimeType($field, $mimeType)
     {
+        list ($mediatype, $subtype) = explode("/", $mimeType);
         if (isset($_FILES[$field])) {
+            return false;
+        }
+        if ($subtype == '*') {
+            return $this->isMimeTypeByMediatype($field, $mediatype);
+        } else {
             $raw = $_FILES[$field];
             if (is_array($raw["type"])) {
                 foreach ($raw["type"] as $type) {
@@ -128,9 +149,6 @@ class DelineUploadService implements UploadService
                 return $raw["type"] == $mimeType;
             }
         }
-        return false;
     }
-    
-    
 }
 
