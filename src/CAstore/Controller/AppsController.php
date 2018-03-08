@@ -1,14 +1,12 @@
 <?php
 namespace CAstore\Controller;
 
-use CAstore\Service\AppService;
-use Deline\Component\PageNotFoundException;
-use Deline\Controller\AbstractEntityController;
-use CAstore\Service\FileService;
-use CAstore\Validator\AppsAppendingValidator;
-use Deline\Service\UploadService;
 use CAstore\Model\Entity\AppInfo;
 use CAstore\Model\Entity\FileInfo;
+use CAstore\Validator\AppsAppendingValidator;
+use CAstore\Validator\AppsEditingValidator;
+use Deline\Component\PageNotFoundException;
+use Deline\Controller\AbstractEntityController;
 
 class AppsController extends AbstractEntityController
 {
@@ -67,20 +65,27 @@ class AppsController extends AbstractEntityController
                     $appInfo->setVersion($_POST["version"]);
                     $this->appService->append($appInfo);
                     $appContentId = $this->appService->getLastInsertedId();
-
+                    
                     // 处理文件上传
                     $infos = $this->uploadService->getUploadInfoGroup(self::POWERPOINT_FIELD);
                     $dir = getcwd() . "/" . self::POWERPOINT_DIR;
-                    $logger->addDebug("AppsController", array("image_dir"=> $dir));
+                    $logger->addDebug("AppsController", array(
+                        "image_dir" => $dir
+                    ));
                     $successful = true;
                     foreach ($infos as $info) {
                         if ($info["error"] != 0) {
                             $successful = false;
-                            $logger->addDebug("AppsController", array($info["name"] => "failed"));
-                            break; //上传失败
+                            $logger->addDebug("AppsController", array(
+                                "file" => $info["name"],
+                                "status" => "uploaded",
+                                "result" => "failed"
+                            ));
+                            break; // 上传失败
                         }
                         $name = $this->uploadService->moveUploadedFileByInfo($info, $dir);
                         if ($name) {
+                            // 生成 FileInfo 实体
                             $fileInfo = new FileInfo();
                             $fileInfo->setMimeType($info["type"]);
                             $fileInfo->setPath(self::POWERPOINT_DIR . "/" . $name);
@@ -89,8 +94,13 @@ class AppsController extends AbstractEntityController
                             $this->fileService->append($fileInfo);
                         } else {
                             $successful = false;
-                            $logger->addDebug("AppsController", array($info["name"] => "failed", "to" => $name));
-                            break; //文件移动失败
+                            $logger->addDebug("AppsController", array(
+                                "file" => $info["name"],
+                                "status" => "moving",
+                                "to" => $name,
+                                "result" => "failed"
+                            ));
+                            break; // 文件移动失败
                         }
                     }
                     if ($successful) {
@@ -104,7 +114,6 @@ class AppsController extends AbstractEntityController
                 } else {
                     $message = "幻灯片图片格式不正确，请上传正确的图片格式！";
                 }
-                
             } else {
                 $message = $validator->getResultMessage();
             }
@@ -125,11 +134,23 @@ class AppsController extends AbstractEntityController
     public function onEntityEdit()
     {
         $this->container->getPermission()->check("content");
+        // EntityId
         $id = $this->getEntityId();
         /** @var AppInfo $entity */
         $entity = $this->appService->queryById($id);
         if ($entity) {
-            if ($this->isSubmit(self::SUBMIT_ID_APP_EDIT)) {} else {
+            if ($this->isSubmit(self::SUBMIT_ID_APP_EDIT)) {
+                $validator = new AppsEditingValidator();
+                if ($validator->isValidatity()) {
+                    $entity->setName($_POST["name"]);
+                    $entity->setTitle($_POST["title"]);
+                    $entity->setPackage($_POST["package"]);
+                    $entity->setDeveloper($_POST["developer"]);
+                    $entity->setDescription($_POST["description"]);
+                    $entity->setPlatform($_POST["platform"]);
+                    $entity->setVersion($_POST["version"]);
+                } else {}
+            } else {
                 $this->view->setPageTitle("编辑应用 - " . $entity->getName());
                 $this->view->setPageName("apps.edit");
                 $this->view->setData("app_info", $entity);
