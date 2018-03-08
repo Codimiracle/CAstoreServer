@@ -1,13 +1,12 @@
 <?php
-$TAG = "DelineContainer";
-
+// Composer Autoloader
 require __DIR__ . '/vendor/autoload.php';
-
+// Application Settings
 require_once "settings.php";
 
 use CAstore\Component\CAstoreComponentCenter;
-use Monolog\Handler\StreamHandler;
 use Deline\Component\DelineAppclication;
+use Monolog\Handler\StreamHandler;
 
 //创建日志
 $logger = new Monolog\Logger("CAstoreServer");
