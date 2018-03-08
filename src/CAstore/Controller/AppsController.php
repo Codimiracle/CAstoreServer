@@ -46,6 +46,7 @@ class AppsController extends AbstractEntityController
 
     public function onEntityAppend()
     {
+        global $logger;
         $this->container->getPermission()->check("content");
         $this->view->setPageTitle("添加应用");
         if ($this->isSubmit(self::SUBMIT_ID_APP_APPEND)) {
@@ -57,7 +58,7 @@ class AppsController extends AbstractEntityController
                 if ($this->uploadService->isMimeType(self::POWERPOINT_FIELD, self::POWERPOINT_MIMETYPE)) {
                     // 创建 AppInfo 实体
                     $appInfo = new AppInfo();
-                    $appInfo->setTitle($_POST["titile"]);
+                    $appInfo->setTitle($_POST["title"]);
                     $appInfo->setName($_POST["name"]);
                     $appInfo->setDescription($_POST["description"]);
                     $appInfo->setDeveloper($_POST["developer"]);
@@ -66,14 +67,16 @@ class AppsController extends AbstractEntityController
                     $appInfo->setVersion($_POST["version"]);
                     $this->appService->append($appInfo);
                     $appContentId = $this->appService->getLastInsertedId();
-                    
+
                     // 处理文件上传
                     $infos = $this->uploadService->getUploadInfoGroup(self::POWERPOINT_FIELD);
                     $dir = getcwd() . "/" . self::POWERPOINT_DIR;
+                    $logger->addDebug("AppsController", array("image_dir"=> $dir));
                     $successful = true;
                     foreach ($infos as $info) {
                         if ($info["error"] != 0) {
                             $successful = false;
+                            $logger->addDebug("AppsController", array($info["name"] => "failed"));
                             break; //上传失败
                         }
                         $name = $this->uploadService->moveUploadedFileByInfo($info, $dir);
@@ -86,6 +89,7 @@ class AppsController extends AbstractEntityController
                             $this->fileService->append($fileInfo);
                         } else {
                             $successful = false;
+                            $logger->addDebug("AppsController", array($info["name"] => "failed", "to" => $name));
                             break; //文件移动失败
                         }
                     }

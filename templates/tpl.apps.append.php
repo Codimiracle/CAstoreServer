@@ -60,7 +60,7 @@
 		<div class="col-md-6">
 			<div class="row">
 				<div class="col-md-12">
-					<form method="post" role="form">
+					<form method="post" role="form" enctype="multipart/form-data">
 						<div class="form-group">
 							<label for="name">应用名称</label> <input id="name" type="text"
 								class="form-control" name="name" />

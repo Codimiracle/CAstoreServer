@@ -142,6 +142,7 @@ class DelineUploadServiceTest extends TestCase
 
     public function testIsMimeType()
     {
+        self::assertTrue($this->uploadService->isMimeType("field", "text/*"));
         self::assertTrue($this->uploadService->isMimeType("field", "text/css"));
         self::assertTrue($this->uploadService->isMimeType("fields", "text/css"));
     }

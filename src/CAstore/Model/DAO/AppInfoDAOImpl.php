@@ -46,6 +46,7 @@ class AppInfoDAOImpl extends AbstractDAO implements AppInfoDAO
     {
         return $this->lastInsertedId;
     }
+    
     public function insert()
     {
         $connection = $this->getDataSource()->getConnection();
