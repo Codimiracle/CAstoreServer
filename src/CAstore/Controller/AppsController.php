@@ -70,7 +70,7 @@ class AppsController extends AbstractEntityController
                     $infos = $this->uploadService->getUploadInfoGroup(self::POWERPOINT_FIELD);
                     $dir = getcwd() . "/" . self::POWERPOINT_DIR;
                     $logger->addDebug("AppsController", array(
-                        "image_dir" => $dir
+                        "upload_image_dir" => $dir
                     ));
                     $successful = true;
                     foreach ($infos as $info) {
@@ -139,8 +139,10 @@ class AppsController extends AbstractEntityController
         /** @var AppInfo $entity */
         $entity = $this->appService->queryById($id);
         if ($entity) {
+            $this->view->setPageTitle("编辑应用 - " . $entity->getName());
             if ($this->isSubmit(self::SUBMIT_ID_APP_EDIT)) {
                 $validator = new AppsEditingValidator();
+                $message = null;
                 if ($validator->isValidatity()) {
                     $entity->setName($_POST["name"]);
                     $entity->setTitle($_POST["title"]);
@@ -149,9 +151,14 @@ class AppsController extends AbstractEntityController
                     $entity->setDescription($_POST["description"]);
                     $entity->setPlatform($_POST["platform"]);
                     $entity->setVersion($_POST["version"]);
-                } else {}
+                    $this->appService->edit($entity);
+                    $message = "更新 App 信息成功！";
+                } else {
+                    $message = $validator->getResultMessage();
+                }
+                $this->view->setPageName("system.info");
+                $this->view->setMessage("error", $message);
             } else {
-                $this->view->setPageTitle("编辑应用 - " . $entity->getName());
                 $this->view->setPageName("apps.edit");
                 $this->view->setData("app_info", $entity);
             }
@@ -163,11 +170,11 @@ class AppsController extends AbstractEntityController
     public function onEntityDelete()
     {
         $this->container->getPermission()->check("content");
-    }
-
-    public function onEntityUpdate()
-    {
-        $this->container->getPermission()->check("content");
+        $id = $this->getEntityId();
+        $entity = $this->appService->queryById($id);
+        if ($entity) {
+            
+        }
     }
 
     public function onEntityDetails()

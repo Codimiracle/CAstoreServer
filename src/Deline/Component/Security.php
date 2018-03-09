@@ -9,7 +9,6 @@ namespace Deline\Component;
 
 class Security
 {
-
     public static function escapeHTML($input)
     {
         return htmlspecialchars($input);

@@ -34,7 +34,5 @@ abstract class AbstractEntityController extends AbstractController
 
     public abstract function onEntityDelete();
 
-    public abstract function onEntityUpdate();
-
     public abstract function onEntityDetails();
 }
