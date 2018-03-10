@@ -9,10 +9,16 @@ class AppInfo implements Entity
     /**
      * App Id
      *
-     * @var string
+     * @var int
      */
     public $id;
 
+    /**
+     * App Content Id
+     * @var int
+     */
+    public $contentId;
+    
     /**
      * App 显示名称
      *
@@ -83,6 +89,17 @@ class AppInfo implements Entity
     public function getId()
     {
         return $this->id;
+    }
+
+
+    
+    
+    /**
+     * @return number
+     */
+    public function getContentId()
+    {
+        return $this->contentId;
     }
 
     /**

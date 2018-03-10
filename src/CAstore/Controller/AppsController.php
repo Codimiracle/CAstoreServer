@@ -3,10 +3,13 @@ namespace CAstore\Controller;
 
 use CAstore\Model\Entity\AppInfo;
 use CAstore\Model\Entity\FileInfo;
+use CAstore\Service\AppService;
+use CAstore\Service\FileService;
 use CAstore\Validator\AppsAppendingValidator;
 use CAstore\Validator\AppsEditingValidator;
 use Deline\Component\PageNotFoundException;
 use Deline\Controller\AbstractEntityController;
+use Deline\Service\UploadService;
 
 class AppsController extends AbstractEntityController
 {
@@ -181,11 +184,14 @@ class AppsController extends AbstractEntityController
     {
         $id = $this->getEntityId();
         if ($id != - 1) {
+            /** @var AppInfo $entity */
             $entity = $this->appService->queryById($id);
+            $powerpoints = $this->fileService->queryByTargetId($entity->getContentId());
             if ($entity) {
                 $this->view->setPageTitle($entity->getTitle());
                 $this->view->setPageName("apps.details");
                 $this->view->setData("app_info", $entity);
+                $this->view->setData("app_powerpoint", $powerpoints);
                 return;
             }
         }

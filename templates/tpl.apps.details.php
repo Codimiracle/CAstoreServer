@@ -1,6 +1,7 @@
 <?php use Deline\Component\Security;
 
 $appInfo = $parameters["app_info"];
+$appPowerpoint = $parameters["app_powerpoint"]; 
 $appStatics = $parameters["app_statics"];
 
 ?>
@@ -38,14 +39,10 @@ $appStatics = $parameters["app_statics"];
 						<div class="header">应用幻灯片</div>
 						<div class="body">
 							<ul class="list-inline">
-								<li><img class="img-responsive"
-									src="static/images/avatar-default.png" /></li>
-								<li><img class="img-responsive"
-									src="static/images/avatar-default.png" /></li>
-								<li><img class="img-responsive"
-									src="static/images/avatar-default.png" /></li>
-								<li><img class="img-responsive"
-									src="static/images/avatar-default.png" /></li>
+								<?php foreach ($appPowerpoint as $powerpoint) { ?>
+									<li><img class="img-responsive"
+									src="<?= $powerpoint->getPath() ?>" /></li>
+								<?php } ?>
 							</ul>
 						</div>
 						<div class="scrollbar">
