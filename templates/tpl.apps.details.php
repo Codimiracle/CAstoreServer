@@ -1,4 +1,8 @@
-<?php use Deline\Component\Security;
+<?php
+use Deline\Component\Security;
+
+deline_show_html_head();
+deline_show_header();
 
 $appInfo = $parameters["app_info"];
 $appPowerpoint = $parameters["app_powerpoint"]; 
@@ -63,4 +67,5 @@ $appStatics = $parameters["app_statics"];
 	</div>
 </div>
 <?php
-
+deline_show_footer();
+deline_show_html_foot();

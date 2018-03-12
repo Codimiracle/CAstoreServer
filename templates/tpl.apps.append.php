@@ -1,3 +1,7 @@
+<?php 
+deline_show_html_head();
+deline_show_header();
+?>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-6">
@@ -117,15 +121,12 @@
 			</div>
 		</div>
 	</div>
-	<style type="text/css">
+</div>
+<style type="text/css">
 @import url("static/css/apps-details.css");
 </style>
-</div>
-
+<script type="text/javascript" src="static/js/app-append-preview.js">
+</script>
 <?php
-/**
- * Created by PhpStorm.
- * User: codimiracle
- * Date: 18-1-19
- * Time: 下午8:55
- */
+deline_show_footer();
+deline_show_html_foot();

@@ -1,11 +1,11 @@
+<?php
+deline_show_html_head();
+deline_show_header();
+?>
 <div class="container-fluid">
 	<p><?= $parameters["message"] ?></p>
 </div>
 
 <?php
-/**
- * Created by PhpStorm.
- * User: codimiracle
- * Date: 18-1-19
- * Time: 下午8:55
- */
+deline_show_footer();
+deline_show_html_foot();

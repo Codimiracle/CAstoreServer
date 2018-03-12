@@ -1,6 +1,9 @@
 <?php
 use Deline\Component\Security;
 
+deline_show_html_head();
+deline_show_header();
+
 $appInfo = $parameters["app_info"];
 ?>
 <div class="container-fluid">
@@ -62,4 +65,5 @@ $appInfo = $parameters["app_info"];
 	</div>
 </div>
 <?php
-
+deline_show_footer();
+deline_show_html_foot();

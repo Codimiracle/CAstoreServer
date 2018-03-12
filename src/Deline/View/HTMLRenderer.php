@@ -5,11 +5,6 @@ use Deline\Component\Container;
 
 class HTMLRenderer implements Renderer
 {
-
-    const HEADER = "header";
-
-    const FOOTER = "footer";
-
     private $parameters = array();
 
     private $attributes = null;
@@ -64,15 +59,14 @@ class HTMLRenderer implements Renderer
             $attributes = $this->attributes;
             $parameters = $this->parameters;
             $session = $this->container->getSession()->getSessionData();
+            require_once __DIR__.'/view.func.php';
             require $template_file;
         }
     }
 
     public function render()
     {
-        $this->load(self::HEADER);
         $this->load($this->getAttribute("page-name"));
-        $this->load(self::FOOTER);
     }
 
     public function setAttribute($attribute_name, $attribute_value)

@@ -1,4 +1,7 @@
 <?php
+deline_show_html_head();
+deline_show_header();
+
 $userdata = $parameters["userdata"];
 ?>
 
@@ -32,9 +35,5 @@ $userdata = $parameters["userdata"];
 @import url("./static/css/user-center.css");
 </style>
 <?php
-/**
- * Created by PhpStorm.
- * User: codimiracle
- * Date: 18-1-19
- * Time: 下午8:55
- */
+deline_show_footer();
+deline_show_html_foot();
