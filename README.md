@@ -1,6 +1,6 @@
-# CAstore
->作者：[Codimiracle](https://github.com/Codimiracle)
->项目链接：[CAstoreServer](https://github.com/Codimiracle/CAstoreServer)
+# castore-server
+>作者：[codimiracle](https://github.com/codimiracle)
+>项目链接：[castore-server](https://github.com/codimiracle/castore-server)
 ## 目录
 - [简介](#简介)
 - [特色](#特色)
@@ -35,5 +35,6 @@
     - 根据实际需要编辑模板
         - templates
 ### 附加说明
+- deline: [here](github.com/codimiracle/deline)
 - license: LGPL2.0
 - bugs: [feedback](mailto:Codimiracle@outlook.com)
