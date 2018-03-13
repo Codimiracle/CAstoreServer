@@ -20,7 +20,7 @@
     - 步骤
         - 克隆项目
         - 移动到 apache 的 www 文件夹。
-        - 浏览 http://localhost/CAstoreServer
+        - 浏览 http://localhost/castore-server
     
 - 配置
     - 打开项目根目录
