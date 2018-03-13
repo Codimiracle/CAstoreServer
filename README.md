@@ -35,6 +35,6 @@
     - 根据实际需要编辑模板
         - templates
 ### 附加说明
-- deline: [here](github.com/codimiracle/deline)
+- deline: [here](https://github.com/codimiracle/deline)
 - license: LGPL2.0
 - bugs: [feedback](mailto:Codimiracle@outlook.com)
