@@ -1,4 +1,6 @@
-
+<?php
+$userdata = isset($session["logged_user"]) ? $session["logged_user"] : null;
+?>
 <nav class="navbar navbar-inverse navbar-fixed-top">
 	<div class="navbar-header">
 		<button type="button" class="navbar-toggle collapsed"
@@ -24,4 +26,3 @@
         </ul>
 	</div>
 </nav>
-<?php

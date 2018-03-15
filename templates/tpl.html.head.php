@@ -1,6 +1,3 @@
-<?php
-$userdata = isset($session["logged_user"]) ? $session["logged_user"] : null;
-?>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -27,4 +24,3 @@ $userdata = isset($session["logged_user"]) ? $session["logged_user"] : null;
     <![endif]-->
 </head>
 <body>
-<?php

@@ -186,8 +186,8 @@ class AppsController extends AbstractEntityController
         if ($id != - 1) {
             /** @var AppInfo $entity */
             $entity = $this->appService->queryById($id);
-            $powerpoints = $this->fileService->queryByTargetId($entity->getContentId());
             if ($entity) {
+                $powerpoints = $this->fileService->queryByTargetId($entity->getContentId());
                 $this->view->setPageTitle($entity->getTitle());
                 $this->view->setPageName("apps.details");
                 $this->view->setData("app_info", $entity);
