@@ -1,6 +1,6 @@
-# CAstore
->作者：[Codimiracle](https://github.com/Codimiracle)
->项目链接：[CAstoreServer](https://github.com/Codimiracle/CAstoreServer)
+# castore-server
+>作者：[codimiracle](https://github.com/codimiracle)
+>项目链接：[castore-server](https://github.com/codimiracle/castore-server)
 ## 目录
 - [简介](#简介)
 - [特色](#特色)
@@ -20,7 +20,7 @@
     - 步骤
         - 克隆项目
         - 移动到 apache 的 www 文件夹。
-        - 浏览 http://localhost/CAstoreServer
+        - 浏览 http://localhost/castore-server
     
 - 配置
     - 打开项目根目录
@@ -35,5 +35,6 @@
     - 根据实际需要编辑模板
         - templates
 ### 附加说明
+- deline: [here](https://github.com/codimiracle/deline)
 - license: LGPL2.0
 - bugs: [feedback](mailto:Codimiracle@outlook.com)
