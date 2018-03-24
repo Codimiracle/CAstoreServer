@@ -128,7 +128,7 @@ class UserServiceImpl implements UserService
         $data["nickname"] = $userInfo->getNickname();
         $data["uid"] = $userInfo->getId();
         $data["gender"] = $userInfo->getGender();
-        $data["permission"] = $this->container->getPermission()->getPermissions();
+        $data["permission"] = $this->container->getAuthorization()->getPermissions();
         return $data;
     }
 
@@ -140,7 +140,7 @@ class UserServiceImpl implements UserService
     public function setUserPermissionByRoleId($roleId)
     {
         $roleInfo = $this->roleInfoDAO->queryById($roleId);
-        $permission = $this->container->getPermission();
+        $permission = $this->container->getAuthorization();
         if ($roleInfo) {
             $permission_list = explode(",", $roleInfo->getPermission());
             $permission->setPermissions($permission_list);

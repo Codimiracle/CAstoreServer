@@ -48,7 +48,7 @@ class AppsController extends AbstractEntityController
     public function onEntityAppend()
     {
         global $logger;
-        $this->container->getPermission()->check("content");
+        $this->container->getAuthorization()->check("content");
         $this->view->setPageTitle("添加应用");
         if ($this->isSubmit(self::SUBMIT_ID_APP_APPEND)) {
             $message = null;
@@ -136,7 +136,7 @@ class AppsController extends AbstractEntityController
 
     public function onEntityEdit()
     {
-        $this->container->getPermission()->check("content");
+        $this->container->getAuthorization()->check("content");
         // EntityId
         $id = $this->getEntityId();
         /** @var AppInfo $entity */
@@ -172,7 +172,7 @@ class AppsController extends AbstractEntityController
 
     public function onEntityDelete()
     {
-        $this->container->getPermission()->check("content");
+        $this->container->getAuthorization()->check("content");
         $id = $this->getEntityId();
         $entity = $this->appService->queryById($id);
         if ($entity) {

@@ -1,7 +1,7 @@
 <?php
 namespace Deline\Component;
 
-interface Permission
+interface Authorization
 {
 
     /**

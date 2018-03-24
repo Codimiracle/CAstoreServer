@@ -1,7 +1,7 @@
 <?php
 namespace Deline\Component;
 
-class DelinePermission implements Permission
+class DelineAuthorization implements Authorization
 {
 
     const SESSION_PERMISSION = "permissions";

@@ -15,8 +15,8 @@ class DelineContainer implements Container
     /** @var  NodePath */
     private $nodePath = null;
 
-    /** @var Permission */
-    private $permission;
+    /** @var Authorization */
+    private $authorization;
 
     /** @var  Session */
     private $session = null;
@@ -49,13 +49,13 @@ class DelineContainer implements Container
         $this->componentCenter->setContainer($this);
     }
 
-    public function getPermission()
+    public function getAuthorization()
     {
-        if (is_null($this->permission)) {
-            $this->permission = new DelinePermission();
-            $this->permission->setContainer($this);
+        if (is_null($this->authorization)) {
+            $this->authorization = new DelineAuthorization();
+            $this->authorization->setContainer($this);
         }
-        return $this->permission;
+        return $this->authorization;
     }
 
     /**

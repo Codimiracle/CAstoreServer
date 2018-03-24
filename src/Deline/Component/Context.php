@@ -33,9 +33,9 @@ interface Context
 
     /**
      *
-     * @return Permission
+     * @return Authorization
      */
-    public function getPermission();
+    public function getAuthorization();
 
     /**
      *

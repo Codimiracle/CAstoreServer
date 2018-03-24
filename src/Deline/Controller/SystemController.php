@@ -18,14 +18,14 @@ class SystemController extends AbstractController
 
     public function onSystemRoot()
     {
-        $this->container->getPermission()->check("console");
+        $this->container->getAuthorization()->check("console");
         $this->view->setPageTitle("Dashboard");
         $this->view->setPageName("system.dashboard");
     }
     
     public function onPhpInfo()
     {
-        $this->container->getPermission()->check("console");
+        $this->container->getAuthorization()->check("console");
         $this->view->setPageTitle("phpinfo");
         $this->view->setPageName("system.phpinfo");
     }
