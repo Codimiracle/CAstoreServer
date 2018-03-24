@@ -27,9 +27,9 @@ class UserController extends AbstractController
     public function onControllerStart()
     {
         $this->attachAction("/^\\/$/", "onUserRoot");
-        $this->attachAction("/^\\/SignUp$/", "onUserSignUp");
-        $this->attachAction("/^\\/SignIn$/", "onUserSignIn");
-        $this->attachAction("/^\\/SignOut$/", "onUserSignOut");
+        $this->attachAction("/^\\/SignUp($|\\/$)/", "onUserSignUp");
+        $this->attachAction("/^\\/SignIn($|\\/$)/", "onUserSignIn");
+        $this->attachAction("/^\\/SignOut($|\\/$)/", "onUserSignOut");
         
         $this->userService = $this->container->getComponentCenter()->getService("UserService");
     }

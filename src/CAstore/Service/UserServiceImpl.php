@@ -140,10 +140,10 @@ class UserServiceImpl implements UserService
     public function setUserPermissionByRoleId($roleId)
     {
         $roleInfo = $this->roleInfoDAO->queryById($roleId);
-        $permission = $this->container->getAuthorization();
+        $authorization = $this->container->getAuthorization();
         if ($roleInfo) {
             $permission_list = explode(",", $roleInfo->getPermission());
-            $permission->setPermissions($permission_list);
+            $authorization->setPermissions($permission_list);
             return true;
         }
         return false;

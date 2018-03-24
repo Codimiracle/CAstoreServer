@@ -2,6 +2,11 @@
 
 use Deline\Component\Security;
 
+//export to global variable.
+$GLOBALS["parameters"] = $parameters;
+$GLOBALS["attributes"] = $attributes;
+$GLOBALS["session"] = $session;
+
 function deline_load_stylesheet($filename) {
     
 }
@@ -10,6 +15,9 @@ function deline_load_script($filename) {
     
 }
 function deline_show_file($filename) {
+    $parameters = $GLOBALS["parameters"];
+    $attributes = $GLOBALS["attributes"];
+    $session    = $GLOBALS["session"];
     require_once $filename;
 }
 function delien_show_template($template_name) {

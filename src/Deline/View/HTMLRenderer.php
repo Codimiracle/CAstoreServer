@@ -59,7 +59,7 @@ class HTMLRenderer implements Renderer
             $attributes = $this->attributes;
             $parameters = $this->parameters;
             $session = $this->container->getSession()->getSessionData();
-            require_once __DIR__.'/view.func.php';
+            require __DIR__.'/view.func.php';
             require $template_file;
         }
     }

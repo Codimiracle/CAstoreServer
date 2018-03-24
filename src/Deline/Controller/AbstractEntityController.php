@@ -6,11 +6,11 @@ abstract class AbstractEntityController extends AbstractController
 
     public function onControllerStart()
     {
-        $this->attachAction("/^\\/Append$/", "onEntityAppend");
-        $this->attachAction("/^\\/[0-9]+$/", "onEntityDetails");
-        $this->attachAction("/^\\/[0-9]+\\/Edit$/", "onEntityEdit");
-        $this->attachAction("/^\\/[0-9]+\\/Delete/", "onEntityDelete");
-        $this->attachAction("/^\\/[0-9]+\\/Update/", "onEntityUpdate");
+        $this->attachAction("/^\\/Append($|\\/$)/", "onEntityAppend");
+        $this->attachAction("/^\\/[0-9]+($|\\/$)/", "onEntityDetails");
+        $this->attachAction("/^\\/[0-9]+\\/Edit($|\\/$)/", "onEntityEdit");
+        $this->attachAction("/^\\/[0-9]+\\/Delete($|\\/$)/", "onEntityDelete");
+        $this->attachAction("/^\\/[0-9]+\\/Update($|\\/$)/", "onEntityUpdate");
     }
 
     /**

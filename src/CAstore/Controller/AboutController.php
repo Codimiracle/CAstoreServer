@@ -14,7 +14,7 @@ class AboutController extends AbstractController
 
     public function onControllerStart()
     {
-        $this->attachAction("/^\\/License$/", "onLicenseVisiting");
+        $this->attachAction("/^\\/License($|\\/$)/", "onLicenseVisiting");
     }
 
     public function onLicenseVisiting()
