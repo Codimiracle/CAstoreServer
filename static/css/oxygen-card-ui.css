@@ -6,7 +6,7 @@ body {
 	background: #f6f6f6;
 }
 
-body>.container, body>.container-fluid>.row>div>div {
+body>.container, body >.container-fluid>.row>div>div {
 	background: white;
 }
 
@@ -16,4 +16,10 @@ body>.container, body>.container-fluid>.row>div>div {
 }
 .body {
 	padding: 8px;
+}
+.navigation-btn > span {
+	padding-right: 8px;
+}
+.navbar-right {
+	margin-right:0;
 }

@@ -1,1 +1,18 @@
 @charset "UTF-8";
+.app-list > li {
+	width: 24.75%;
+}
+.app-logo > .logo {
+	width: 96px;
+}
+.app-logo {
+	float: left;
+}
+.app-details {
+	padding-left: 106px;
+}
+.app-details > .description {
+	height: 40px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}

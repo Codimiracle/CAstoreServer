@@ -16,6 +16,16 @@
 <link href="static/bootstrap/css/bootstrap-thmeme.min.css" />
 <!-- Deline -->
 <link href="static/css/oxygen-card-ui.css" rel="stylesheet" />
+
+<!-- Customs  -->
+<?php foreach ($GLOBALS["stylesheets"] as $stylesheet): ?>
+<link href="<?= $stylesheet ?>" rel="stylesheet">
+<?php endforeach; ?>
+
+<!-- Custom Scripts -->
+<?php foreach ($GLOBALS["scripts_sync"] as $script):?>
+<script src="<?= $script ?>"></script>
+<?php endforeach; ?>
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>

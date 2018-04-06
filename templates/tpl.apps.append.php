@@ -1,4 +1,4 @@
-<?php 
+<?php
 deline_show_html_head();
 deline_show_header();
 ?>

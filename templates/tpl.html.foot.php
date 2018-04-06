@@ -5,6 +5,10 @@
 -->
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="static/bootstrap/js/bootstrap.min.js"></script>
+<!-- Custom Scripts -->
+<?php foreach ($GLOBALS["scripts"] as $script):?>
+<script src="<?= $script ?>"></script>
+<?php endforeach; ?>
 </body>
 </html>
 <?php
