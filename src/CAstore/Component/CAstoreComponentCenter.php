@@ -13,6 +13,7 @@ use CAstore\Service\UserServiceImpl;
 use Deline\Component\AbstractComponentCenter;
 use CAstore\Service\FileServiceImpl;
 use CAstore\Model\DAO\FileInfoDAOImpl;
+use CAstore\Controller\DashboardController;
 
 class CAstoreComponentCenter extends AbstractComponentCenter
 {
@@ -24,7 +25,8 @@ class CAstoreComponentCenter extends AbstractComponentCenter
             "About" => AboutController::class,
             "Home" => HomeController::class,
             "Apps" => AppsController::class,
-            "User" => UserController::class
+            "User" => UserController::class,
+            "System" => DashboardController::class
         )));
         
         $this->setDAOs(array(

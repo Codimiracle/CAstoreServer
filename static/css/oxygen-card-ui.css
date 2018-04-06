@@ -20,6 +20,3 @@ body>.container, body >.container-fluid>.row>div>div {
 .navigation-btn > span {
 	padding-right: 8px;
 }
-.navbar-right {
-	margin-right:0;
-}
