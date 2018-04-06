@@ -14,7 +14,7 @@ a:link {
 }
 </style>
 </div>
-<?php 
+<?php
 deline_show_footer();
 deline_show_html_foot();
 ?>
