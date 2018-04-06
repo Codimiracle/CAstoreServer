@@ -19,6 +19,14 @@ class ComposerStaticInit487259cdf086031776b6a313113b318f
         array (
             'Webmozart\\Assert\\' => 17,
         ),
+        'P' => 
+        array (
+            'Psr\\Log\\' => 8,
+        ),
+        'M' => 
+        array (
+            'Monolog\\' => 8,
+        ),
         'D' => 
         array (
             'Doctrine\\Instantiator\\' => 22,
@@ -37,6 +45,14 @@ class ComposerStaticInit487259cdf086031776b6a313113b318f
         array (
             0 => __DIR__ . '/..' . '/webmozart/assert/src',
         ),
+        'Psr\\Log\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
+        ),
+        'Monolog\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
+        ),
         'Doctrine\\Instantiator\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/instantiator/src/Doctrine/Instantiator',
@@ -53,13 +69,6 @@ class ComposerStaticInit487259cdf086031776b6a313113b318f
             'Prophecy\\' => 
             array (
                 0 => __DIR__ . '/..' . '/phpspec/prophecy/src',
-            ),
-        ),
-        'M' => 
-        array (
-            'Monolog' => 
-            array (
-                0 => __DIR__ . '/..' . '/monolog/monolog/src',
             ),
         ),
     );
@@ -98,6 +107,47 @@ class ComposerStaticInit487259cdf086031776b6a313113b318f
         'CAstore\\Validator\\AppsAppendingValidator' => __DIR__ . '/../..' . '/src/CAstore/Validator/AppsAppendingValidator.php',
         'CAstore\\Validator\\AppsEditingValidator' => __DIR__ . '/../..' . '/src/CAstore/Validator/AppsEditingValidator.php',
         'CAstore\\Validator\\UserSigningUpValidator' => __DIR__ . '/../..' . '/src/CAstore/Validator/UserSigningUpValidator.php',
+        'Deline\\Component\\AbstractComponentCenter' => __DIR__ . '/..' . '/codimiracle/deline/src/Deline/Component/AbstractComponentCenter.php',
+        'Deline\\Component\\Authorization' => __DIR__ . '/..' . '/codimiracle/deline/src/Deline/Component/Authorization.php',
+        'Deline\\Component\\ComponentCenter' => __DIR__ . '/..' . '/codimiracle/deline/src/Deline/Component/ComponentCenter.php',
+        'Deline\\Component\\Container' => __DIR__ . '/..' . '/codimiracle/deline/src/Deline/Component/Container.php',
+        'Deline\\Component\\Context' => __DIR__ . '/..' . '/codimiracle/deline/src/Deline/Component/Context.php',
+        'Deline\\Component\\DelineAppclication' => __DIR__ . '/..' . '/codimiracle/deline/src/Deline/Component/DelineAppclication.php',
+        'Deline\\Component\\DelineAuthorization' => __DIR__ . '/..' . '/codimiracle/deline/src/Deline/Component/DelineAuthorization.php',
+        'Deline\\Component\\DelineContainer' => __DIR__ . '/..' . '/codimiracle/deline/src/Deline/Component/DelineContainer.php',
+        'Deline\\Component\\DelineSession' => __DIR__ . '/..' . '/codimiracle/deline/src/Deline/Component/DelineSession.php',
+        'Deline\\Component\\Mapper' => __DIR__ . '/..' . '/codimiracle/deline/src/Deline/Component/Mapper.php',
+        'Deline\\Component\\NodePath' => __DIR__ . '/..' . '/codimiracle/deline/src/Deline/Component/NodePath.php',
+        'Deline\\Component\\NodePathFormatException' => __DIR__ . '/..' . '/codimiracle/deline/src/Deline/Component/NodePathFormatException.php',
+        'Deline\\Component\\PageNotFoundException' => __DIR__ . '/..' . '/codimiracle/deline/src/Deline/Component/PageNotFoundException.php',
+        'Deline\\Component\\PermissionException' => __DIR__ . '/..' . '/codimiracle/deline/src/Deline/Component/PermissionException.php',
+        'Deline\\Component\\Security' => __DIR__ . '/..' . '/codimiracle/deline/src/Deline/Component/Security.php',
+        'Deline\\Component\\Session' => __DIR__ . '/..' . '/codimiracle/deline/src/Deline/Component/Session.php',
+        'Deline\\Controller\\AbstractController' => __DIR__ . '/..' . '/codimiracle/deline/src/Deline/Controller/AbstractController.php',
+        'Deline\\Controller\\AbstractEntityController' => __DIR__ . '/..' . '/codimiracle/deline/src/Deline/Controller/AbstractEntityController.php',
+        'Deline\\Controller\\Controller' => __DIR__ . '/..' . '/codimiracle/deline/src/Deline/Controller/Controller.php',
+        'Deline\\Controller\\ControllerFactory' => __DIR__ . '/..' . '/codimiracle/deline/src/Deline/Controller/ControllerFactory.php',
+        'Deline\\Controller\\SystemController' => __DIR__ . '/..' . '/codimiracle/deline/src/Deline/Controller/SystemController.php',
+        'Deline\\Model\\DAO\\AbstractDAO' => __DIR__ . '/..' . '/codimiracle/deline/src/Deline/Model/DAO/AbstractDAO.php',
+        'Deline\\Model\\DAO\\DataAccessObject' => __DIR__ . '/..' . '/codimiracle/deline/src/Deline/Model/DAO/DataAccessObject.php',
+        'Deline\\Model\\DAO\\DataAccessObjectFactory' => __DIR__ . '/..' . '/codimiracle/deline/src/Deline/Model/DAO/DataAccessObjectFactory.php',
+        'Deline\\Model\\DAO\\Pager' => __DIR__ . '/..' . '/codimiracle/deline/src/Deline/Model/DAO/Pager.php',
+        'Deline\\Model\\Database\\DataSource' => __DIR__ . '/..' . '/codimiracle/deline/src/Deline/Model/Database/DataSource.php',
+        'Deline\\Model\\Database\\MySQLDataSource' => __DIR__ . '/..' . '/codimiracle/deline/src/Deline/Model/Database/MySQLDataSource.php',
+        'Deline\\Model\\Entity\\Entity' => __DIR__ . '/..' . '/codimiracle/deline/src/Deline/Model/Entity/Entity.php',
+        'Deline\\Service\\DelineUploadService' => __DIR__ . '/..' . '/codimiracle/deline/src/Deline/Service/DelineUploadService.php',
+        'Deline\\Service\\EntityService' => __DIR__ . '/..' . '/codimiracle/deline/src/Deline/Service/EntityService.php',
+        'Deline\\Service\\Service' => __DIR__ . '/..' . '/codimiracle/deline/src/Deline/Service/Service.php',
+        'Deline\\Service\\ServiceFactory' => __DIR__ . '/..' . '/codimiracle/deline/src/Deline/Service/ServiceFactory.php',
+        'Deline\\Service\\UploadService' => __DIR__ . '/..' . '/codimiracle/deline/src/Deline/Service/UploadService.php',
+        'Deline\\Validator\\AbstractValidator' => __DIR__ . '/..' . '/codimiracle/deline/src/Deline/Validator/AbstractValidator.php',
+        'Deline\\Validator\\Validator' => __DIR__ . '/..' . '/codimiracle/deline/src/Deline/Validator/Validator.php',
+        'Deline\\View\\HTMLRenderer' => __DIR__ . '/..' . '/codimiracle/deline/src/Deline/View/HTMLRenderer.php',
+        'Deline\\View\\JSONRenderer' => __DIR__ . '/..' . '/codimiracle/deline/src/Deline/View/JSONRenderer.php',
+        'Deline\\View\\Renderer' => __DIR__ . '/..' . '/codimiracle/deline/src/Deline/View/Renderer.php',
+        'Deline\\View\\RendererBuilder' => __DIR__ . '/..' . '/codimiracle/deline/src/Deline/View/RendererBuilder.php',
+        'Deline\\View\\RendererFactory' => __DIR__ . '/..' . '/codimiracle/deline/src/Deline/View/RendererFactory.php',
+        'Deline\\View\\ResourceRenderer' => __DIR__ . '/..' . '/codimiracle/deline/src/Deline/View/ResourceRenderer.php',
         'File_Iterator' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Iterator.php',
         'File_Iterator_Facade' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Facade.php',
         'File_Iterator_Factory' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Factory.php',

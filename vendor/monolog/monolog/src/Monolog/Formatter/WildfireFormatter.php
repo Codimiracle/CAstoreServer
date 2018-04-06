@@ -8,6 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Monolog\Formatter;
 
 use Monolog\Logger;
@@ -19,23 +20,25 @@ use Monolog\Logger;
  * @author Christophe Coevoet <stof@notk.org>
  * @author Kirill chEbba Chebunin <iam@chebba.org>
  */
-class WildfireFormatter implements FormatterInterface
+class WildfireFormatter extends NormalizerFormatter
 {
+    const TABLE = 'table';
 
     /**
      * Translates Monolog log levels to Wildfire levels.
      */
     private $logLevels = array(
-        Logger::DEBUG => 'LOG',
-        Logger::INFO => 'INFO',
-        Logger::WARNING => 'WARN',
-        Logger::ERROR => 'ERROR',
-        Logger::CRITICAL => 'ERROR',
-        Logger::ALERT => 'ERROR'
+        Logger::DEBUG     => 'LOG',
+        Logger::INFO      => 'INFO',
+        Logger::NOTICE    => 'INFO',
+        Logger::WARNING   => 'WARN',
+        Logger::ERROR     => 'ERROR',
+        Logger::CRITICAL  => 'ERROR',
+        Logger::ALERT     => 'ERROR',
+        Logger::EMERGENCY => 'ERROR',
     );
 
     /**
-     *
      * {@inheritdoc}
      */
     public function format(array $record)
@@ -50,37 +53,61 @@ class WildfireFormatter implements FormatterInterface
             $line = $record['extra']['line'];
             unset($record['extra']['line']);
         }
-        
-        $message = array(
-            'message' => $record['message']
-        );
+
+        $record = $this->normalize($record);
+        $message = array('message' => $record['message']);
+        $handleError = false;
         if ($record['context']) {
             $message['context'] = $record['context'];
+            $handleError = true;
         }
         if ($record['extra']) {
             $message['extra'] = $record['extra'];
+            $handleError = true;
         }
         if (count($message) === 1) {
             $message = reset($message);
         }
-        
+
+        if (isset($record['context'][self::TABLE])) {
+            $type  = 'TABLE';
+            $label = $record['channel'] .': '. $record['message'];
+            $message = $record['context'][self::TABLE];
+        } else {
+            $type  = $this->logLevels[$record['level']];
+            $label = $record['channel'];
+        }
+
         // Create JSON object describing the appearance of the message in the console
-        $json = json_encode(array(
+        $json = $this->toJson(array(
             array(
-                'Type' => $this->logLevels[$record['level']],
-                'File' => $file,
-                'Line' => $line,
-                'Label' => $record['channel']
+                'Type'  => $type,
+                'File'  => $file,
+                'Line'  => $line,
+                'Label' => $label,
             ),
-            $message
-        ));
-        
+            $message,
+        ), $handleError);
+
         // The message itself is a serialization of the above JSON object + it's length
-        return sprintf('%s|%s|', strlen($json), $json);
+        return sprintf(
+            '%s|%s|',
+            strlen($json),
+            $json
+        );
     }
 
     public function formatBatch(array $records)
     {
         throw new \BadMethodCallException('Batch formatting does not make sense for the WildfireFormatter');
+    }
+
+    protected function normalize($data)
+    {
+        if (is_object($data) && !$data instanceof \DateTime) {
+            return $data;
+        }
+
+        return parent::normalize($data);
     }
 }

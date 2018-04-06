@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Monolog\Handler;
 
 use Monolog\Logger;
 
 class SyslogHandlerTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @covers Monolog\Handler\SyslogHandler::__construct
      */
@@ -22,11 +22,14 @@ class SyslogHandlerTest extends \PHPUnit_Framework_TestCase
     {
         $handler = new SyslogHandler('test');
         $this->assertInstanceOf('Monolog\Handler\SyslogHandler', $handler);
-        
+
         $handler = new SyslogHandler('test', LOG_USER);
         $this->assertInstanceOf('Monolog\Handler\SyslogHandler', $handler);
-        
+
         $handler = new SyslogHandler('test', 'user');
+        $this->assertInstanceOf('Monolog\Handler\SyslogHandler', $handler);
+
+        $handler = new SyslogHandler('test', LOG_USER, Logger::DEBUG, true, LOG_PERROR);
         $this->assertInstanceOf('Monolog\Handler\SyslogHandler', $handler);
     }
 

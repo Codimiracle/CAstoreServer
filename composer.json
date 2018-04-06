@@ -1,16 +1,21 @@
 {
-	"name" : "CAstore/CAstore",
+	"name" : "castore-server/CAstore",
 	"description" : "CAstore is a App Store.",
 	"minimum-stability" : "stable",
-	"license" : "LGPL2.0",
+	"license" : "MIT",
 	"authors" : [{
 			"name" : "Codimiracle",
 			"email" : "Codimiracle@outlook.com"
 		}
 	],
+	"repositories" : [{
+			"type" : "git",
+			"url" : "https://github.com/codimiracle/deline.git"
+		}
+	],
 	"require" : {
 		"php" : ">=5.5.0",
-		"monolog/monolog" : "1.0.*"
+		"codimiracle/deline" : "dev-master"
 	},
 	"require-dev" : {
 		"phpunit/phpunit" : "6.5.6"

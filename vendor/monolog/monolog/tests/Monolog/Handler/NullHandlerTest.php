@@ -8,6 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Monolog\Handler;
 
 use Monolog\TestCase;
@@ -18,7 +19,6 @@ use Monolog\Logger;
  */
 class NullHandlerTest extends TestCase
 {
-
     public function testHandle()
     {
         $handler = new NullHandler();
