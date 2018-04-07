@@ -1,0 +1,3 @@
+[submodule "docs"]
+	path = vendor/codimiracle/deline
+	url = https://github.com/codimiracle/deline
