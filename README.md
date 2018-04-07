@@ -36,5 +36,5 @@
         - templates
 ### 附加说明
 - deline: [here](https://github.com/codimiracle/deline)
-- license: LGPL2.0
+- license: MIT
 - bugs: [feedback](mailto:Codimiracle@outlook.com)
