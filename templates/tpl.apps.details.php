@@ -1,6 +1,7 @@
 <?php
 use Deline\Component\Security;
-
+deline_load_stylesheet("static/css/app-details.css");
+deline_load_script("static/js/app-details.js");
 deline_show_html_head();
 deline_show_header();
 
@@ -44,14 +45,31 @@ $appStatics = $parameters["app_statics"];
 						<div class="body">
 							<ul class="list-inline">
 								<?php foreach ($appPowerpoint as $powerpoint) { ?>
-									<li><img class="img-responsive"
+									<li><img class="powerpoint"
+									src="<?= $powerpoint->getPath() ?>" /></li>
+								<?php } ?>
+								<?php foreach ($appPowerpoint as $powerpoint) { ?>
+									<li><img class="powerpoint"
+									src="<?= $powerpoint->getPath() ?>" /></li>
+								<?php } ?>
+								<?php foreach ($appPowerpoint as $powerpoint) { ?>
+									<li><img class="powerpoint"
+									src="<?= $powerpoint->getPath() ?>" /></li>
+								<?php } ?>
+								<?php foreach ($appPowerpoint as $powerpoint) { ?>
+									<li><img class="powerpoint"
+									src="<?= $powerpoint->getPath() ?>" /></li>
+								<?php } ?>
+								<?php foreach ($appPowerpoint as $powerpoint) { ?>
+									<li><img class="powerpoint"
 									src="<?= $powerpoint->getPath() ?>" /></li>
 								<?php } ?>
 							</ul>
+							<div class="scrollbar-track">
+								<div class="scrollbar-thumb"></div>
+							</div>
 						</div>
-						<div class="scrollbar">
-							<div></div>
-						</div>
+
 					</div>
 				</div>
 			</div>

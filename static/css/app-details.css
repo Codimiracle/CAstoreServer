@@ -1,0 +1,31 @@
+@charset "UTF-8";
+
+.app-powerpoint .body {
+	overflow: hidden;
+}
+
+.app-powerpoint ul {
+	position: relative;
+	left: 0;
+	display: flex;
+}
+
+.app-powerpoint li {
+	padding-right: 9px;
+	padding-left: 9px;
+}
+
+.powerpoint {
+	width: 256px;
+}
+.scrollbar-track,.scrollbar-thumb {
+	height: 8px;
+	border-radius: 4px;
+}
+.scrollbar-track {
+	background: gainsboro;
+}
+
+.scrollbar-thumb {
+	background: darkgrey;
+}
