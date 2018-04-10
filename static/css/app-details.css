@@ -7,7 +7,7 @@
 .app-powerpoint ul {
 	position: relative;
 	left: 0;
-	display: flex;
+	display: inline-flex;
 }
 
 .app-powerpoint li {
