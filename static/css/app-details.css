@@ -28,4 +28,5 @@
 
 .scrollbar-thumb {
 	background: darkgrey;
+	position: relative;
 }

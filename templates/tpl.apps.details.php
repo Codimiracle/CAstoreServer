@@ -43,7 +43,7 @@ $appStatics = $parameters["app_statics"];
 					<div class="app-powerpoint">
 						<div class="header">应用幻灯片</div>
 						<div class="body">
-							<ul class="list-inline">
+							<ul class="list-inline" onselect="false">
 								<?php foreach ($appPowerpoint as $powerpoint) { ?>
 									<li><img class="powerpoint"
 									src="<?= $powerpoint->getPath() ?>" /></li>
