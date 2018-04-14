@@ -1,4 +1,7 @@
 <?php
+deline_load_script("static/js/scrollbar.js");
+deline_load_script("static/js/app-appending-preview.js");
+deline_load_stylesheet("static/css/app-powerpoint.css");
 deline_show_html_head();
 deline_show_header();
 ?>
@@ -36,18 +39,20 @@ deline_show_header();
 						<div class="header">应用幻灯片</div>
 						<div class="body">
 							<ul class="list-inline">
-								<li><img class="img-responsive"
+									<li><img class="powerpoint"
 									src="static/images/avatar-default.png" /></li>
-								<li><img class="img-responsive"
+									<li><img class="powerpoint"
 									src="static/images/avatar-default.png" /></li>
-								<li><img class="img-responsive"
+									<li><img class="powerpoint"
 									src="static/images/avatar-default.png" /></li>
-								<li><img class="img-responsive"
+									<li><img class="powerpoint"
+									src="static/images/avatar-default.png" /></li>
+									<li><img class="powerpoint"
 									src="static/images/avatar-default.png" /></li>
 							</ul>
-						</div>
-						<div class="scrollbar">
-							<div></div>
+							<div class="scrollbar-track">
+								<div class="scrollbar-thumb"></div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -122,11 +127,6 @@ deline_show_header();
 		</div>
 	</div>
 </div>
-<style type="text/css">
-@import url("static/css/apps-details.css");
-</style>
-<script type="text/javascript" src="static/js/app-append-preview.js">
-</script>
 <?php
 deline_show_footer();
 deline_show_html_foot();
