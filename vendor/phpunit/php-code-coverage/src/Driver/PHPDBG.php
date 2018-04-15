@@ -7,6 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace SebastianBergmann\CodeCoverage\Driver;
 
 use SebastianBergmann\CodeCoverage\RuntimeException;
@@ -18,18 +19,21 @@ use SebastianBergmann\CodeCoverage\RuntimeException;
  */
 class PHPDBG implements Driver
 {
-
     /**
      * Constructor.
      */
     public function __construct()
     {
         if (PHP_SAPI !== 'phpdbg') {
-            throw new RuntimeException('This driver requires the PHPDBG SAPI');
+            throw new RuntimeException(
+                'This driver requires the PHPDBG SAPI'
+            );
         }
-        
-        if (! \function_exists('phpdbg_start_oplog')) {
-            throw new RuntimeException('This build of PHPDBG does not support code coverage');
+
+        if (!\function_exists('phpdbg_start_oplog')) {
+            throw new RuntimeException(
+                'This build of PHPDBG does not support code coverage'
+            );
         }
     }
 
@@ -51,31 +55,34 @@ class PHPDBG implements Driver
     public function stop()
     {
         static $fetchedLines = [];
-        
+
         $dbgData = phpdbg_end_oplog();
-        
+
         if ($fetchedLines == []) {
             $sourceLines = phpdbg_get_executable();
         } else {
-            $newFiles = \array_diff(\get_included_files(), \array_keys($fetchedLines));
-            
+            $newFiles = \array_diff(
+                \get_included_files(),
+                \array_keys($fetchedLines)
+            );
+
             if ($newFiles) {
-                $sourceLines = phpdbg_get_executable([
-                    'files' => $newFiles
-                ]);
+                $sourceLines = phpdbg_get_executable(
+                    ['files' => $newFiles]
+                );
             } else {
                 $sourceLines = [];
             }
         }
-        
+
         foreach ($sourceLines as $file => $lines) {
             foreach ($lines as $lineNo => $numExecuted) {
                 $sourceLines[$file][$lineNo] = self::LINE_NOT_EXECUTED;
             }
         }
-        
+
         $fetchedLines = \array_merge($fetchedLines, $sourceLines);
-        
+
         return $this->detectExecutedLines($fetchedLines, $dbgData);
     }
 
@@ -98,7 +105,7 @@ class PHPDBG implements Driver
                 }
             }
         }
-        
+
         return $sourceLines;
     }
 }

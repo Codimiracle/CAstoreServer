@@ -3,7 +3,6 @@ use PHPUnit\Framework\TestCase;
 
 class CoverageFunctionParenthesesTest extends TestCase
 {
-
     /**
      * @covers ::globalFunction()
      */

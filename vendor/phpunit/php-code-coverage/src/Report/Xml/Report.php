@@ -7,18 +7,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace SebastianBergmann\CodeCoverage\Report\Xml;
 
 class Report extends File
 {
-
     public function __construct($name)
     {
         $dom = new \DOMDocument();
         $dom->loadXML('<?xml version="1.0" ?><phpunit xmlns="http://schema.phpunit.de/coverage/1.0"><file /></phpunit>');
-        
-        $contextNode = $dom->getElementsByTagNameNS('http://schema.phpunit.de/coverage/1.0', 'file')->item(0);
-        
+
+        $contextNode = $dom->getElementsByTagNameNS(
+            'http://schema.phpunit.de/coverage/1.0',
+            'file'
+        )->item(0);
+
         parent::__construct($contextNode);
         $this->setName($name);
     }
@@ -36,9 +39,13 @@ class Report extends File
 
     public function getFunctionObject($name)
     {
-        $node = $this->getContextNode()->appendChild($this->getDomDocument()
-            ->createElementNS('http://schema.phpunit.de/coverage/1.0', 'function'));
-        
+        $node = $this->getContextNode()->appendChild(
+            $this->getDomDocument()->createElementNS(
+                'http://schema.phpunit.de/coverage/1.0',
+                'function'
+            )
+        );
+
         return new Method($node, $name);
     }
 
@@ -54,23 +61,32 @@ class Report extends File
 
     private function getUnitObject($tagName, $name)
     {
-        $node = $this->getContextNode()->appendChild($this->getDomDocument()
-            ->createElementNS('http://schema.phpunit.de/coverage/1.0', $tagName));
-        
+        $node = $this->getContextNode()->appendChild(
+            $this->getDomDocument()->createElementNS(
+                'http://schema.phpunit.de/coverage/1.0',
+                $tagName
+            )
+        );
+
         return new Unit($node, $name);
     }
 
     public function getSource()
     {
-        $source = $this->getContextNode()
-            ->getElementsByTagNameNS('http://schema.phpunit.de/coverage/1.0', 'source')
-            ->item(0);
-        
-        if (! $source) {
-            $source = $this->getContextNode()->appendChild($this->getDomDocument()
-                ->createElementNS('http://schema.phpunit.de/coverage/1.0', 'source'));
+        $source = $this->getContextNode()->getElementsByTagNameNS(
+            'http://schema.phpunit.de/coverage/1.0',
+            'source'
+        )->item(0);
+
+        if (!$source) {
+            $source = $this->getContextNode()->appendChild(
+                $this->getDomDocument()->createElementNS(
+                    'http://schema.phpunit.de/coverage/1.0',
+                    'source'
+                )
+            );
         }
-        
+
         return new Source($source);
     }
 }

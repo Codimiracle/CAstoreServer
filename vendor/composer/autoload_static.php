@@ -79,6 +79,7 @@ class ComposerStaticInit487259cdf086031776b6a313113b318f
         'CAstore\\Controller\\AboutController' => __DIR__ . '/../..' . '/src/CAstore/Controller/AboutController.php',
         'CAstore\\Controller\\AppsController' => __DIR__ . '/../..' . '/src/CAstore/Controller/AppsController.php',
         'CAstore\\Controller\\DashboardController' => __DIR__ . '/../..' . '/src/CAstore/Controller/DashboardController.php',
+        'CAstore\\Controller\\FilesController' => __DIR__ . '/../..' . '/src/CAstore/Controller/FilesController.php',
         'CAstore\\Controller\\HomeController' => __DIR__ . '/../..' . '/src/CAstore/Controller/HomeController.php',
         'CAstore\\Model\\DAO\\AppInfoDAO' => __DIR__ . '/../..' . '/src/CAstore/Model/DAO/AppInfoDAO.php',
         'CAstore\\Model\\DAO\\AppInfoDAOImpl' => __DIR__ . '/../..' . '/src/CAstore/Model/DAO/AppInfoDAOImpl.php',

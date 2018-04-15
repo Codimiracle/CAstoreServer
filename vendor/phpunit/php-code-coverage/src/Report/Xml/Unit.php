@@ -7,13 +7,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace SebastianBergmann\CodeCoverage\Report\Xml;
 
 class Unit
 {
-
     /**
-     *
      * @var \DOMElement
      */
     private $contextNode;
@@ -21,7 +20,7 @@ class Unit
     public function __construct(\DOMElement $context, $name)
     {
         $this->contextNode = $context;
-        
+
         $this->setName($name);
     }
 
@@ -44,12 +43,20 @@ class Unit
 
     public function setPackage($full, $package, $sub, $category)
     {
-        $node = $this->contextNode->getElementsByTagNameNS('http://schema.phpunit.de/coverage/1.0', 'package')->item(0);
-        
-        if (! $node) {
-            $node = $this->contextNode->appendChild($this->contextNode->ownerDocument->createElementNS('http://schema.phpunit.de/coverage/1.0', 'package'));
+        $node = $this->contextNode->getElementsByTagNameNS(
+            'http://schema.phpunit.de/coverage/1.0',
+            'package'
+        )->item(0);
+
+        if (!$node) {
+            $node = $this->contextNode->appendChild(
+                $this->contextNode->ownerDocument->createElementNS(
+                    'http://schema.phpunit.de/coverage/1.0',
+                    'package'
+                )
+            );
         }
-        
+
         $node->setAttribute('full', $full);
         $node->setAttribute('name', $package);
         $node->setAttribute('sub', $sub);
@@ -58,19 +65,32 @@ class Unit
 
     public function setNamespace($namespace)
     {
-        $node = $this->contextNode->getElementsByTagNameNS('http://schema.phpunit.de/coverage/1.0', 'namespace')->item(0);
-        
-        if (! $node) {
-            $node = $this->contextNode->appendChild($this->contextNode->ownerDocument->createElementNS('http://schema.phpunit.de/coverage/1.0', 'namespace'));
+        $node = $this->contextNode->getElementsByTagNameNS(
+            'http://schema.phpunit.de/coverage/1.0',
+            'namespace'
+        )->item(0);
+
+        if (!$node) {
+            $node = $this->contextNode->appendChild(
+                $this->contextNode->ownerDocument->createElementNS(
+                    'http://schema.phpunit.de/coverage/1.0',
+                    'namespace'
+                )
+            );
         }
-        
+
         $node->setAttribute('name', $namespace);
     }
 
     public function addMethod($name)
     {
-        $node = $this->contextNode->appendChild($this->contextNode->ownerDocument->createElementNS('http://schema.phpunit.de/coverage/1.0', 'method'));
-        
+        $node = $this->contextNode->appendChild(
+            $this->contextNode->ownerDocument->createElementNS(
+                'http://schema.phpunit.de/coverage/1.0',
+                'method'
+            )
+        );
+
         return new Method($node, $name);
     }
 }

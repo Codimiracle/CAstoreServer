@@ -7,45 +7,39 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace SebastianBergmann\CodeCoverage\Report\Xml;
 
 use SebastianBergmann\CodeCoverage\Util;
 
 class Totals
 {
-
     /**
-     *
      * @var \DOMNode
      */
     private $container;
 
     /**
-     *
      * @var \DOMElement
      */
     private $linesNode;
 
     /**
-     *
      * @var \DOMElement
      */
     private $methodsNode;
 
     /**
-     *
      * @var \DOMElement
      */
     private $functionsNode;
 
     /**
-     *
      * @var \DOMElement
      */
     private $classesNode;
 
     /**
-     *
      * @var \DOMElement
      */
     private $traitsNode;
@@ -53,18 +47,33 @@ class Totals
     public function __construct(\DOMElement $container)
     {
         $this->container = $container;
-        $dom = $container->ownerDocument;
-        
-        $this->linesNode = $dom->createElementNS('http://schema.phpunit.de/coverage/1.0', 'lines');
-        
-        $this->methodsNode = $dom->createElementNS('http://schema.phpunit.de/coverage/1.0', 'methods');
-        
-        $this->functionsNode = $dom->createElementNS('http://schema.phpunit.de/coverage/1.0', 'functions');
-        
-        $this->classesNode = $dom->createElementNS('http://schema.phpunit.de/coverage/1.0', 'classes');
-        
-        $this->traitsNode = $dom->createElementNS('http://schema.phpunit.de/coverage/1.0', 'traits');
-        
+        $dom             = $container->ownerDocument;
+
+        $this->linesNode = $dom->createElementNS(
+            'http://schema.phpunit.de/coverage/1.0',
+            'lines'
+        );
+
+        $this->methodsNode = $dom->createElementNS(
+            'http://schema.phpunit.de/coverage/1.0',
+            'methods'
+        );
+
+        $this->functionsNode = $dom->createElementNS(
+            'http://schema.phpunit.de/coverage/1.0',
+            'functions'
+        );
+
+        $this->classesNode = $dom->createElementNS(
+            'http://schema.phpunit.de/coverage/1.0',
+            'classes'
+        );
+
+        $this->traitsNode = $dom->createElementNS(
+            'http://schema.phpunit.de/coverage/1.0',
+            'traits'
+        );
+
         $container->appendChild($this->linesNode);
         $container->appendChild($this->methodsNode);
         $container->appendChild($this->functionsNode);
@@ -84,34 +93,49 @@ class Totals
         $this->linesNode->setAttribute('code', $ncloc);
         $this->linesNode->setAttribute('executable', $executable);
         $this->linesNode->setAttribute('executed', $executed);
-        $this->linesNode->setAttribute('percent', $executable === 0 ? 0 : \sprintf('%01.2F', Util::percent($executed, $executable, false)));
+        $this->linesNode->setAttribute(
+            'percent',
+            $executable === 0 ? 0 : \sprintf('%01.2F', Util::percent($executed, $executable, false))
+        );
     }
 
     public function setNumClasses($count, $tested)
     {
         $this->classesNode->setAttribute('count', $count);
         $this->classesNode->setAttribute('tested', $tested);
-        $this->classesNode->setAttribute('percent', $count === 0 ? 0 : \sprintf('%01.2F', Util::percent($tested, $count, false)));
+        $this->classesNode->setAttribute(
+            'percent',
+            $count === 0 ? 0 : \sprintf('%01.2F', Util::percent($tested, $count, false))
+        );
     }
 
     public function setNumTraits($count, $tested)
     {
         $this->traitsNode->setAttribute('count', $count);
         $this->traitsNode->setAttribute('tested', $tested);
-        $this->traitsNode->setAttribute('percent', $count === 0 ? 0 : \sprintf('%01.2F', Util::percent($tested, $count, false)));
+        $this->traitsNode->setAttribute(
+            'percent',
+            $count === 0 ? 0 : \sprintf('%01.2F', Util::percent($tested, $count, false))
+        );
     }
 
     public function setNumMethods($count, $tested)
     {
         $this->methodsNode->setAttribute('count', $count);
         $this->methodsNode->setAttribute('tested', $tested);
-        $this->methodsNode->setAttribute('percent', $count === 0 ? 0 : \sprintf('%01.2F', Util::percent($tested, $count, false)));
+        $this->methodsNode->setAttribute(
+            'percent',
+            $count === 0 ? 0 : \sprintf('%01.2F', Util::percent($tested, $count, false))
+        );
     }
 
     public function setNumFunctions($count, $tested)
     {
         $this->functionsNode->setAttribute('count', $count);
         $this->functionsNode->setAttribute('tested', $tested);
-        $this->functionsNode->setAttribute('percent', $count === 0 ? 0 : \sprintf('%01.2F', Util::percent($tested, $count, false)));
+        $this->functionsNode->setAttribute(
+            'percent',
+            $count === 0 ? 0 : \sprintf('%01.2F', Util::percent($tested, $count, false))
+        );
     }
 }

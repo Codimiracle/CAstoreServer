@@ -11,6 +11,7 @@ return array(
     'CAstore\\Controller\\AboutController' => $baseDir . '/src/CAstore/Controller/AboutController.php',
     'CAstore\\Controller\\AppsController' => $baseDir . '/src/CAstore/Controller/AppsController.php',
     'CAstore\\Controller\\DashboardController' => $baseDir . '/src/CAstore/Controller/DashboardController.php',
+    'CAstore\\Controller\\FilesController' => $baseDir . '/src/CAstore/Controller/FilesController.php',
     'CAstore\\Controller\\HomeController' => $baseDir . '/src/CAstore/Controller/HomeController.php',
     'CAstore\\Model\\DAO\\AppInfoDAO' => $baseDir . '/src/CAstore/Model/DAO/AppInfoDAO.php',
     'CAstore\\Model\\DAO\\AppInfoDAOImpl' => $baseDir . '/src/CAstore/Model/DAO/AppInfoDAOImpl.php',

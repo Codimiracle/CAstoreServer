@@ -6,7 +6,6 @@ use PHPUnit\Framework\TestCase;
  */
 class NamespaceCoverageCoversClassTest extends TestCase
 {
-
     /**
      * @covers ::privateMethod
      * @covers ::protectedMethod
@@ -17,7 +16,7 @@ class NamespaceCoverageCoversClassTest extends TestCase
      */
     public function testSomething()
     {
-        $o = new Foo\CoveredClass();
+        $o = new Foo\CoveredClass;
         $o->publicMethod();
     }
 }

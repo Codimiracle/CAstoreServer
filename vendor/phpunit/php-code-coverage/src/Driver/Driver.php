@@ -7,6 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace SebastianBergmann\CodeCoverage\Driver;
 
 /**
@@ -14,9 +15,7 @@ namespace SebastianBergmann\CodeCoverage\Driver;
  */
 interface Driver
 {
-
     /**
-     *
      * @var int
      *
      * @see http://xdebug.org/docs/code_coverage
@@ -24,20 +23,18 @@ interface Driver
     const LINE_EXECUTED = 1;
 
     /**
-     *
      * @var int
      *
      * @see http://xdebug.org/docs/code_coverage
      */
-    const LINE_NOT_EXECUTED = - 1;
+    const LINE_NOT_EXECUTED = -1;
 
     /**
-     *
      * @var int
      *
      * @see http://xdebug.org/docs/code_coverage
      */
-    const LINE_NOT_EXECUTABLE = - 2;
+    const LINE_NOT_EXECUTABLE = -2;
 
     /**
      * Start collection of code coverage information.

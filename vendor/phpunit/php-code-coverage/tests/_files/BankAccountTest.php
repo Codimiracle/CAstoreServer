@@ -5,12 +5,11 @@ use PHPUnit\Framework\TestCase;
 
 class BankAccountTest extends TestCase
 {
-
     protected $ba;
 
     protected function setUp()
     {
-        $this->ba = new BankAccount();
+        $this->ba = new BankAccount;
     }
 
     /**
@@ -30,10 +29,10 @@ class BankAccountTest extends TestCase
             $this->ba->withdrawMoney(1);
         } catch (RuntimeException $e) {
             $this->assertEquals(0, $this->ba->getBalance());
-            
+
             return;
         }
-        
+
         $this->fail();
     }
 
@@ -43,13 +42,13 @@ class BankAccountTest extends TestCase
     public function testBalanceCannotBecomeNegative2()
     {
         try {
-            $this->ba->depositMoney(- 1);
+            $this->ba->depositMoney(-1);
         } catch (RuntimeException $e) {
             $this->assertEquals(0, $this->ba->getBalance());
-            
+
             return;
         }
-        
+
         $this->fail();
     }
 

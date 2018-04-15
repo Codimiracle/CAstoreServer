@@ -7,21 +7,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace SebastianBergmann\CodeCoverage;
 
 use PHPUnit\Framework\TestCase;
 
 class FilterTest extends TestCase
 {
-
     /**
-     *
      * @var Filter
      */
     private $filter;
 
     /**
-     *
      * @var array
      */
     private $files = [];
@@ -29,7 +27,7 @@ class FilterTest extends TestCase
     protected function setUp()
     {
         $this->filter = unserialize('O:37:"SebastianBergmann\CodeCoverage\Filter":0:{}');
-        
+
         $this->files = [
             TEST_FILES_PATH . 'BankAccount.php',
             TEST_FILES_PATH . 'BankAccountTest.php',
@@ -82,10 +80,11 @@ class FilterTest extends TestCase
     public function testAddingAFileToTheWhitelistWorks()
     {
         $this->filter->addFileToWhitelist($this->files[0]);
-        
-        $this->assertEquals([
-            $this->files[0]
-        ], $this->filter->getWhitelist());
+
+        $this->assertEquals(
+            [$this->files[0]],
+            $this->filter->getWhitelist()
+        );
     }
 
     /**
@@ -96,22 +95,22 @@ class FilterTest extends TestCase
     {
         $this->filter->addFileToWhitelist($this->files[0]);
         $this->filter->removeFileFromWhitelist($this->files[0]);
-        
+
         $this->assertEquals([], $this->filter->getWhitelist());
     }
 
     /**
-     * @covers SebastianBergmann\CodeCoverage\Filter::addDirectoryToWhitelist
-     * @covers SebastianBergmann\CodeCoverage\Filter::getWhitelist
+     * @covers  SebastianBergmann\CodeCoverage\Filter::addDirectoryToWhitelist
+     * @covers  SebastianBergmann\CodeCoverage\Filter::getWhitelist
      * @depends testAddingAFileToTheWhitelistWorks
      */
     public function testAddingADirectoryToTheWhitelistWorks()
     {
         $this->filter->addDirectoryToWhitelist(TEST_FILES_PATH);
-        
+
         $whitelist = $this->filter->getWhitelist();
         sort($whitelist);
-        
+
         $this->assertEquals($this->files, $whitelist);
     }
 
@@ -121,28 +120,31 @@ class FilterTest extends TestCase
      */
     public function testAddingFilesToTheWhitelistWorks()
     {
-        $facade = new \File_Iterator_Facade();
-        
-        $files = $facade->getFilesAsArray(TEST_FILES_PATH, $suffixes = '.php');
-        
+        $facade = new \File_Iterator_Facade;
+
+        $files = $facade->getFilesAsArray(
+            TEST_FILES_PATH,
+            $suffixes = '.php'
+        );
+
         $this->filter->addFilesToWhitelist($files);
-        
+
         $whitelist = $this->filter->getWhitelist();
         sort($whitelist);
-        
+
         $this->assertEquals($this->files, $whitelist);
     }
 
     /**
-     * @covers SebastianBergmann\CodeCoverage\Filter::removeDirectoryFromWhitelist
-     * @covers SebastianBergmann\CodeCoverage\Filter::getWhitelist
+     * @covers  SebastianBergmann\CodeCoverage\Filter::removeDirectoryFromWhitelist
+     * @covers  SebastianBergmann\CodeCoverage\Filter::getWhitelist
      * @depends testAddingADirectoryToTheWhitelistWorks
      */
     public function testRemovingADirectoryFromTheWhitelistWorks()
     {
         $this->filter->addDirectoryToWhitelist(TEST_FILES_PATH);
         $this->filter->removeDirectoryFromWhitelist(TEST_FILES_PATH);
-        
+
         $this->assertEquals([], $this->filter->getWhitelist());
     }
 

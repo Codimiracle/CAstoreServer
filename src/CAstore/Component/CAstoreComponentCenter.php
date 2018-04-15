@@ -14,6 +14,7 @@ use Deline\Component\AbstractComponentCenter;
 use CAstore\Service\FileServiceImpl;
 use CAstore\Model\DAO\FileInfoDAOImpl;
 use CAstore\Controller\DashboardController;
+use CAstore\Controller\FilesController;
 
 class CAstoreComponentCenter extends AbstractComponentCenter
 {
@@ -26,6 +27,7 @@ class CAstoreComponentCenter extends AbstractComponentCenter
             "Home" => HomeController::class,
             "Apps" => AppsController::class,
             "User" => UserController::class,
+            "Files" => FilesController::class,
             "System" => DashboardController::class
         )));
         

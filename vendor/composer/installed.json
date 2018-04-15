@@ -6,13 +6,13 @@
         "source": {
             "type": "git",
             "url": "https://github.com/codimiracle/deline.git",
-            "reference": "edf9282116fc93df983101eec89a00c5d1592411"
+            "reference": "0d89dbf9aeaf4af35930ecd6a5c77c6b4e593107"
         },
         "require": {
             "monolog/monolog": "^1.23",
             "php": ">5.4"
         },
-        "time": "2018-04-06T07:26:33+00:00",
+        "time": "2018-04-14T03:28:37+00:00",
         "type": "library",
         "installation-source": "source",
         "autoload": {
@@ -545,17 +545,17 @@
     },
     {
         "name": "phpunit/php-code-coverage",
-        "version": "5.3.0",
-        "version_normalized": "5.3.0.0",
+        "version": "5.3.2",
+        "version_normalized": "5.3.2.0",
         "source": {
             "type": "git",
             "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-            "reference": "661f34d0bd3f1a7225ef491a70a020ad23a057a1"
+            "reference": "c89677919c5dd6d3b3852f230a663118762218ac"
         },
         "dist": {
             "type": "zip",
-            "url": "https://files.phpcomposer.com/files/sebastianbergmann/php-code-coverage/661f34d0bd3f1a7225ef491a70a020ad23a057a1.zip",
-            "reference": "661f34d0bd3f1a7225ef491a70a020ad23a057a1",
+            "url": "https://files.phpcomposer.com/files/sebastianbergmann/php-code-coverage/c89677919c5dd6d3b3852f230a663118762218ac.zip",
+            "reference": "c89677919c5dd6d3b3852f230a663118762218ac",
             "shasum": ""
         },
         "require": {
@@ -576,7 +576,7 @@
         "suggest": {
             "ext-xdebug": "^2.5.5"
         },
-        "time": "2017-12-06T09:29:45+00:00",
+        "time": "2018-04-06T15:36:58+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
