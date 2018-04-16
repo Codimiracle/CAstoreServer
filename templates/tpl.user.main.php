@@ -2,7 +2,7 @@
 deline_show_html_head();
 deline_show_header();
 
-$userdata = $parameters["userdata"];
+$userdata = deline_parameter_get("userdata");
 ?>
 
 <div class="container-fluid">
@@ -11,7 +11,7 @@ $userdata = $parameters["userdata"];
 			<div class="user-base-view">
 				<div class="avatar">
 					<img class="img-responsive"
-						src="<?= $userdata["avatar"] ? $userdata["avatar"] :  "./static/images/avatar-default.png" ?>">
+						src="<?= isset($userdata["avatar"]) ? $userdata["avatar"] :  "./static/images/avatar-default.png" ?>">
 				</div>
 				<div class="name">
 					<strong><?= $userdata["nickname"] ?>(<?= $userdata["username"] ?>)</strong>

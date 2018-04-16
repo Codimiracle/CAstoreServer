@@ -1,6 +1,4 @@
 <?php
-use Deline\Component\Security;
-
 deline_load_stylesheet("static/css/app-details.css");
 deline_load_stylesheet("static/css/app-powerpoint.css");
 deline_load_script("static/js/app-details.js");
@@ -8,9 +6,9 @@ deline_load_script("static/js/scrollbar.js");
 deline_show_html_head();
 deline_show_header();
 
-$appInfo = $parameters["app_info"];
-$appPowerpoint = $parameters["app_powerpoint"]; 
-$appStatics = $parameters["app_statics"];
+$appInfo = deline_parameter_get("app_info");
+$appPowerpoint = deline_parameter_get("app_powerpoint");
+$appStatics = deline_parameter_get("app_statics");
 
 ?>
 <div class="container-fluid">
@@ -25,11 +23,11 @@ $appStatics = $parameters["app_statics"];
 				<div class="col-md-8">
 					<div class="app-name">
 						<div class="header">应用名称</div>
-						<div class="body"><?= Security::escapeHTML($appInfo->getName()) ?></div>
+						<div class="body"><?= deline_show_text($appInfo->getName()) ?></div>
 					</div>
 					<div class="app-developer">
 						<div class="header">开发者</div>
-						<div class="body"><?= Security::escapeHTML($appInfo->getDeveloper()) ?></div>
+						<div class="body"><?= deline_show_text($appInfo->getDeveloper()) ?></div>
 					</div>
 					<div class="app-statics">
 						<div class="header">应用统计</div>
@@ -64,7 +62,7 @@ $appStatics = $parameters["app_statics"];
 				<div class="col-md-12">
 					<div class="app-description">
 						<div class="header">应用描述</div>
-						<div class="body"><?= Security::escapeHTML($appInfo->getDescription()) ?></div>
+						<div class="body"><?= deline_show_text($appInfo->getDescription()) ?></div>
 					</div>
 				</div>
 			</div>

@@ -8,7 +8,7 @@
 <meta name="email" content="Codimiracle@outlook.com" />
 <meta name="generator" content="CAstore Templating System" />
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-<title><?= $attributes["title"].$attributes["title_system"] ?></title>
+<title><?= deline_attribute_get("title").deline_attribute_get("title_system") ?></title>
 
 <!-- Bootstrap -->
 <link href="static/bootstrap/css/bootstrap.min.css" rel="stylesheet" />

@@ -105,7 +105,7 @@ class UserController extends AbstractController
         if ($this->isSubmit(self::SUBMIT_ID_USER_SIGN_IN)) {
             $username = $_POST["username"];
             $password = $_POST["password"];
-            $verifier = $_POST["verifier"];
+            $verifier = isset($_POST["verifier"]) ? $_POST["verifier"] : null;
             $result = $this->userService->signIn($username, $password);
             if ($result == 1) { // 登录成功
                 $this->view->setPageName("system.info");

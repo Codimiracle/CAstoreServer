@@ -4,7 +4,7 @@ use Deline\Component\Security;
 deline_show_html_head();
 deline_show_header();
 
-$appInfo = $parameters["app_info"];
+$appInfo = deline_parameter_get("app_info");
 ?>
 <div class="container-fluid">
 	<div class="row">

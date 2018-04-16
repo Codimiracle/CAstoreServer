@@ -1,5 +1,5 @@
 <?php
-$userdata = isset($session["logged_user"]) ? $session["logged_user"] : null;
+$userdata = deline_session_get("logged_user");
 ?>
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
