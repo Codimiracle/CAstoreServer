@@ -10,14 +10,23 @@
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 <title><?= deline_attribute_get("title").deline_attribute_get("title_system") ?></title>
 
+<?php 
+$head = $GLOBALS["head_additional"];
+if (is_null($head)) {
+    echo <<<TERMINATE
 <!-- Bootstrap -->
 <link href="static/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 <!-- Bootstrap Theme-->
 <link href="static/bootstrap/css/bootstrap-thmeme.min.css" />
 <!-- Deline -->
 <link href="static/css/oxygen-card-ui.css" rel="stylesheet" />
+TERMINATE;
+} else {
+    echo $head;
+}
+?>
 
-<!-- Customs  -->
+<!-- Dynamic  -->
 <?php foreach ($GLOBALS["stylesheets"] as $stylesheet): ?>
 <link href="<?= $stylesheet ?>" rel="stylesheet">
 <?php endforeach; ?>

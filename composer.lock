@@ -12,7 +12,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/codimiracle/deline.git",
-                "reference": "1c7b00dbf0729b8aa6bad9133620ee8a7b366fa0"
+                "reference": "7be569afe27757169f6a19a2a2d21d2b0ec99245"
             },
             "require": {
                 "monolog/monolog": "^1.23",
@@ -34,7 +34,7 @@
                 }
             ],
             "description": "this is a lightweight php framework.",
-            "time": "2018-04-16T09:37:14+00:00"
+            "time": "2018-04-17T01:39:04+00:00"
         },
         {
             "name": "monolog/monolog",

@@ -34,6 +34,7 @@ class AppsController extends AbstractEntityController
         $this->appService = $this->container->getComponentCenter()->getService("AppService");
         $this->fileService = $this->container->getComponentCenter()->getService("FileService");
         $this->uploadService = $this->container->getComponentCenter()->getService("UploadService");
+        $this->commentService = $this->container->getComponentCenter()->getService("CommentService");
     }
 
     public function onControllerEnd()

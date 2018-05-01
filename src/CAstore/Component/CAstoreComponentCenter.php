@@ -15,6 +15,7 @@ use CAstore\Service\FileServiceImpl;
 use CAstore\Model\DAO\FileInfoDAOImpl;
 use CAstore\Controller\DashboardController;
 use CAstore\Controller\FilesController;
+use CAstore\Controller\UploadController;
 
 class CAstoreComponentCenter extends AbstractComponentCenter
 {
@@ -28,7 +29,8 @@ class CAstoreComponentCenter extends AbstractComponentCenter
             "Apps" => AppsController::class,
             "User" => UserController::class,
             "Files" => FilesController::class,
-            "System" => DashboardController::class
+            "System" => DashboardController::class,
+            "Upload" => UploadController::class
         )));
         
         $this->setDAOs(array(
