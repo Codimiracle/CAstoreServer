@@ -32,7 +32,7 @@ deline_show_header();
 								<img class="logo" src="static/images/avatar-default.png">
 							</div>
 							<div class="app-details">
-								<h4 class="name"><a href="?node=/Apps/1">Hello App</a></h4>
+								<h4 class="name"><a href="<?= deline_link("/Apps/1") ?>">Hello App</a></h4>
 								<div class="statics">
 									<span>123142</span> <span>23MB</span>
 								</div>
