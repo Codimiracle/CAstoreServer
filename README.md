@@ -17,7 +17,7 @@
 - [数据库建设](https://github.com/codimiracle/castore-server/docs/database-guide.md)
 - [Server 端建设](https://github.com/codimiracle/castore-server/docs/server-guide.md)
 - [Client 接口](https://github.com/codimiracle/castore-server/docs/client-guide.md)
-    -示例:[castore-android](https://github.com/codimiracle/castore-android)
+    - 示例:[castore-android](https://github.com/codimiracle/castore-android)
 ### 安装/配置
 - 安装
     - 依赖
