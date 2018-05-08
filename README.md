@@ -13,6 +13,11 @@
 - 完整的 PC 网页体验
 - 完整的 AppStore 体验
 - 提供了客户端访问接口，使用 OkHttp(java) 进行连接即可。
+### 架构
+- [数据库建设](https://github.com/codimiracle/castore-server/docs/database-guide.md)
+- [Server 端建设](https://github.com/codimiracle/castore-server/docs/server-guide.md)
+- [Client 接口](https://github.com/codimiracle/castore-server/docs/client-guide.md)
+    -示例:[castore-android](https://github.com/codimiracle/castore-android)
 ### 安装/配置
 - 安装
     - 依赖
