@@ -1,5 +1,5 @@
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="static/bootstrap/js/jquery-1.12.4.js"></script>
+<script src="static/bootstrap/js/jquery-1.12.4.min.js"></script>
 <?php
 $foot = $GLOBALS["foot_additional"];
 if (!is_null($foot)) {

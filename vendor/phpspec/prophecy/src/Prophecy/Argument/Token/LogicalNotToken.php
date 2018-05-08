@@ -3,11 +3,12 @@
 /*
  * This file is part of the Prophecy.
  * (c) Konstantin Kudryashov <ever.zet@gmail.com>
- * Marcello Duarte <marcello.duarte@gmail.com>
+ *     Marcello Duarte <marcello.duarte@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Prophecy\Argument\Token;
 
 /**
@@ -17,26 +18,22 @@ namespace Prophecy\Argument\Token;
  */
 class LogicalNotToken implements TokenInterface
 {
-
     /** @var \Prophecy\Argument\Token\TokenInterface  */
     private $token;
 
     /**
-     *
-     * @param mixed $value
-     *            exact value or token
+     * @param mixed $value exact value or token
      */
     public function __construct($value)
     {
-        $this->token = $value instanceof TokenInterface ? $value : new ExactValueToken($value);
+        $this->token = $value instanceof TokenInterface? $value : new ExactValueToken($value);
     }
 
     /**
      * Scores 4 when preset token does not match the argument.
      *
-     * @param
-     *            $argument
-     *            
+     * @param $argument
+     *
      * @return bool|int
      */
     public function scoreArgument($argument)

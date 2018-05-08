@@ -17,7 +17,7 @@ if (is_null($head)) {
 <!-- Bootstrap -->
 <link href="static/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 <!-- Bootstrap Theme-->
-<link href="static/bootstrap/css/bootstrap-thmeme.min.css" />
+<!-- <link href="static/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" /> -->
 <!-- Deline -->
 <link href="static/css/oxygen-card-ui.css" rel="stylesheet" />
 TERMINATE;

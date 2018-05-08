@@ -3,11 +3,12 @@
 /*
  * This file is part of the Prophecy.
  * (c) Konstantin Kudryashov <ever.zet@gmail.com>
- * Marcello Duarte <marcello.duarte@gmail.com>
+ *     Marcello Duarte <marcello.duarte@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Prophecy\Doubler\Generator\Node;
 
 use Prophecy\Doubler\Generator\TypeHintReference;
@@ -20,35 +21,25 @@ use Prophecy\Exception\InvalidArgumentException;
  */
 class MethodNode
 {
-
     private $name;
-
     private $code;
-
     private $visibility = 'public';
-
     private $static = false;
-
     private $returnsReference = false;
-
     private $returnType;
-
     private $nullableReturnType = false;
 
     /**
-     *
      * @var ArgumentNode[]
      */
     private $arguments = array();
 
     /**
-     *
      * @var TypeHintReference
      */
     private $typeHintReference;
 
     /**
-     *
      * @param string $name
      * @param string $code
      */
@@ -65,21 +56,18 @@ class MethodNode
     }
 
     /**
-     *
      * @param string $visibility
      */
     public function setVisibility($visibility)
     {
         $visibility = strtolower($visibility);
-        
-        if (! in_array($visibility, array(
-            'public',
-            'private',
-            'protected'
-        ))) {
-            throw new InvalidArgumentException(sprintf('`%s` method visibility is not supported.', $visibility));
+
+        if (!in_array($visibility, array('public', 'private', 'protected'))) {
+            throw new InvalidArgumentException(sprintf(
+                '`%s` method visibility is not supported.', $visibility
+            ));
         }
-        
+
         $this->visibility = $visibility;
     }
 
@@ -114,7 +102,6 @@ class MethodNode
     }
 
     /**
-     *
      * @return ArgumentNode[]
      */
     public function getArguments()
@@ -128,7 +115,6 @@ class MethodNode
     }
 
     /**
-     *
      * @param string $type
      */
     public function setReturnType($type = null)
@@ -141,12 +127,14 @@ class MethodNode
             'double' => 'float',
             'real' => 'float',
             'boolean' => 'bool',
-            'integer' => 'int'
+            'integer' => 'int',
         );
         if (isset($typeMap[$type])) {
             $type = $typeMap[$type];
         }
-        $this->returnType = $this->typeHintReference->isBuiltInReturnTypeHint($type) ? $type : '\\' . ltrim($type, '\\');
+        $this->returnType = $this->typeHintReference->isBuiltInReturnTypeHint($type) ?
+            $type :
+            '\\' . ltrim($type, '\\');
     }
 
     public function getReturnType()
@@ -155,7 +143,6 @@ class MethodNode
     }
 
     /**
-     *
      * @param bool $bool
      */
     public function setNullableReturnType($bool = true)
@@ -164,7 +151,6 @@ class MethodNode
     }
 
     /**
-     *
      * @return bool
      */
     public function hasNullableReturnType()
@@ -173,7 +159,6 @@ class MethodNode
     }
 
     /**
-     *
      * @param string $code
      */
     public function setCode($code)
@@ -183,29 +168,31 @@ class MethodNode
 
     public function getCode()
     {
-        if ($this->returnsReference) {
+        if ($this->returnsReference)
+        {
             return "throw new \Prophecy\Exception\Doubler\ReturnByReferenceException('Returning by reference not supported', get_class(\$this), '{$this->name}');";
         }
-        
+
         return (string) $this->code;
     }
 
     public function useParentCode()
     {
-        $this->code = sprintf('return parent::%s(%s);', $this->getName(), implode(', ', array_map(array(
-            $this,
-            'generateArgument'
-        ), $this->arguments)));
+        $this->code = sprintf(
+            'return parent::%s(%s);', $this->getName(), implode(', ',
+                array_map(array($this, 'generateArgument'), $this->arguments)
+            )
+        );
     }
 
     private function generateArgument(ArgumentNode $arg)
     {
-        $argument = '$' . $arg->getName();
-        
+        $argument = '$'.$arg->getName();
+
         if ($arg->isVariadic()) {
-            $argument = '...' . $argument;
+            $argument = '...'.$argument;
         }
-        
+
         return $argument;
     }
 }

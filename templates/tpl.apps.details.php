@@ -46,8 +46,7 @@ $appStatics = deline_parameter_get("app_statics");
 						<div class="body">
 							<ul class="list-inline">
 								<?php foreach ($appPowerpoint as $powerpoint) { ?>
-									<li><img class="powerpoint"
-									src="<?= $powerpoint->getPath() ?>" /></li>
+									<li><img class="powerpoint" src="<?= $powerpoint->getPath() ?>" /></li>
 								<?php } ?>
 							</ul>
 							<div class="scrollbar-track">
@@ -63,6 +62,41 @@ $appStatics = deline_parameter_get("app_statics");
 					<div class="app-description">
 						<div class="header">应用描述</div>
 						<div class="body"><?= deline_show_text($appInfo->getDescription()) ?></div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="app-comments">
+						<div class="header">应用评论</div>
+						<div class="body">
+							<div class="">
+								<ul class="comment-list list-unstyled">
+									<li></li>
+								</ul>
+							</div>
+							<div>
+								<form action="<?= deline_link("/Comment/Append") ?>"
+									method="post">
+									<div class="form-group">
+										<label>话题：</label>
+										<div class="input-group">
+											<div class="input-group-addon">#</div>
+											<input class="form-control" type="text" name="topic" />
+											<div class="input-group-addon">#</div>
+										</div>
+										<p class="help-block">例如：界面不好看</p>
+									</div>
+									<div class="form-group">
+										<label>内容：</label>
+										<textarea class="form-control" name="comment" rows="3"></textarea>
+									</div>
+									<div class="from-group">
+										<button class="btn btn-default" type="submit">评论</button>
+									</div>
+								</form>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
