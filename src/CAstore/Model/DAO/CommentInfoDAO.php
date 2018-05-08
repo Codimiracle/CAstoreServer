@@ -6,5 +6,5 @@ use Deline\Model\DAO\DataAccessObject;
 interface CommentInfoDAO extends DataAccessObject
 {
 
-    public function queryByContentId($content_id);
+    public function queryByTargetId($targetId);
 }

@@ -62,5 +62,10 @@ class AppServiceImpl implements AppService
     {
         return $this->dao->getLastInsertedId();
     }
+    public function queryByPackage($package)
+    {
+        return $this->dao->queryByPackage($package);
+    }
+
 
 }

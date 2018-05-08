@@ -1,4 +1,7 @@
 <?php
+
+$renderer = array();
+$renderer["client_user_agent"] = "CAstore/1.0";
 /**
  * 网站设定
  */
