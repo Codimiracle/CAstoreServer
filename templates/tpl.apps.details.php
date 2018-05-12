@@ -10,8 +10,8 @@ deline_show_header();
 $appInfo = deline_parameter_get("appInfo");
 $appPowerpoint = deline_parameter_get("appPowerpoints");
 $appStatics = deline_parameter_get("appStatics");
-$appIcon = deline_parameter_get("appIcon");
 $appComments = deline_parameter_get("appComments");
+$appIcon = deline_parameter_get("appIcon")
 ?>
 <div class="container-fluid">
 	<div class="row">
