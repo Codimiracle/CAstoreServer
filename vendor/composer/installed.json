@@ -6,13 +6,13 @@
         "source": {
             "type": "git",
             "url": "https://github.com/codimiracle/deline.git",
-            "reference": "332e98e208e5a33826ab654c587a15a11433f793"
+            "reference": "e5cc6a5132a6fe336bcf9386b8773cfa773449a2"
         },
         "require": {
             "monolog/monolog": "^1.23",
             "php": ">5.4"
         },
-        "time": "2018-05-12T06:00:12+00:00",
+        "time": "2018-05-12T07:22:45+00:00",
         "type": "library",
         "installation-source": "source",
         "autoload": {

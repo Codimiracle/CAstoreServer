@@ -71,6 +71,12 @@ deline_show_header();
 				<div class="col-md-12">
 					<form method="post" role="form" enctype="multipart/form-data">
 						<div class="form-group">
+							<label for="icon">应用图标
+								<input type="file" name="icon" />
+							</label>
+							<p class="help-block">用于应用的第一印象</p>
+						</div>
+						<div class="form-group">
 							<label for="name">应用名称</label> <input id="name" type="text"
 								class="form-control" name="name" />
 							<p class="help-block">应用的名字</p>

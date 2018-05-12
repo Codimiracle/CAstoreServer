@@ -7,10 +7,11 @@ deline_load_script("static/js/scrollbar.js");
 deline_show_html_head();
 deline_show_header();
 
-$appInfo = deline_parameter_get("app_info");
-$appPowerpoint = deline_parameter_get("app_powerpoint");
-$appStatics = deline_parameter_get("app_statics");
-$appComments = deline_parameter_get("app_comments");
+$appInfo = deline_parameter_get("appInfo");
+$appPowerpoint = deline_parameter_get("appPowerpoints");
+$appStatics = deline_parameter_get("appStatics");
+$appIcon = deline_parameter_get("appIcon");
+$appComments = deline_parameter_get("appComments");
 ?>
 <div class="container-fluid">
 	<div class="row">
