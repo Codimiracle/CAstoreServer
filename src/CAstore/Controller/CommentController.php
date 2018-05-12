@@ -1,30 +1,58 @@
 <?php
 namespace CAstore\Controller;
 
-use Deline\Controller\AbstractController;
+use CAstore\Model\Entity\CommentInfo;
+use CAstore\Service\CommentService;
+use CAstore\Service\UserService;
+use Deline\Controller\AbstractEntityController;
 
-class CommentController extends AbstractController
+
+class CommentController extends AbstractEntityController
 {
+
+    /** @var UserService */
+    private $userService;
+
+    /** @var CommentService */
+    private $commentService;
 
     public function onControllerStart()
     {
-        $this->attachAction("/\\/Append$|\\//", "onCommentAppend");
-        $this->attachAction("/\\/Edit$|\\//", "onCommentEdit");
-        $this->attachAction("/\\/Delete$|\\//", "onCommentDelete");
+        parent::onControllerStart();
+        $this->userService = $this->getContainer()
+            ->getComponentCenter()
+            ->getService("UserService");
+            $this->commentService = $this->getContainer()
+            ->getComponentCenter()
+            ->getService("CommentService");
     }
-    
-    public function onCommentAppend() {
-        
-    }
-    
-    public function onCommentEdit() {
-        
-    }
-    public function onCommentDelete() {
-        
-    }
-    public function onControllerEnd()
+
+    public function onEntityDelete()
     {}
 
+    public function onEntityAppend()
+    {
+        $this->getContainer()
+            ->getAuthorization()
+            ->check("user");
+        $commentInfo = new CommentInfo();
+        $commentInfo->setTitle($_POST["title"]);
+        $commentInfo->setContent($_POST["content"]);
+        $commentInfo->setTargetId($_POST["aid"]);
+        $commentInfo->setUserId($this->userService->getUserInfo()
+            ->getId());
+        $this->commentService->append($commentInfo);
+        $this->view->setMessage("info", "评论成功！");
+        $this->view->setPageName("system.info");
+    }
+
+    public function onEntityDetails()
+    {}
+
+    public function onEntityEdit()
+    {}
+
+    public function onControllerEnd()
+    {}
 }
 
