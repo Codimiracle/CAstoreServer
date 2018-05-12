@@ -10,7 +10,11 @@ class CommentInfo implements Entity
 
     public $targetId;
 
+    public $title;
+    
     public $content;
+    
+    public $contentId;
 
     public $createdTime;
 
@@ -43,6 +47,26 @@ class CommentInfo implements Entity
         $this->targetId = $targetId;
     }
 
+    
+    /**
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param string $title
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
+
+    public function getContentId() {
+        return $this->contentId;
+    }
     /**
      *
      * @return mixed

@@ -2,13 +2,13 @@
 namespace CAstore\Controller;
 
 use CAstore\Model\Entity\AppInfo;
-use CAstore\Model\Entity\FileInfo;
 use CAstore\Service\AppService;
-use CAstore\Service\FileService;
 use CAstore\Validator\AppsAppendingValidator;
 use CAstore\Validator\AppsEditingValidator;
 use Deline\Component\PageNotFoundException;
 use Deline\Controller\AbstractEntityController;
+use Deline\Service\FileService;
+use Deline\Model\Entity\FileInfo;
 use Deline\Service\UploadService;
 
 class AppsController extends AbstractEntityController
@@ -71,11 +71,21 @@ class AppsController extends AbstractEntityController
                     $appContentId = $this->appService->getLastInsertedId();
                     
                     // 处理文件上传
+                    $successful = true;
+                    $info = $this->uploadService->getUploadInfoGroup("icon");
+                    if ($info) {
+                        if (count($info) == 1) {
+                            
+                        } else {
+                            
+                        }
+                    }
                     $infos = $this->uploadService->getUploadInfoGroup(self::POWERPOINT_FIELD);
                     $dir = getcwd() . "/" . self::POWERPOINT_DIR;
                     $logger->addDebug("AppsController", array(
                         "upload_image_dir" => $dir
                     ));
+                    
                     $successful = true;
                     foreach ($infos as $info) {
                         if ($info["error"] != 0) {
@@ -187,12 +197,17 @@ class AppsController extends AbstractEntityController
         if ($id != - 1) {
             /** @var AppInfo $entity */
             $entity = $this->appService->queryById($id);
+            
             if ($entity) {
                 $powerpoints = $this->fileService->queryByTargetId($entity->getContentId());
+                /** @var $commentService CommentService */
+                $commentService = $this->getContainer()->getComponentCenter()->getService("CommentService");
+                $comments = $commentService->queryByTargetId($entity->getContentId());
                 $this->view->setPageTitle($entity->getTitle());
                 $this->view->setPageName("apps.details");
                 $this->view->setData("app_info", $entity);
                 $this->view->setData("app_powerpoint", $powerpoints);
+                $this->view->setData("app_comments", $comments);
                 return;
             }
         }

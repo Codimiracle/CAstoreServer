@@ -4,19 +4,22 @@ namespace CAstore\Component;
 use CAstore\Action\UserController;
 use CAstore\Controller\AboutController;
 use CAstore\Controller\AppsController;
+use CAstore\Controller\CommentController;
+use CAstore\Controller\DashboardController;
+use CAstore\Controller\FilesController;
 use CAstore\Controller\HomeController;
+use CAstore\Controller\UploadController;
 use CAstore\Model\DAO\AppInfoDAOImpl;
+use CAstore\Model\DAO\FileInfoDAOImpl;
 use CAstore\Model\DAO\RoleInfoDAOImpl;
 use CAstore\Model\DAO\UserInfoDAOImpl;
 use CAstore\Service\AppServiceImpl;
+use CAstore\Service\CommentServiceImpl;
+use CAstore\Service\FileServiceImpl;
 use CAstore\Service\UserServiceImpl;
 use Deline\Component\AbstractComponentCenter;
-use CAstore\Service\FileServiceImpl;
-use CAstore\Model\DAO\FileInfoDAOImpl;
-use CAstore\Controller\DashboardController;
-use CAstore\Controller\FilesController;
-use CAstore\Controller\UploadController;
-use CAstore\Controller\CommentController;
+use CAstore\Model\DAO\CommentInfoDAOImpl;
+use Deline\Service\DelineUploadService;
 
 class CAstoreComponentCenter extends AbstractComponentCenter
 {
@@ -34,19 +37,19 @@ class CAstoreComponentCenter extends AbstractComponentCenter
             "Upload" => UploadController::class,
             "Comment" => CommentController::class
         )));
-        
-        $this->setDAOs(array(
+        $defaultDAOs = $this->getDAOs();
+        $this->setDAOs(array_merge($defaultDAOs, array(
             "UserInfoDAO" => UserInfoDAOImpl::class,
             "RoleInfoDAO" => RoleInfoDAOImpl::class,
             "AppInfoDAO" => AppInfoDAOImpl::class,
-            "FileInfoDAO" => FileInfoDAOImpl::class
-        ));
+            "CommentInfoDAO" => CommentInfoDAOImpl::class
+        )));
         
         $defaultService = $this->getServices();
         $this->setServices(array_merge($defaultService, array(
             "UserService" => UserServiceImpl::class,
             "AppService" => AppServiceImpl::class,
-            "FileService" => FileServiceImpl::class
+            "CommentService" => CommentServiceImpl::class
         )));
     }
 }

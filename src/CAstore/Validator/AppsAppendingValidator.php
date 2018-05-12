@@ -17,7 +17,6 @@ class AppsAppendingValidator extends AbstractValidator
             "title",
             "version",
             "package",
-            "description",
             "platform",
             "developer"
         );
@@ -34,8 +33,6 @@ class AppsAppendingValidator extends AbstractValidator
                 return "/^[0-9]+(\.[0-9]+)*$/";
             case "package":
                 return "/^[a-z]+(\.[a-z]+)*$/";
-            case "description":
-                return "/^.+$/";
             case "platform":
                 return "/^.{1,128}$/";
             case "developer":
