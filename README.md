@@ -18,6 +18,14 @@
 - [Server 端建设](https://github.com/codimiracle/castore-server/docs/server-guide.md)
 - [Client 接口](https://github.com/codimiracle/castore-server/docs/client-guide.md)
     - 示例:[castore-android](https://github.com/codimiracle/castore-android)
+    
+### 功能完成表
+   功能名称 | 完成状况 | 完成度
+   ------- |------ | -----
+   用户注册 | 可以进行注册和登录 | 80%
+   评论 | 可以评论，可以浏览评论 | 30%
+   App内容处理 | 可以浏览App,查看App信息，幻灯片等等 | 30%
+   基于User-Agent的访问访问接口 | 支持 Browser 和 Client （JSON）形式进行交互| 90% 
 ### 安装/配置
 - 安装
     - 依赖
