@@ -30,7 +30,6 @@ class AppsController extends AbstractEntityController
     public function onControllerStart()
     {
         parent::onControllerStart();
-        $this->attachAction("/^\\/$/", "onAppRoot");
         $this->appService = $this->container->getComponentCenter()->getService("AppService");
         $this->fileService = $this->container->getComponentCenter()->getService("FileService");
         $this->uploadService = $this->container->getComponentCenter()->getService("UploadService");
@@ -119,8 +118,19 @@ class AppsController extends AbstractEntityController
             $this->view->setPageName("apps.append");
         }
     }
-
-    public function onAppRoot()
+    public function onEntityList() {
+        $this->onEntityPagerList();
+    }
+    
+    public function onEntityPagerCount() {
+        
+    }
+    
+    public function onEntityPagerCount() {
+        
+    }
+    
+    public function onEntityPagerList()
     {
         $this->view->setPageTitle("应用");
         $this->view->setPageName("apps.main");

@@ -1,8 +1,9 @@
 <?php
 namespace CAstore\Service;
 
-
 use CAstore\Model\DAO\CommentInfoDAO;
+use Deline\Model\DAO\DecrementPager;
+
 
 class CommentServiceImpl implements CommentService
 {
@@ -11,7 +12,7 @@ class CommentServiceImpl implements CommentService
     /**@var CommentInfoDAO */
     private $dao;
 
-    
+
     public function setContainer($container)
     {
         $this->container = $container;
@@ -21,7 +22,7 @@ class CommentServiceImpl implements CommentService
     {
         return $this->container;
     }
-    
+
     public function getLastInsertedId()
     {
         return $this->dao->getLastInsertedId();
@@ -39,6 +40,13 @@ class CommentServiceImpl implements CommentService
         return $this->dao->queryByTargetId($contentId);
     }
 
+    public function queryByTargetIdWithPageNumber($contentId, $pageNumber)
+    {
+        $pager = new DecrementPager("id", $pageNumber, 10);
+        $this->dao->setPager($pager);
+        return $this->dao->queryByTargetId($contentId);
+    }
+
     public function delete($entity)
     {
         $this->dao->setTarget($entity);
@@ -49,7 +57,7 @@ class CommentServiceImpl implements CommentService
 
     public function queryByTargetIdWithFloor($contentId, $floor)
     {
-        
+
     }
 
     public function append($entity)
@@ -63,4 +71,3 @@ class CommentServiceImpl implements CommentService
         return $this->dao->queryById($id);
     }
 }
-

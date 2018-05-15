@@ -54,5 +54,28 @@ class CommentController extends AbstractEntityController
 
     public function onControllerEnd()
     {}
+    public function onEntityCount() {
+        
+    }
+    
+    public function onEntityList() {
+        $this->onEntityPagerList();
+    }
+    
+    public function onEntityPagerCount() {
+        
+    }
+    
+    public function onEntityPagerList() {
+        $pn = $this->getPagerNumber();
+        $this->view->setPageName("system.info");
+        if ($pn < 1) {
+            $this->view->setMessage("warning", "页号必须从 1 开始！");
+            return;
+        }
+        $this->view->setMessage("info", "The page is not visible.");
+        $comments = $this->commentService->queryByTargetIdWithPageNumber(2, $pn);
+        $this->view->setData("comments", $comments);
+    }
 }
 
