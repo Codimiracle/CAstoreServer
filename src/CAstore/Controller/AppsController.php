@@ -126,10 +126,6 @@ class AppsController extends AbstractEntityController
         
     }
     
-    public function onEntityPagerCount() {
-        
-    }
-    
     public function onEntityPagerList()
     {
         $this->view->setPageTitle("应用");
