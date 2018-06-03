@@ -1,7 +1,6 @@
 composer.phar
 /.settings/
-/static/images/apps/
-/static/images/users/
+/static/images/
 /static/files/
 /static/resources/
 .project
