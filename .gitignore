@@ -1,5 +1,9 @@
 composer.phar
 /.settings/
+/static/images/apps/
+/static/images/users/
+/static/files/
+/static/resources/
 .project
 .directory
 .buildpath

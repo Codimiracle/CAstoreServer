@@ -8,17 +8,17 @@ use PDOException;
 class AppInfoDAOImpl extends AbstractDAO implements AppInfoDAO
 {
 
-    const INSERT_CONTENT = "INSERT INTO content(title, name, content) VALUES (:title, :name, :description)";
+    const INSERT_CONTENT = "INSERT INTO content(title, name, content, createdTime, updatedTime) VALUES (:title, :name, :description, NOW(), NOW())";
 
-    const INSERT_APP = "INSERT INTO app(cid, package, developer, platform, version, createdTime, updatedTime) VALUES (:cid, :package, :developer, :platform, :version, NOW(), NOW())";
+    const INSERT_APP = "INSERT INTO app(cid, package, developer, platform, version) VALUES (:cid, :package, :developer, :platform, :version)";
 
     const DELETE_CONTENT = "DELETE FROM content WHERE id = (SELECT cid FROM app WHERE id = :id)";
 
     const DELETE_APP = "DELETE FROM app WHERE id = :id";
 
-    const UPDATE_CONTENT = "UPDATE content SET title = :title, name = :name, content = :description WHERE id = (SELECT cid FROM app WHERE id = :id)";
+    const UPDATE_CONTENT = "UPDATE content SET title = :title, name = :name, content = :description, updatedTime = NOW() WHERE id = (SELECT cid FROM app WHERE id = :id)";
 
-    const UPDATE_APP = "UPDATE app SET package = :package, developer = :developer, platform = :platform, version = :version, updatedTime = NOW() WHERE id = :id";
+    const UPDATE_APP = "UPDATE app SET package = :package, developer = :developer, platform = :platform, version = :version WHERE id = :id";
 
     const QUERY = "SELECT * FROM app_info";
 
@@ -28,7 +28,7 @@ class AppInfoDAOImpl extends AbstractDAO implements AppInfoDAO
 
     const QUERY_BY_PACKAGE = "SELECT * FROM app_info WHERE package LIKE concat('%',replace(:package, ' ', '%'), '%'))";
 
-    const QUERY_BY_KEYWORD = "SELECT * FROM app_info WHERE name LIKE concat('%',replace(:keyword, ' ', '%'), '%')) OR package LIKE concat('%',replace(:keyword, ' ', '%'), '%')) OR developer LIKE concat('%',replace(:keyword, ' ', '%'), '%')) OR EXISTS (SELECT 1 FROM tag, app WHERE app.cid = tag.cid AND app.id = app_info.id AND tag.name LIKE concat('%',replace(:tag, ' ', '%'), '%'))";
+    const QUERY_BY_KEYWORD = "SELECT * FROM app_info WHERE name LIKE concat('%',replace(:keyword, ' ', '%'), '%') OR package LIKE concat('%',replace(:keyword, ' ', '%'), '%') OR developer LIKE concat('%',replace(:keyword, ' ', '%'), '%') OR EXISTS (SELECT 1 FROM tag, app WHERE app.cid = tag.tid AND app.id = app_info.id AND tag.name LIKE concat('%',replace(:keyword, ' ', '%'), '%'))";
 
     const QUERY_BY_ID = "SELECT * FROM app_info WHERE id = :id";
 

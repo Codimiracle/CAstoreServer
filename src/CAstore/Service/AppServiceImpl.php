@@ -3,6 +3,7 @@ namespace CAstore\Service;
 
 use Deline\Component\Container;
 use CAstore\Model\DAO\AppInfoDAO;
+use Deline\Model\DAO\SimplePager;
 
 class AppServiceImpl implements AppService
 {
@@ -37,11 +38,6 @@ class AppServiceImpl implements AppService
         $this->dao->update();
     }
 
-    public function queryByKeyword($keyword)
-    {
-        return $this->dao->queryByKeyword($keyword);
-    }
-
     public function delete($entity)
     {
         $this->dao->setTarget($entity);
@@ -58,14 +54,34 @@ class AppServiceImpl implements AppService
     {
         return $this->dao->queryById($id);
     }
+
     public function getLastInsertedId()
     {
         return $this->dao->getLastInsertedId();
     }
+
     public function queryByPackage($package)
     {
         return $this->dao->queryByPackage($package);
     }
 
+    public function queryWithPagerNumber($pagerNumber)
+    {
+        $pager = new SimplePager($pagerNumber, 10);
+        $this->dao->setPager($pager);
+        return $this->dao->query();
+    }
+
+    public function queryByKeyword($keyword)
+    {
+        return $this->dao->queryByKeyword($keyword);
+    }
+
+    public function queryByKeywordWithPagerNumber($keyword, $pagerNumber)
+    {
+        $pager = new SimplePager($pagerNumber, 10);
+        $this->dao->setPager($pager);
+        return $this->dao->queryByKeyword($keyword);
+    }
 
 }

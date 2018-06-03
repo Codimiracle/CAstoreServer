@@ -4,22 +4,22 @@ namespace CAstore\Component;
 use CAstore\Action\UserController;
 use CAstore\Controller\AboutController;
 use CAstore\Controller\AppsController;
+use CAstore\Controller\ArticleController;
 use CAstore\Controller\CommentController;
 use CAstore\Controller\DashboardController;
 use CAstore\Controller\FilesController;
 use CAstore\Controller\HomeController;
 use CAstore\Controller\UploadController;
 use CAstore\Model\DAO\AppInfoDAOImpl;
-use CAstore\Model\DAO\FileInfoDAOImpl;
+use CAstore\Model\DAO\CommentInfoDAOImpl;
 use CAstore\Model\DAO\RoleInfoDAOImpl;
 use CAstore\Model\DAO\UserInfoDAOImpl;
 use CAstore\Service\AppServiceImpl;
 use CAstore\Service\CommentServiceImpl;
-use CAstore\Service\FileServiceImpl;
 use CAstore\Service\UserServiceImpl;
 use Deline\Component\AbstractComponentCenter;
-use CAstore\Model\DAO\CommentInfoDAOImpl;
-use Deline\Service\DelineUploadService;
+use CAstore\Model\DAO\ArticleInfoDAOImpl;
+use CAstore\Controller\ArticleAlbumController;
 
 class CAstoreComponentCenter extends AbstractComponentCenter
 {
@@ -35,14 +35,17 @@ class CAstoreComponentCenter extends AbstractComponentCenter
             "Files" => FilesController::class,
             "System" => DashboardController::class,
             "Upload" => UploadController::class,
-            "Comment" => CommentController::class
+            "Comment" => CommentController::class,
+            "Article" => ArticleController::class,
+            "ArticleAlbum" => ArticleAlbumController::class
         )));
         $defaultDAOs = $this->getDAOs();
         $this->setDAOs(array_merge($defaultDAOs, array(
             "UserInfoDAO" => UserInfoDAOImpl::class,
             "RoleInfoDAO" => RoleInfoDAOImpl::class,
             "AppInfoDAO" => AppInfoDAOImpl::class,
-            "CommentInfoDAO" => CommentInfoDAOImpl::class
+            "CommentInfoDAO" => CommentInfoDAOImpl::class,
+            "ArticleInfoDAO" => ArticleInfoDAOImpl::class
         )));
         
         $defaultService = $this->getServices();

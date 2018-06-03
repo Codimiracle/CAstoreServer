@@ -7,11 +7,11 @@ use Deline\Model\DAO\AbstractDAO;
 class CommentInfoDAOImpl extends AbstractDAO implements CommentInfoDAO
 {
 
-    const INSERT_CONTENT = "INSERT INTO content(title, name, content) VALUES (:comment_title, 'comment_name', :comment_content)";
+    const INSERT_CONTENT = "INSERT INTO content(title, name, content, createdTime, updatedTime) VALUES (:comment_title, 'comment_name', :comment_content, NOW(), NOW())";
 
-    const INSERT_COMMENT = "INSERT INTO comment(cid, tid, createdTime, uid) VALUES (:cid, :tid, NOW(), :uid)";
+    const INSERT_COMMENT = "INSERT INTO comment(cid, tid, uid) VALUES (:cid, :tid, :uid)";
 
-    const UPDATE_CONTENT = "UPDATE content SET content = :content WHERE id = (SELECT cid FROM comment WHERE id = :id)";
+    const UPDATE_CONTENT = "UPDATE content SET content = :content, updatedTime = NOW() WHERE id = (SELECT cid FROM comment WHERE id = :id)";
 
     const DELETE_CONTENT = "DELETE FROM content WHERE id = (SELECT cid FROM comment WHERE id = :id)";
 

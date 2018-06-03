@@ -30,6 +30,7 @@ class AppsController extends AbstractEntityController
     public function onControllerStart()
     {
         parent::onControllerStart();
+        $this->attachAction("/^\\/Query($|\\/)/", "onAppSearch");
         $this->appService = $this->container->getComponentCenter()->getService("AppService");
         $this->fileService = $this->container->getComponentCenter()->getService("FileService");
         $this->uploadService = $this->container->getComponentCenter()->getService("UploadService");
@@ -43,9 +44,13 @@ class AppsController extends AbstractEntityController
 
     const APP_ICON_FIELD = "icon";
 
-    const POWERPOINT_MIMETYPE = "image/*";
+    const APP_PACKAGE_FIELD = "package";
 
-    const POWERPOINT_DIR = "static/images/apps";
+    const IMAGE_MIMETYPE = "image/*";
+
+    const PACKAGE_MIMETYPE = "application/vnd.android.package-archive";
+
+    const ENTITY_DIR = "static/resources/apps";
 
     public function onEntityAppend()
     {
@@ -71,13 +76,29 @@ class AppsController extends AbstractEntityController
                 $appContentId = $this->appService->getLastInsertedId();
                 
                 // 处理文件上传
-                $dir = self::POWERPOINT_DIR;
+                
+                $powerpoint_dir = self::ENTITY_DIR . "/powerpoints";
+                $icon_dir = self::ENTITY_DIR . "/icons";
+                $package_dir = self::ENTITY_DIR . "/packages";
+                
                 $logger->addDebug("AppsController", array(
-                    "upload_image_dir" => $dir
+                    "upload_image_dir" => $powerpoint_dir
                 ));
-                if ($this->uploadService->isMimeType(self::APP_ICON_FIELD, self::POWERPOINT_MIMETYPE)) {
+                if ($this->uploadService->isMimeType(self::APP_PACKAGE_FIELD, self::PACKAGE_MIMETYPE)) {
+                    $packageUploadHandler = new DelineUploadHandler(self::APP_PACKAGE_FIELD, $appContentId, array(
+                        "upload_dir" => $package_dir,
+                        "upload_field_prefix" => "app_"
+                    ));
+                    $packageUploadHandler->setFileService($this->fileService);
+                    $packageUploadHandler->setUploadService($this->uploadService);
+                    $successful = $packageUploadHandler->handle();
+                    if ($successful) {
+                        
+                    }
+                }
+                if ($this->uploadService->isMimeType(self::APP_ICON_FIELD, self::IMAGE_MIMETYPE)) {
                     $iconUploadHandler = new DelineUploadHandler(self::APP_ICON_FIELD, $appContentId, array(
-                        "upload_dir" => $dir,
+                        "upload_dir" => $icon_dir,
                         "upload_field_prefix" => "app_"
                     ));
                     $iconUploadHandler->setFileService($this->fileService);
@@ -89,9 +110,9 @@ class AppsController extends AbstractEntityController
                 } else {
                     $message = "应用图标格式不正确，请上传正确的图片格式！";
                 }
-                if ($this->uploadService->isMimeType(self::POWERPOINT_FIELD, self::POWERPOINT_MIMETYPE)) {
+                if ($this->uploadService->isMimeType(self::POWERPOINT_FIELD, self::IMAGE_MIMETYPE)) {
                     $powerpointUploadHandler = new DelineUploadHandler(self::POWERPOINT_FIELD, $appContentId, array(
-                        "upload_dir" => $dir,
+                        "upload_dir" => $powerpoint_dir,
                         "upload_field_prefix" => "app_"
                     ), true);
                     $powerpointUploadHandler->setFileService($this->fileService);
@@ -118,18 +139,27 @@ class AppsController extends AbstractEntityController
             $this->view->setPageName("apps.append");
         }
     }
-    public function onEntityList() {
-        $this->onEntityPagerList();
+
+    public function onAppSearch()
+    {
+        $this->view->setPageName("apps.search");
+        $this->view->setPageName("应用搜索");
     }
-    
-    public function onEntityPagerCount() {
+
+    public function onEntityPagerCount()
+    {
         
     }
-    
+
     public function onEntityPagerList()
     {
         $this->view->setPageTitle("应用");
         $this->view->setPageName("apps.main");
+        $pagerNumber = $this->getPagerNumber();
+        if ($pagerNumber < 1) {
+            $pagerNumber = 1;
+        }
+        $this->view->setData("applications", $this->appService->queryWithPagerNumber($pagerNumber));
     }
 
     public function onEntityEdit()
@@ -184,13 +214,13 @@ class AppsController extends AbstractEntityController
             $entity = $this->appService->queryById($id);
             
             if ($entity) {
-                $powerpoints = $this->fileService->queryByTargetIdWithField($entity->getContentId(),"app_" . self::POWERPOINT_FIELD);
+                $powerpoints = $this->fileService->queryByTargetIdWithField($entity->getContentId(), "app_" . self::POWERPOINT_FIELD);
                 $icon = $this->fileService->queryByTargetIdWithField($entity->getContentId(), "app_" . self::APP_ICON_FIELD);
                 /** @var $commentService CommentService */
                 $commentService = $this->getContainer()
                     ->getComponentCenter()
                     ->getService("CommentService");
-                $comments = $commentService->queryByTargetId($entity->getContentId());
+                $comments = $commentService->queryByTargetIdWithPageNumber($entity->getContentId(), 1);
                 $this->view->setPageTitle($entity->getTitle());
                 $this->view->setPageName("apps.details");
                 $this->view->setData("appInfo", $entity);
@@ -202,4 +232,22 @@ class AppsController extends AbstractEntityController
         }
         throw new PageNotFoundException("Id 为\"" . $id . "\"的 App 实体并不存在！");
     }
+    public function onEntitySearchPagerList()
+    {
+        $this->view->setPageTitle("搜索应用");
+        $this->view->setPageName("app.search");
+        $pagerNumber = $this->getSearchPagerNumber();
+        $this->view->setData("results", $this->appService->queryByKeywordWithPagerNumber($this->getSearchingKeyword(), $pagerNumber));
+    }
+
+    public function onEntitySearchPagerCount()
+    {
+        
+    }
+
+    public function onEntitySearch()
+    {
+        $this->onEntitySearchPagerList();
+    }
+
 }

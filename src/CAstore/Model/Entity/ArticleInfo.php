@@ -1,29 +1,22 @@
 <?php
 namespace CAstore\Model\Entity;
 
-use Deline\Model\Entity\Entity;
-
-class CommentInfo implements Entity
+class ArticleInfo
 {
-
+    /** @var int */
     public $id;
-
-    public $targetId;
-
+    /** @var string */
     public $title;
-    
+    /** @var string */
     public $content;
     
-    public $contentId;
-
     public $createdTime;
+    
     public $updatedTime;
-
+    
     public $userId;
-
     /**
-     *
-     * @return mixed
+     * @return number
      */
     public function getId()
     {
@@ -31,30 +24,27 @@ class CommentInfo implements Entity
     }
 
     /**
-     *
-     * @return mixed
-     */
-    public function getTargetId()
-    {
-        return $this->targetId;
-    }
-
-    /**
-     *
-     * @param mixed $targetId
-     */
-    public function setTargetId($targetId)
-    {
-        $this->targetId = $targetId;
-    }
-
-    
-    /**
      * @return string
      */
     public function getTitle()
     {
         return $this->title;
+    }
+
+    /**
+     * @return string
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+    /**
+     * @param number $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
     }
 
     /**
@@ -65,29 +55,15 @@ class CommentInfo implements Entity
         $this->title = $title;
     }
 
-    public function getContentId() {
-        return $this->contentId;
-    }
     /**
-     *
-     * @return mixed
-     */
-    public function getContent()
-    {
-        return $this->content;
-    }
-
-    /**
-     *
-     * @param mixed $content
+     * @param string $content
      */
     public function setContent($content)
     {
         $this->content = $content;
     }
-
+    
     /**
-     *
      * @return mixed
      */
     public function getCreatedTime()
@@ -95,17 +71,14 @@ class CommentInfo implements Entity
         return $this->createdTime;
     }
 
-    
     /**
-     * @return mixed
+     * @return string
      */
     public function getUpdatedTime()
     {
         return $this->updatedTime;
     }
-
     /**
-     *
      * @return mixed
      */
     public function getUserId()
@@ -114,11 +87,12 @@ class CommentInfo implements Entity
     }
 
     /**
-     *
      * @param mixed $userId
      */
     public function setUserId($userId)
     {
         $this->userId = $userId;
     }
+    
 }
+
