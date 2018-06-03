@@ -61,6 +61,10 @@ class UserInfo implements Entity
      * @var int
      */
     public $roleId;
+    
+    public $joinTime;
+    
+    public $updatedTime;
 
     /**
      *
@@ -196,4 +200,20 @@ class UserInfo implements Entity
     {
         return $this->roleId;
     }
+    /**
+     * @return mixed
+     */
+    public function getJoinTime()
+    {
+        return $this->joinTime;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUpdatedTime()
+    {
+        return $this->updatedTime;
+    }
+
 }

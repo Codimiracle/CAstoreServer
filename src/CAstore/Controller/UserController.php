@@ -110,11 +110,14 @@ class UserController extends AbstractController
             if ($result == 1) { // 登录成功
                 $this->view->setPageName("system.info");
                 $message = "登录成功";
+                $this->view->setMessage("info", $message);
             } else if ($result == 2) {
                 $this->view->setPageName("system.info");
                 $message = "用户进行授权时发生错误,已使用匿名权限登录！";
+                $this->view->setMessage("error", $message);
             } else { // 用户不存在或密码错误
                 $message = "用户名或密码不正确！";
+                $this->view->setMessage("error", $message);
             }
         }
         $this->view->setMessage("info", $message);

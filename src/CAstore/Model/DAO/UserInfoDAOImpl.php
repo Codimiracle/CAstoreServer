@@ -7,7 +7,7 @@ use Deline\Model\DAO\AbstractDAO;
 class UserInfoDAOImpl extends AbstractDAO implements UserInfoDAO
 {
 
-    const INSERT_CONTENT = "INSERT INTO content(title, name, content) VALUES (:nickname, 'userdata', :description)";
+    const INSERT_CONTENT = "INSERT INTO content(title, name, content, createdTime, updatedTime) VALUES (:nickname, 'userdata', :description, NOW(), NOW())";
 
     const INSERT_USER = "INSERT INTO user(cid, name, password, avatar, gender, rid) VALUES (:cid, :name, :password, :avatar, :gender, :rid)";
 
@@ -15,7 +15,7 @@ class UserInfoDAOImpl extends AbstractDAO implements UserInfoDAO
 
     const DELETE_USER = "DELETE FROM user WHERE id = :id";
 
-    const UPDATE_CONTENT = "UPDATE content SET title = :nickname, content = :description WHERE id = (SELECT cid FROM user WHERE id = :id)";
+    const UPDATE_CONTENT = "UPDATE content SET title = :nickname, content = :description, updatedTime = NOW() WHERE id = (SELECT cid FROM user WHERE id = :id)";
 
     const UPDATE_USER = "UPDATE user SET name = :name, password = :password, gender = :gender, rid = :rid WHERE id = :id";
 

@@ -39,15 +39,15 @@ deline_show_header();
 						<div class="header">应用幻灯片</div>
 						<div class="body">
 							<ul class="list-inline">
-									<li><img class="powerpoint"
+								<li><img class="powerpoint"
 									src="static/images/avatar-default.png" /></li>
-									<li><img class="powerpoint"
+								<li><img class="powerpoint"
 									src="static/images/avatar-default.png" /></li>
-									<li><img class="powerpoint"
+								<li><img class="powerpoint"
 									src="static/images/avatar-default.png" /></li>
-									<li><img class="powerpoint"
+								<li><img class="powerpoint"
 									src="static/images/avatar-default.png" /></li>
-									<li><img class="powerpoint"
+								<li><img class="powerpoint"
 									src="static/images/avatar-default.png" /></li>
 							</ul>
 							<div class="scrollbar-track">
@@ -70,15 +70,14 @@ deline_show_header();
 			<div class="row">
 				<div class="col-md-12">
 					<form method="post" role="form" enctype="multipart/form-data">
-					<div class="form-group">
+						<div class="form-group">
 							<label for="name">应用图标</label> <input type="file" name="icon" />
 							<p class="help-block">用于应用的第一印象</p>
 						</div>
 						<div class="form-group">
-							<label for="icon">应用图标
-								<input type="file" name="icon" />
+							<label for="package">应用安装包 <input type="file" name="package" />
 							</label>
-							<p class="help-block">用于应用的第一印象</p>
+							<p class="help-block">应用的实际安装文件</p>
 						</div>
 						<div class="form-group">
 							<label for="name">应用名称</label> <input id="name" type="text"

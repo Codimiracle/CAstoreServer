@@ -57,7 +57,7 @@ class CommentServiceImpl implements CommentService
 
     public function queryByTargetIdWithFloor($contentId, $floor)
     {
-
+        
     }
 
     public function append($entity)
