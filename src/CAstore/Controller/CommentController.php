@@ -19,6 +19,7 @@ class CommentController extends AbstractEntityController
     public function onControllerStart()
     {
         parent::onControllerStart();
+        $this->attachAction("/^\\/Pager\\/[0-9]+\\/[0-9]+($|\\/$)/", "onEntityPagerList");
         $this->userService = $this->getContainer()
             ->getComponentCenter()
             ->getService("UserService");
@@ -66,6 +67,16 @@ class CommentController extends AbstractEntityController
         
     }
     
+    public function getTargetId() {
+        // <targetId>/Pager/<pagerNumber>/
+        $node = $this->getNodePath()->getSubnodePath()->getSubnodePath()->getMainNodeName();
+        if (is_numeric($node)) {
+            return intval($node);
+        } else {
+            return 0;
+        }
+    }
+    
     public function onEntityPagerList() {
         $pn = $this->getPagerNumber();
         $this->view->setPageName("system.info");
@@ -74,8 +85,23 @@ class CommentController extends AbstractEntityController
             return;
         }
         $this->view->setMessage("info", "The page is not visible.");
-        $comments = $this->commentService->queryByTargetIdWithPageNumber(2, $pn);
-        $this->view->setData("comments", $comments);
+        $targetId = $this->getTargetId();
+        if ($targetId > 0) {
+            $comments = $this->commentService->queryByTargetIdWithPageNumber($targetId, $pn);
+            $this->view->setData("comments", $comments);
+        } else {
+            $this->view->setMessage("error", "missing parameter 1 excepted 2.");
+        }
+        
     }
+    public function onEntitySearchPagerList()
+    {}
+
+    public function onEntitySearchPagerCount()
+    {}
+
+    public function onEntitySearch()
+    {}
+
 }
 

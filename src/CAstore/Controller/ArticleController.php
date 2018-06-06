@@ -30,5 +30,14 @@ class ArticleController extends AbstractEntityController
 
     public function onEntityEdit()
     {}
+    public function onEntitySearchPagerList()
+    {}
+
+    public function onEntitySearchPagerCount()
+    {}
+
+    public function onEntitySearch()
+    {}
+
 }
 
